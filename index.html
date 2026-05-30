@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guido Usnayo Vidaurre — Senior Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray: #6b6b6b;
+      --light-gray: #e8e8e8;
+      --accent: #1a46ff;
+      --font: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--light-gray); }
+
+    .nav-name {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-divider { width: 1px; height: 12px; background: var(--light-gray); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 40px 80px;
+      gap: 80px;
+    }
+
+    .hero-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.1s;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.2s;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gray);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--gray);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.3s;
+    }
+
+    .hero-actions {
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.4s;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 400;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-pill:hover { background: #222; transform: translateY(-1px); }
+
+    /* HERO RIGHT */
+    .hero-right {
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.5s;
+    }
+
+    .hero-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f0f0f0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px dashed var(--light-gray);
+    }
+
+    /* STATS BAR */
+    .stats {
+      padding: 48px 40px;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      gap: 0;
+    }
+
+    .stat {
+      flex: 1;
+      padding-right: 40px;
+      border-right: 1px solid var(--light-gray);
+    }
+    .stat:not(:first-child) { padding-left: 40px; }
+    .stat:last-child { border-right: none; }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-value span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    /* WORK GRID */
+    .work { padding: 80px 40px; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .work-item {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .work-item:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .work-item-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+    }
+
+    .work-item:not(:first-child) .work-item-img {
+      aspect-ratio: 4/3;
+    }
+
+    .work-item:nth-child(2) .work-item-img { background: #0d0d0d; }
+    .work-item:nth-child(3) .work-item-img { background: #f0f0f0; color: rgba(0,0,0,0.15); }
+
+    .work-item:hover .work-item-img { transform: scale(1.02); }
+
+    /* Title overlay inside image */
+    .work-item-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px 28px 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+    }
+
+    .work-item:nth-child(3) .work-item-info {
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+    }
+
+    .work-item-meta {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .work-item-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 20px 60px;
+        gap: 40px;
+        min-height: auto;
+      }
+
+      .stats {
+        padding: 40px 20px;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .stat { flex: 1 1 40%; border-right: none; padding: 0; }
+
+      .work { padding: 40px 20px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-item:first-child { grid-column: 1; }
+      .work-item .work-item-img { aspect-ratio: 4/3 !important; }
+
+      footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+    <ul class="nav-links">
+      <li><a href="incode.html">Incode</a></li>
+      <li><a href="speaker.html">Speaker</a></li>
+      <li><a href="ytem.html">Ytem</a></li>
+      <li><a href="other.html">Other work</a></li>
+      <li><a href="motion.html">Motion</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-label">Senior Product Designer</p>
+      <h1 class="hero-headline">Designing systems for <em>high-trust</em> environments.</h1>
+      <p class="hero-sub">Identity verification · B2B platforms · Products where getting the flow wrong has real consequences.</p>
+      <div class="hero-actions">
+        <a href="https://drive.google.com/file/d/19aTsvVUKHIvtxB-5fPAFAPhFU_Lcwi0c/view?usp=share_link" target="_blank" class="btn-pill">Download CV</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- Replace src with your actual hero image -->
+      <div class="hero-image-placeholder">Hero image · 800×600</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-value">8<span>yrs</span></div>
+      <div class="stat-label">product design experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">770<span>K+</span></div>
+      <div class="stat-label">fans verified at Incode</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">17</div>
+      <div class="stat-label">stadiums deployed across Mexico</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">3</div>
+      <div class="stat-label">industries · identity, fintech, B2B SaaS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">1</div>
+      <div class="stat-label">motion practice, built from scratch</div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work">
+    <span class="section-label">Selected Work</span>
+    <div class="work-grid">
+
+      <a href="incode.html" class="work-item">
+        <div class="work-item-img">Incode FanID · hero image · 1200×525
+          <div class="work-item-info">
+            <div class="work-item-meta">Identity Verification · B2B · 2022–2023</div>
+            <div class="work-item-title">Incode Fan ID — 770,000+ fans, 17 stadiums</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="ytem.html" class="work-item">
+        <div class="work-item-img">Ytem · hero image · 600×450
+          <div class="work-item-info">
+            <div class="work-item-meta">B2B · Retail Operations · Deployed</div>
+            <div class="work-item-title">Ytem — Inventory management for operators</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="speaker.html" class="work-item">
+        <div class="work-item-img">Speaker · hero image · 600×450
+          <div class="work-item-info">
+            <div class="work-item-meta">Community Platform · Multiplatform · Freelance</div>
+            <div class="work-item-title">Speaker — Privacy-first community platform</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-text">© 2026 Guido Usnayo Vidaurre</span>
+    <span class="footer-text">Leipzig · Available across Germany and Europe</span>
+    <span class="footer-text">guido.usnayo@icloud.com</span>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+</body>
+</html>
