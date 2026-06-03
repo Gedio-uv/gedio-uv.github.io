@@ -132,20 +132,31 @@ async function callGemini(apiKey, promptText) {
 ══════════════════════════════════════════════════ */
 
 async function callAI(apiKey, promptText) {
-  // No personal key — use the Worker proxy (Groq key stored securely)
+  // No personal key — use the Worker proxy (key lives securely in Cloudflare)
   if (!apiKey || apiKey.trim() === '') {
     return callProxy(promptText);
   }
 
   const provider = detectProvider(apiKey);
-  if (!provider) return callProxy(promptText); // unrecognised key — fall back to proxy
+  if (!provider) return callProxy(promptText);
 
-  const rawText = provider === 'groq'
-    ? await callGroq(apiKey, promptText)
-    : await callGemini(apiKey, promptText);
+  try {
+    const rawText = provider === 'groq'
+      ? await callGroq(apiKey, promptText)
+      : await callGemini(apiKey, promptText);
 
-  if (!rawText) throw new Error('EMPTY_RESPONSE');
-  return rawText;
+    if (!rawText) throw new Error('EMPTY_RESPONSE');
+    return rawText;
+
+  } catch (err) {
+    // If the personal Groq key is revoked/invalid, silently fall back to proxy
+    if (provider === 'groq' && err.message === 'INVALID_KEY') {
+      // Clear the bad key from storage so next load uses proxy directly
+      try { localStorage.removeItem('dl_gemini_key'); } catch {}
+      return callProxy(promptText);
+    }
+    throw err; // re-throw for Gemini errors or other issues
+  }
 }
 
 function parseJSON(raw) {
