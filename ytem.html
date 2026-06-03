@@ -6,7 +6,7 @@
   <title>Ytem — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -345,8 +345,72 @@
 
     /* ANIMATIONS */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-stagger > * {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
+
+    /* READ PROGRESS */
+    .read-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--accent);
+      z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* NAV UNDERLINE */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--black);
+      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* CONTEXT TAGS HOVER */
+    .context-tag {
+      transition: border-color 0.18s, background 0.18s, transform 0.2s;
+    }
+    .context-tag:hover { border-color: var(--accent); background: rgba(26,70,255,0.04); transform: translateY(-1px); }
+
+    /* IMPACT TAG HOVER */
+    .impact-tag { transition: border-color 0.18s, background 0.18s, transform 0.18s; }
+    .impact-tag:hover { border-color: var(--accent); background: rgba(26,70,255,0.04); transform: translateY(-1px); }
+
+    /* PRINCIPLE CARDS HOVER */
+    .principle-card { transition: border-color 0.2s, background 0.2s, transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .principle-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); transform: translateY(-2px); }
+
+    /* CTA radial glow */
+    .cs-cta { position: relative; overflow: hidden; }
+    .cs-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* DARK BAND IMG HOVER */
+    .dark-band img { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .dark-band img:hover { transform: scale(1.01); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
     }
 
     /* RESPONSIVE */
@@ -372,6 +436,8 @@
   </style>
 </head>
 <body>
+
+  <div class="read-progress" id="readProgress"></div>
 
   <nav id="nav">
     <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
@@ -418,7 +484,7 @@
   </div>
 
   <!-- CONTEXT -->
-  <section class="context-section">
+  <section class="context-section reveal">
     <span class="section-label">Context</span>
     <h2>Inventory management sounds like a back-office problem.</h2>
     <p>In practice, it's a real-time operational challenge — non-technical staff, variable lighting, physical tasks, and time pressure. The design had to work in that environment, not around it.</p>
@@ -440,7 +506,7 @@
   </section>
 
   <!-- THE PROBLEM -->
-  <section class="problem-section">
+  <section class="problem-section reveal">
     <div class="problem-section-inner">
       <span class="section-label">The Problem</span>
       <h2>Inventory that lies to you.</h2>
@@ -450,7 +516,7 @@
   </section>
 
   <!-- SYSTEM ARCHITECTURE — dark band -->
-  <div class="dark-band">
+  <div class="dark-band reveal">
     <div class="dark-band-inner">
       <span class="section-label">System Architecture</span>
       <h2>Four layers, one connected system.</h2>
@@ -531,7 +597,7 @@
       <span class="section-label">Impact</span>
       <h2>Deployed to real retail environments.</h2>
       <p>Ytem was deployed to real retail environments and is actively used by store owners for inventory management. The product successfully bridged the gap between physical stock counting and digital supply chain management, reducing the friction of a previously manual and error-prone process.</p>
-      <div class="impact-tags">
+      <div class="impact-tags reveal-stagger">
         <div class="impact-tag"><strong>Deployed</strong> Used in real retail environments</div>
         <div class="impact-tag"><strong>B2B</strong> Designed for store operators</div>
         <div class="impact-tag"><strong>Collaborative</strong> Working with a small team</div>
@@ -556,12 +622,7 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+  <script src="shared-animations.js"></script>
 
 </body>
 </html>

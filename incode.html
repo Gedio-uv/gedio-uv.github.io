@@ -6,7 +6,7 @@
   <title>Incode Fan ID — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -451,9 +451,83 @@
       .next-project { padding: 32px 20px; }
       footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
     }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-stagger > * {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
+    .reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
+
+    /* READ PROGRESS */
+    .read-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--accent);
+      z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* NAV UNDERLINE */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--black);
+      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active::after { width: 100%; }
+
+    /* FLOW IMAGES HOVER */
+    .flow-images img {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .flow-images img:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+
+    /* IMPACT GRID ITEMS */
+    .impact-item {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+    .impact-item:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+
+    /* PROBLEM CARD HOVER */
+    .problem-card {
+      transition: border-color 0.25s, background 0.25s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+    }
+    .problem-card:hover { background: #fff; border-color: var(--light-gray); transform: translateY(-2px); }
+
+    /* CTA radial glow */
+    .cs-cta { position: relative; overflow: hidden; }
+    .cs-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* HERO IMG HOVER */
+    .cs-hero-img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cs-hero-img:hover { transform: scale(1.01); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="read-progress" id="readProgress"></div>
 
   <!-- NAV -->
   <nav id="nav">
@@ -502,14 +576,14 @@
   <div class="cs-content">
 
     <!-- CONTEXT -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">Context</span>
       <h2>A security failure that demanded a design solution.</h2>
       <p>In March 2022, a violent incident at a Liga MX match between Atlas and Querétaro exposed a systemic failure: stadiums had no reliable way of knowing who was entering. Sports authorities responded by mandating identity verification across all national stadiums. Incode was selected to build the solution. I led product design working directly with PM Poojit Sharma.</p>
     </section>
 
     <!-- IMPACT -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">Impact · Verified at scale</span>
       <h2>770,000 fans. One consistent flow.</h2>
       <p>These results came from a single consistent onboarding flow, designed to work for 770,000 people across different ages, devices, and digital literacy levels — from tech-savvy users to first-time smartphone users.</p>
@@ -517,12 +591,12 @@
     </section>
 
     <!-- THE PROBLEM -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">The Problem</span>
       <h2>Manual checks don't scale.</h2>
       <p>The challenge wasn't only technical. Tens of thousands of fans had to complete biometric verification before entering — many unaware the requirement existed, with varying levels of digital literacy, under time pressure before kickoff. A slow or confusing flow wasn't just a UX problem: it was a real security bottleneck.</p>
 
-      <div class="problem-grid">
+      <div class="problem-grid reveal-stagger">
         <div class="problem-card">
           <div class="problem-number">01</div>
           <div class="problem-title">Unaware attendees</div>
@@ -547,12 +621,12 @@
     </section>
 
     <!-- DESIGN DECISION 01 -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design Decision 01</span>
       <h3>Shift friction before the gate.</h3>
       <p>The core principle: move verification pressure away from the entry point. By encouraging pre-event registration, gate congestion dropped significantly. For the verification flow itself, I separated ID capture and face capture into distinct guided steps — reducing cognitive load and error rates at each stage.</p>
 
-      <div class="flow-images">
+      <div class="flow-images reveal-stagger">
         <img src="images/ic3a.png" alt="Take selfie step">
         <img src="images/ic3b.png" alt="Face recognition step">
         <img src="images/ic3c.png" alt="Scan ID step">
@@ -562,7 +636,7 @@
     </div>
 
     <!-- DESIGN DECISION 02 -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design Decision 02</span>
       <h3>Status-first hierarchy for operators.</h3>
       <p>The operator dashboard had to support fast decision-making under real event-day pressure. I structured information in a status-first hierarchy — critical verification states immediately visible, evidence organized to support review without hesitation. Exception handling was designed to resolve edge cases without disrupting access control flow.</p>
@@ -571,7 +645,7 @@
     </div>
 
     <!-- DESIGN DECISION 03 -->
-    <div class="decision-split">
+    <div class="decision-split reveal">
       <div class="decision-text">
         <span class="decision-number">Design Decision 03</span>
         <h3>Turning verification into a reusable layer.</h3>
@@ -598,12 +672,7 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+  <script src="shared-animations.js"></script>
 
 </body>
 </html>

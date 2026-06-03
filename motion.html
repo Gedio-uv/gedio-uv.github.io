@@ -6,7 +6,7 @@
   <title>Motion — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -252,8 +252,76 @@
 
     /* ANIMATIONS */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* STAGGERED CARDS — video cards animate in with delay */
+    .video-card {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .motion-grid.visible .video-card:nth-child(1)  { opacity:1; transform:none; transition-delay: 0.00s; }
+    .motion-grid.visible .video-card:nth-child(2)  { opacity:1; transform:none; transition-delay: 0.06s; }
+    .motion-grid.visible .video-card:nth-child(3)  { opacity:1; transform:none; transition-delay: 0.12s; }
+    .motion-grid.visible .video-card:nth-child(4)  { opacity:1; transform:none; transition-delay: 0.18s; }
+    .motion-grid.visible .video-card:nth-child(5)  { opacity:1; transform:none; transition-delay: 0.24s; }
+    .motion-grid.visible .video-card:nth-child(6)  { opacity:1; transform:none; transition-delay: 0.30s; }
+    .motion-grid.visible .video-card:nth-child(7)  { opacity:1; transform:none; transition-delay: 0.36s; }
+    .motion-grid.visible .video-card:nth-child(8)  { opacity:1; transform:none; transition-delay: 0.42s; }
+    .motion-grid.visible .video-card:nth-child(9)  { opacity:1; transform:none; transition-delay: 0.48s; }
+    .motion-grid.visible .video-card:nth-child(10) { opacity:1; transform:none; transition-delay: 0.54s; }
+    .motion-grid.visible .video-card:nth-child(11) { opacity:1; transform:none; transition-delay: 0.60s; }
+    .motion-grid.visible .video-card:nth-child(12) { opacity:1; transform:none; transition-delay: 0.66s; }
+    .motion-grid.visible .video-card:nth-child(13) { opacity:1; transform:none; transition-delay: 0.72s; }
+    .motion-grid.visible .video-card:nth-child(n+14) { opacity:1; transform:none; transition-delay: 0.78s; }
+
+    /* READ PROGRESS */
+    .read-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--accent);
+      z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* NAV UNDERLINE */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--black);
+      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* PAGE HEADER */
+    .page-header { cursor: default; }
+
+    /* VIDEO CARD — richer hover */
+    .video-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      transform: translateY(-3px) scale(1.01);
+    }
+    .motion-grid.visible .video-card:hover { transform: translateY(-3px) scale(1.01) !important; }
+
+    /* CTA radial glow */
+    .cs-cta { position: relative; overflow: hidden; }
+    .cs-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .video-card { opacity: 1 !important; transform: none !important; }
     }
 
     /* RESPONSIVE */
@@ -272,6 +340,8 @@
   </style>
 </head>
 <body>
+
+  <div class="read-progress" id="readProgress"></div>
 
   <nav id="nav">
     <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
@@ -300,7 +370,7 @@
   </header>
 
   <!-- VIDEO GRID -->
-  <section class="motion-grid" id="motionGrid">
+  <section class="motion-grid reveal" id="motionGrid">
 
     <!-- VIMEO -->
     <div class="video-card" data-type="vimeo" data-id="1145366421">
@@ -585,13 +655,8 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
+  <script src="shared-animations.js"></script>
   <script>
-    // Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
     // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lightboxFrame = document.getElementById('lightboxFrame');

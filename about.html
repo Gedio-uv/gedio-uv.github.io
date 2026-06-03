@@ -6,7 +6,7 @@
   <title>About — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -243,9 +243,71 @@
       .cs-cta { padding: 48px 20px; flex-direction: column; gap: 32px; text-align: center; }
       footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
     }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-stagger > * {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+    .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
+    .reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
+
+    /* READ PROGRESS */
+    .read-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--accent);
+      z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* NAV UNDERLINE */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--black);
+      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active::after { width: 100%; }
+
+    /* STAT HOVER */
+    .stat-item { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .stat-item:hover { transform: translateY(-2px); }
+
+    /* ABOUT PHOTO HOVER */
+    .about-photo { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .about-right:hover .about-photo { transform: scale(1.012) translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+    /* IMPACT TAG HOVER */
+    .impact-tag { transition: border-color 0.18s, background 0.18s, transform 0.18s; }
+    .impact-tag:hover { border-color: var(--accent); background: rgba(26,70,255,0.04); transform: translateY(-1px); }
+
+    /* CTA radial glow */
+    .cs-cta { position: relative; overflow: hidden; }
+    .cs-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="read-progress" id="readProgress"></div>
 
   <nav id="nav">
     <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
@@ -292,25 +354,25 @@
   </section>
 
   <!-- STATS -->
-  <div class="stats-grid">
+  <div class="stats-grid reveal-stagger" id="statsGrid">
     <div class="stat-item">
-      <div class="stat-value">8<span>yrs</span></div>
+      <div class="stat-value" data-target="8" data-suffix="yrs">8<span>yrs</span></div>
       <div class="stat-label">product design experience</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value">770<span>K+</span></div>
+      <div class="stat-value" data-target="770" data-suffix="K+">770<span>K+</span></div>
       <div class="stat-label">fans verified at Incode</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value">17</div>
+      <div class="stat-value" data-target="17">17</div>
       <div class="stat-label">stadiums deployed</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value">3</div>
+      <div class="stat-value" data-target="3">3</div>
       <div class="stat-label">industries · identity, fintech, B2B</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value">1</div>
+      <div class="stat-value" data-target="1">1</div>
       <div class="stat-label">motion practice, built from scratch</div>
     </div>
   </div>
@@ -318,19 +380,19 @@
   <!-- CONTENT -->
   <div class="about-content">
 
-    <div class="about-section">
+    <div class="about-section reveal">
       <span class="section-label">How I work</span>
       <p>I lead end-to-end — framing the problem, building the architecture, designing the system, and shipping the final UI. My work sits at the boundary between product thinking and craft, and I'm equally at home in a research conversation or a late-night animation pass.</p>
       <p><strong>AI sits in my process as a layer:</strong> Figma AI for component exploration, Gemini for visual concepting, and Claude for structuring information architecture and rationale. It keeps me fast through early thinking so I can spend more time on the decisions that actually need a human.</p>
     </div>
 
-    <div class="about-section">
+    <div class="about-section reveal">
       <span class="section-label">Building what's missing</span>
       <p>At Incode, I led design for the largest stadium identity rollout in Latin America — <strong>770,000+ fans verified across 17 venues</strong>, sub-five-second authentication at the gate.</p>
       <p>Along the way I noticed the product needed motion to communicate trust under pressure, but no one owned that craft. So I built it. I taught myself the toolchain, shipped the first prototypes, and grew it into a formal capability the team could rely on. That's how I tend to work: spot the gap, learn what's needed, and leave behind something the team can keep using.</p>
     </div>
 
-    <div class="about-section">
+    <div class="about-section reveal">
       <span class="section-label">What I'm looking for</span>
       <p>I moved to Leipzig deliberately — looking for a work culture that respects boundaries and supports long-term quality. I'm freelancing selectively while I look for my next senior IC role in Europe, ideally on a product that still has hard problems left to solve.</p>
       <p>Based in Leipzig, open to roles across Germany and Europe. Available from June 2026.</p>
@@ -354,12 +416,7 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+  <script src="shared-animations.js"></script>
 
 </body>
 </html>

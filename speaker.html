@@ -6,7 +6,7 @@
   <title>Speaker — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -361,9 +361,74 @@
       .cs-cta { padding: 48px 20px; flex-direction: column; gap: 32px; text-align: center; }
       footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
     }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-stagger > * {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+
+    /* READ PROGRESS */
+    .read-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; background: var(--accent);
+      z-index: 200; width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* NAV UNDERLINE */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--black);
+      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active::after { width: 100%; }
+
+    /* CONSTRAINT CARD HOVER */
+    .constraint-card {
+      transition: border-color 0.25s, background 0.25s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+    }
+    .constraint-card:hover { background: #fff; border-color: var(--light-gray); transform: translateY(-2px); }
+
+    /* IMPACT TAGS HOVER */
+    .impact-tag { transition: border-color 0.18s, background 0.18s, transform 0.18s; }
+    .impact-tag:hover { border-color: var(--accent); background: rgba(26,70,255,0.04); transform: translateY(-1px); }
+
+    /* IMAGES HOVER */
+    .cs-img-full, .img-grid-3 img {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cs-img-full:hover { transform: scale(1.01); }
+    .img-grid-3 img:hover { transform: translateY(-3px) scale(1.02); }
+
+    /* CTA radial glow */
+    .cs-cta { position: relative; overflow: hidden; }
+    .cs-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="read-progress" id="readProgress"></div>
 
   <!-- NAV -->
   <nav id="nav">
@@ -412,7 +477,7 @@
   <div class="cs-content">
 
     <!-- CONTEXT -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">Context</span>
       <h2>The brief sounded simple. The challenge wasn't.</h2>
       <p>A real estate and property company approached me to design a community connection platform for residents living in the same private building. The target audience was busy young professionals aged 18–35 who needed a simple way to connect with neighbors, book shared spaces, and stay informed about building events.</p>
@@ -420,19 +485,19 @@
     </section>
 
     <!-- THE PROBLEM -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">The Problem</span>
       <h2>Buildings full of strangers.</h2>
       <p>The core tension wasn't technical — it was architectural. A building app that feels too social gets abandoned. One that's too transactional misses the point. The design had to hold both: enough connection to be useful, enough privacy to feel safe. Every feature decision was filtered through that constraint.</p>
     </section>
 
     <!-- SYSTEM CONSTRAINTS -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">System Constraints</span>
       <h2>Architecture before pixels.</h2>
       <p>Speaker wasn't a visual problem — it was a system one. Three constraints shaped every decision that followed.</p>
 
-      <div class="constraints-grid">
+      <div class="constraints-grid reveal-stagger">
         <div class="constraint-card">
           <span class="constraint-number">01</span>
           <div class="constraint-title">Privacy by default</div>
@@ -452,7 +517,7 @@
     </section>
 
     <!-- BRANDING -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design — Branding Process</span>
       <h3>From brief to brand identity.</h3>
       <p>Starting from the brief, I ran through four naming and brand concepts before landing on Speaker — a name combining 'speaker' with the idea of storeys and floors, visually represented by a speech bubble icon made of colorful dots arranged like a building grid.</p>
@@ -460,7 +525,7 @@
     </div>
 
     <!-- DESIGN PROCESS -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design — Process</span>
       <h3>Low to high fidelity.</h3>
       <p>I tested at low, medium, and high fidelity — moving from hand-drawn sketches to mid-fi screens to final UI. User testing with real residents shaped key decisions, particularly around group organization by floor and the emergency contact feature which emerged as an unexpected priority.</p>
@@ -468,11 +533,11 @@
     </div>
 
     <!-- DESIGN DECISION 01 -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design Decision 01</span>
       <h3>Warm UI for a social product.</h3>
       <p>The colorful, high-contrast chat UI was a deliberate choice to make the social layer feel warm and approachable — distinct from the cold utility of most building management tools.</p>
-      <div class="img-grid-3">
+      <div class="img-grid-3 reveal-stagger">
         <img src="images/sp4a.png" alt="Speaker UI — chat interface">
         <img src="images/sp4b.png" alt="Speaker UI — floor navigation">
         <img src="images/sp4c.png" alt="Speaker UI — community features">
@@ -480,7 +545,7 @@
     </div>
 
     <!-- DESIGN DECISION 02 -->
-    <div class="decision">
+    <div class="decision reveal">
       <span class="decision-number">Design Decision 02</span>
       <h3>Space as a navigation model.</h3>
       <p>The floor plan visualization on the main screen gave residents immediate spatial orientation within their building — something no competing product was doing at the time. Navigation organized by floor and interest group made the community feel tangible, not abstract.</p>
@@ -488,14 +553,14 @@
     </div>
 
     <!-- IMPACT -->
-    <section class="cs-section">
+    <section class="cs-section reveal">
       <span class="cs-section-label">Impact</span>
       <h2>Deployed to real residents.</h2>
       <p>The product was implemented by the client and deployed to real residents. User testing confirmed the core flows were intuitive across the target age group. The client planned to scale it across additional buildings — validating that the privacy-first approach didn't reduce adoption.</p>
 
       <img src="images/sp6.png" alt="Speaker — deployed product" class="cs-img-full">
 
-      <div class="impact-tags">
+      <div class="impact-tags reveal-stagger">
         <div class="impact-tag"><strong>Deployed</strong> Implemented by client</div>
         <div class="impact-tag"><strong>3 platforms</strong> Mobile, tablet, web</div>
         <div class="impact-tag"><strong>Tested</strong> Validated with real residents</div>
@@ -521,12 +586,7 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+  <script src="shared-animations.js"></script>
 
 </body>
 </html>
