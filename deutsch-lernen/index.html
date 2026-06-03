@@ -227,26 +227,6 @@
 
         <div class="cards-header">
           <h2 class="cards-title" id="cards-title">Kartenspiel</h2>
-          <div class="cards-controls">
-            <select id="cards-category" class="cards-category-select" aria-label="Select vocabulary category">
-              <option value="animals">🐾 Tiere</option>
-              <option value="food">🍎 Essen</option>
-              <option value="colors">🎨 Farben</option>
-              <option value="nature">🌿 Natur</option>
-              <option value="household">🏠 Haushalt</option>
-              <option value="body">💪 Körper</option>
-              <option value="transport">🚗 Verkehr</option>
-              <option value="emotions">❤️ Gefühle</option>
-              <option value="travel">✈️ Reisen</option>
-              <option value="work">💼 Arbeit</option>
-            </select>
-            <button id="cards-refresh" class="icon-btn" aria-label="Refresh / Load new cards">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
-                <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
-              </svg>
-            </button>
-          </div>
         </div>
 
         <!-- Loading -->
@@ -268,20 +248,21 @@
           </button>
         </div>
 
-        <!-- Start prompt -->
+        <!-- Category picker (shown when no game active) -->
         <div id="cards-start" class="cards-start">
-          <div class="cards-start__visual" aria-hidden="true">
-            <div class="cards-start__card cards-start__card--3"></div>
-            <div class="cards-start__card cards-start__card--2"></div>
-            <div class="cards-start__card cards-start__card--1">🃏</div>
+          <p class="cards-start__text" id="cards-start-text">Wähle eine Kategorie</p>
+          <div class="category-grid" id="category-grid" role="list">
+            <button class="cat-pill" data-category="animals" role="listitem">🐾<span>Tiere</span></button>
+            <button class="cat-pill" data-category="food" role="listitem">🍎<span>Essen</span></button>
+            <button class="cat-pill" data-category="colors" role="listitem">🎨<span>Farben</span></button>
+            <button class="cat-pill" data-category="nature" role="listitem">🌿<span>Natur</span></button>
+            <button class="cat-pill" data-category="household" role="listitem">🏠<span>Haushalt</span></button>
+            <button class="cat-pill" data-category="body" role="listitem">💪<span>Körper</span></button>
+            <button class="cat-pill" data-category="transport" role="listitem">🚗<span>Verkehr</span></button>
+            <button class="cat-pill" data-category="emotions" role="listitem">❤️<span>Gefühle</span></button>
+            <button class="cat-pill" data-category="travel" role="listitem">✈️<span>Reisen</span></button>
+            <button class="cat-pill" data-category="work" role="listitem">💼<span>Arbeit</span></button>
           </div>
-          <p class="cards-start__text" id="cards-start-text">Selecciona una categoría y carga las tarjetas</p>
-          <button id="cards-load-btn" class="btn-primary cards-load-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-              <polygon points="5 3 19 12 5 21 5 3"/>
-            </svg>
-            <span id="cards-load-label">Cargar tarjetas</span>
-          </button>
         </div>
 
         <!-- Game area -->

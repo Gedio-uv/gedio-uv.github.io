@@ -35,6 +35,8 @@ let unsplashKey = '';
 const LANG_NAMES = {
   es: 'Spanish', en: 'English', pt: 'Portuguese',
   fr: 'French',  it: 'Italian', de: 'German',
+  zh: 'Chinese', ja: 'Japanese', ko: 'Korean',
+  ru: 'Russian', tr: 'Turkish', pl: 'Polish',
 };
 
 /**
@@ -48,7 +50,7 @@ export function initFlashcards(refs) {
     elFlipBtn, elFlipLabel, elPrevBtn, elNextBtn,
     elSwipeHint, elGameArea, elCompleteArea, elLoadingArea,
     elErrorArea, elErrorText, elRetryBtn, elCardViewport,
-    elStartArea, elLoadBtn,
+    elStartArea,
   } = refs);
 
   bindEvents();
@@ -252,15 +254,15 @@ function showState(state) {
 
 /* ── Private: bind events ── */
 function bindEvents() {
-  // Load button (start)
-  elLoadBtn?.addEventListener('click', () => {
-    const category = document.getElementById('cards-category')?.value || 'animals';
-    loadCards(category);
-  });
-
-  // Refresh button in header
-  document.getElementById('cards-refresh')?.addEventListener('click', () => {
-    const category = document.getElementById('cards-category')?.value || 'animals';
+  // Category grid — tap a pill to load that category immediately
+  document.getElementById('category-grid')?.addEventListener('click', (e) => {
+    const pill = e.target.closest('.cat-pill');
+    if (!pill) return;
+    const category = pill.dataset.category;
+    if (!category) return;
+    // Highlight selected pill
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
     loadCards(category);
   });
 
@@ -284,18 +286,14 @@ function bindEvents() {
   elPrevBtn?.addEventListener('click', goPrev);
   elNextBtn?.addEventListener('click', goNext);
 
-  // Retry button
+  // Retry button — show category grid again
   elRetryBtn?.addEventListener('click', () => {
-    const category = document.getElementById('cards-category')?.value || 'animals';
-    loadCards(category);
+    showState('start');
   });
 
-  // Play again button
+  // Play again button — show category grid again
   document.getElementById('cards-again-btn')?.addEventListener('click', () => {
-    currentIdx = 0;
-    isFlipped  = false;
-    showCard(0, 'from-right');
-    showState('game');
+    showState('start');
   });
 
   // Keyboard navigation

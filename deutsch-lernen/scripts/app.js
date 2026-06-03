@@ -164,7 +164,6 @@ async function boot() {
     elRetryBtn:     $('cards-retry-btn'),
     elCardViewport: $('card-viewport'),
     elStartArea:    $('cards-start'),
-    elLoadBtn:      $('cards-load-btn'),
   });
 
   if (isInitialized()) {

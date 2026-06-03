@@ -61,13 +61,14 @@
 
 /* ─── RESET ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { height: 100%; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { height: 100%; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; }
 body {
   height: 100%;
   font-family: var(--f-body);
   background: var(--c-bg);
   color: var(--c-text);
   overflow: hidden;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

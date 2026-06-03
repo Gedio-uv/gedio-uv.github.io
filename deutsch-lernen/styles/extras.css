@@ -330,9 +330,9 @@
 }
 
 .grammar-table-wrap {
-  overflow-x: auto;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.08);
+  width: 100%;
 }
 
 .grammar-table {
