@@ -377,72 +377,76 @@
             </div>
           </div>
 
-          <!-- API Keys -->
+          <!-- Connection Status -->
           <div class="settings-card">
             <h3 class="settings-card__title" id="settings-api-title">
-              <span aria-hidden="true">🔑</span> API Keys
+              <span aria-hidden="true">🔌</span> <span id="settings-conn-title">Connection</span>
             </h3>
             <p class="settings-card__desc" id="settings-api-desc">
-              Las API keys se guardan solo en tu dispositivo (localStorage).
+              All services are pre-configured and ready to use.
             </p>
 
-            <div class="settings-field">
-              <label class="settings-label" for="gemini-key" id="gemini-key-label">Gemini API Key</label>
-              <div class="settings-input-row">
-                <input type="password" id="gemini-key" class="settings-input" placeholder="AIza..." autocomplete="off" />
-                <button class="settings-eye-btn" data-target="gemini-key" aria-label="Toggle visibility">
-                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                  <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                    <line x1="1" y1="1" x2="23" y2="23"/>
-                  </svg>
-                </button>
+            <!-- Status rows -->
+            <div class="conn-status-list">
+              <div class="conn-status-row">
+                <span class="conn-dot conn-dot--ok"></span>
+                <span class="conn-label" id="conn-ai-label">AI (Groq · Llama 3.3)</span>
+                <span class="conn-badge conn-badge--ok" id="conn-ai-badge">Connected</span>
               </div>
-              <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="settings-link" id="gemini-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span id="gemini-link-text">Obtener Gemini API Key gratis</span>
-              </a>
-            </div>
-
-            <div class="settings-field">
-              <label class="settings-label" for="unsplash-key" id="unsplash-key-label">Unsplash Access Key</label>
-              <div class="settings-input-row">
-                <input type="password" id="unsplash-key" class="settings-input" placeholder="Access Key..." autocomplete="off" />
-                <button class="settings-eye-btn" data-target="unsplash-key" aria-label="Toggle visibility">
-                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                  <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                    <line x1="1" y1="1" x2="23" y2="23"/>
-                  </svg>
-                </button>
+              <div class="conn-status-row">
+                <span class="conn-dot conn-dot--ok"></span>
+                <span class="conn-label" id="conn-img-label">Images (Unsplash + AI)</span>
+                <span class="conn-badge conn-badge--ok" id="conn-img-badge">Connected</span>
               </div>
-              <a href="https://unsplash.com/developers" target="_blank" rel="noopener noreferrer" class="settings-link" id="unsplash-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span id="unsplash-link-text">Obtener Unsplash Access Key gratis</span>
-              </a>
+              <div class="conn-status-row">
+                <span class="conn-dot conn-dot--ok"></span>
+                <span class="conn-label" id="conn-speech-label">Speech (Web API)</span>
+                <span class="conn-badge conn-badge--ok" id="conn-speech-badge">Built-in</span>
+              </div>
             </div>
 
-            <button id="save-keys" class="btn-primary settings-save-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-                <polyline points="17 21 17 13 7 13 7 21"/>
-                <polyline points="7 3 7 8 15 8"/>
-              </svg>
-              <span id="save-keys-label">Guardar Keys</span>
-            </button>
+            <!-- Advanced: optional personal Gemini key -->
+            <details class="settings-advanced">
+              <summary class="settings-advanced__toggle" id="settings-advanced-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                Advanced — use your own Gemini key
+              </summary>
+              <div class="settings-advanced__body">
+                <p class="settings-card__desc" id="settings-adv-desc">Optional. Leave blank to use the default proxy.</p>
+                <div class="settings-field">
+                  <label class="settings-label" for="gemini-key" id="gemini-key-label">Gemini API Key</label>
+                  <div class="settings-input-row">
+                    <input type="password" id="gemini-key" class="settings-input" placeholder="AIza..." autocomplete="off" />
+                    <button class="settings-eye-btn" data-target="gemini-key" aria-label="Toggle visibility">
+                      <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                        <line x1="1" y1="1" x2="23" y2="23"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="settings-link" id="gemini-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span id="gemini-link-text">Get free Gemini API Key</span>
+                  </a>
+                </div>
 
-            <div id="save-feedback" class="save-feedback hidden" role="status" aria-live="polite">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-              <span id="save-feedback-text">¡Keys guardadas correctamente!</span>
-            </div>
+                <button id="save-keys" class="btn-primary settings-save-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+                  </svg>
+                  <span id="save-keys-label">Save Key</span>
+                </button>
+
+                <div id="save-feedback" class="save-feedback hidden" role="status" aria-live="polite">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span id="save-feedback-text">Key saved!</span>
+                </div>
+              </div>
+            </details>
           </div>
 
           <!-- Speech -->
