@@ -328,12 +328,6 @@ function showSearchState(state) {
 async function doSearch(query) {
   if (!query.trim()) return;
 
-  if (!state.geminiKey) {
-    showSearchState('error');
-    setText('search-error-text', 'Ingresa tu Gemini API Key en Ajustes para buscar.');
-    return;
-  }
-
   showSearchState('loading');
 
   try {
