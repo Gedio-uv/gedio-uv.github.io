@@ -186,8 +186,8 @@ const G = {
   },
 };
 
-// Fallback for unsupported languages
-['pt','fr','it','de'].forEach(l => { G[l] = G['en']; });
+// Fallback for unsupported languages → English grammar tables
+['pt','fr','it','zh','ja','ko','ru','tr','pl'].forEach(l => { G[l] = G['en']; });
 G['de'] = { ...G['en'],
   tabs: ['Fälle','Artikel','Verben','Wortstellung'],
   casesIntro: 'Das Deutsche hat 4 grammatische Fälle, die die Rolle jedes Worts im Satz bestimmen.',

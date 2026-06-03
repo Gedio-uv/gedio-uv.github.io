@@ -12,13 +12,19 @@ const KEYS = {
 };
 
 /**
+ * Pre-configured shared key for testing.
+ * Users can override it in Settings with their own key.
+ */
+const DEFAULT_GROQ_KEY = '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';
+
+/**
  * Load all settings from localStorage.
  * Returns an object with all settings.
  */
 export function loadSettings() {
   return {
     difficulty:   localStorage.getItem(KEYS.DIFFICULTY)   || null,
-    geminiKey:    localStorage.getItem(KEYS.GEMINI_KEY)   || '',
+    geminiKey:    localStorage.getItem(KEYS.GEMINI_KEY)   || DEFAULT_GROQ_KEY,
     unsplashKey:  localStorage.getItem(KEYS.UNSPLASH_KEY) || '',
     speechRate:   parseFloat(localStorage.getItem(KEYS.SPEECH_RATE) || '0.9'),
     nativeLang:   localStorage.getItem(KEYS.NATIVE_LANG)  || null,

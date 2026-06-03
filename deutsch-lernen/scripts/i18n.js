@@ -347,17 +347,231 @@ const TRANSLATIONS = {
     toggleInitial: 'Anfänger',
     toggleAdvanced: 'Fortgeschritten',
   },
+
+  // ── Simplified Chinese (zh) ──
+  zh: {
+    onboardingSubtitle: '选择你的级别',
+    levelInitialTitle: '初学者',
+    levelInitialDesc: '界面使用你的母语',
+    levelAdvancedTitle: '高级',
+    levelAdvancedDesc: '界面完全使用德语',
+    onboardingNote: '你可以随时在设置中更改级别',
+    navSearch: '搜索', navCards: '卡片', navHistory: '历史',
+    navGrammar: '语法', navSettings: '设置',
+    searchPlaceholder: '搜索德语或中文单词…',
+    searchEmptyText: '搜索德语或中文单词',
+    searchEmptyHint: '系统自动检测语言',
+    searchLoading: '搜索中…', searchErrorTitle: '搜索错误',
+    searchErrorText: '请在设置中检查你的 API Key',
+    goSettings: '前往设置',
+    synonymsLabel: '同义词', tabExamples: '例句', tabGrammar: '语法',
+    grammarGender: '性别', grammarPlural: '复数', grammarType: '词性', grammarIPA: '发音',
+    cardsTitle: '闪卡游戏', cardsLoadingText: '加载卡片中…',
+    cardsErrorText: '加载失败，请检查 API Key。',
+    cardsRetry: '重试', cardsStartText: '选择一个类别并加载卡片',
+    cardsLoad: '加载卡片', cardHint: '点击查看', cardListen: '收听',
+    swipeHint: '滑动或使用箭头翻页', cardFlip: '翻转',
+    cardsComplete: '完成！', cardsCompleteText: '你已看完所有卡片', cardsAgain: '再玩一次',
+    settingsTitle: '设置', settingsLevelTitle: '🎯 难度级别',
+    settingsAPITitle: '🔑 API Keys',
+    settingsAPIDesc: 'API Key 仅存储在你的设备上。',
+    settingsSpeechTitle: '🔊 发音',
+    geminiKeyLabel: 'Gemini API Key', geminiLinkText: '免费获取 Gemini API Key',
+    unsplashKeyLabel: 'Unsplash Access Key', unsplashLinkText: '免费获取 Unsplash Access Key',
+    saveKeys: '保存 Keys', savedFeedback: 'Keys 保存成功！',
+    speechRateLabel: '发音速度',
+    aboutDesc: '用人工智能、真实图片和母语发音学习德语。',
+    toggleInitial: '初学者', toggleAdvanced: '高级',
+  },
+
+  // ── Japanese (ja) ──
+  ja: {
+    onboardingSubtitle: 'レベルを選んでください',
+    levelInitialTitle: '初級者', levelInitialDesc: 'インターフェースが母国語で表示されます',
+    levelAdvancedTitle: '上級者', levelAdvancedDesc: 'インターフェースが完全にドイツ語で表示されます',
+    onboardingNote: 'レベルはいつでも設定から変更できます',
+    navSearch: '検索', navCards: 'カード', navHistory: '履歴',
+    navGrammar: '文法', navSettings: '設定',
+    searchPlaceholder: 'ドイツ語または日本語で単語を検索…',
+    searchEmptyText: 'ドイツ語または日本語で単語を検索',
+    searchEmptyHint: 'システムが自動的に言語を検出します',
+    searchLoading: '検索中…', searchErrorTitle: '検索エラー',
+    searchErrorText: '設定で API Key を確認してください',
+    goSettings: '設定へ',
+    synonymsLabel: '同義語', tabExamples: '例文', tabGrammar: '文法',
+    grammarGender: '性', grammarPlural: '複数形', grammarType: '品詞', grammarIPA: '発音',
+    cardsTitle: 'フラッシュカード', cardsLoadingText: 'カードを読み込み中…',
+    cardsErrorText: '読み込みエラー。API Key を確認してください。',
+    cardsRetry: '再試行', cardsStartText: 'カテゴリを選んでカードを読み込んでください',
+    cardsLoad: 'カードを読み込む', cardHint: 'タップして確認', cardListen: '聴く',
+    swipeHint: 'スワイプまたは矢印で移動', cardFlip: '裏返す',
+    cardsComplete: '完了！', cardsCompleteText: 'すべてのカードを見ました', cardsAgain: 'もう一度',
+    settingsTitle: '設定', settingsLevelTitle: '🎯 難易度',
+    settingsAPITitle: '🔑 API Keys', settingsAPIDesc: 'API Key はデバイスにのみ保存されます。',
+    settingsSpeechTitle: '🔊 発音',
+    geminiKeyLabel: 'Gemini API Key', geminiLinkText: '無料で Gemini API Key を取得',
+    unsplashKeyLabel: 'Unsplash Access Key', unsplashLinkText: '無料で Unsplash Access Key を取得',
+    saveKeys: 'Keys を保存', savedFeedback: 'Keys が正常に保存されました！',
+    speechRateLabel: '発音速度',
+    aboutDesc: 'AI、実際の画像、ネイティブ発音でドイツ語を学ぼう。',
+    toggleInitial: '初級者', toggleAdvanced: '上級者',
+  },
+
+  // ── Korean (ko) ──
+  ko: {
+    onboardingSubtitle: '레벨을 선택하세요',
+    levelInitialTitle: '입문자', levelInitialDesc: '인터페이스가 모국어로 표시됩니다',
+    levelAdvancedTitle: '고급자', levelAdvancedDesc: '인터페이스가 완전히 독일어로 표시됩니다',
+    onboardingNote: '언제든지 설정에서 레벨을 변경할 수 있습니다',
+    navSearch: '검색', navCards: '카드', navHistory: '기록',
+    navGrammar: '문법', navSettings: '설정',
+    searchPlaceholder: '독일어 또는 한국어로 단어 검색…',
+    searchEmptyText: '독일어 또는 한국어로 단어를 검색하세요',
+    searchEmptyHint: '시스템이 언어를 자동으로 감지합니다',
+    searchLoading: '검색 중…', searchErrorTitle: '검색 오류',
+    searchErrorText: '설정에서 API Key를 확인하세요',
+    goSettings: '설정으로 이동',
+    synonymsLabel: '동의어', tabExamples: '예문', tabGrammar: '문법',
+    grammarGender: '성', grammarPlural: '복수형', grammarType: '품사', grammarIPA: '발음',
+    cardsTitle: '플래시카드 게임', cardsLoadingText: '카드 로딩 중…',
+    cardsErrorText: '로딩 오류. API Key를 확인하세요.',
+    cardsRetry: '재시도', cardsStartText: '카테고리를 선택하고 카드를 로드하세요',
+    cardsLoad: '카드 로드', cardHint: '탭하여 확인', cardListen: '듣기',
+    swipeHint: '스와이프하거나 화살표로 이동', cardFlip: '뒤집기',
+    cardsComplete: '완료!', cardsCompleteText: '모든 카드를 봤습니다', cardsAgain: '다시 하기',
+    settingsTitle: '설정', settingsLevelTitle: '🎯 난이도',
+    settingsAPITitle: '🔑 API Keys', settingsAPIDesc: 'API Key는 기기에만 저장됩니다.',
+    settingsSpeechTitle: '🔊 발음',
+    geminiKeyLabel: 'Gemini API Key', geminiLinkText: '무료로 Gemini API Key 받기',
+    unsplashKeyLabel: 'Unsplash Access Key', unsplashLinkText: '무료로 Unsplash Access Key 받기',
+    saveKeys: 'Keys 저장', savedFeedback: 'Keys가 성공적으로 저장되었습니다!',
+    speechRateLabel: '발음 속도',
+    aboutDesc: 'AI, 실제 이미지, 원어민 발음으로 독일어를 배우세요.',
+    toggleInitial: '입문자', toggleAdvanced: '고급자',
+  },
+
+  // ── Russian (ru) ──
+  ru: {
+    onboardingSubtitle: 'Выберите уровень',
+    levelInitialTitle: 'Начинающий', levelInitialDesc: 'Интерфейс на вашем родном языке',
+    levelAdvancedTitle: 'Продвинутый', levelAdvancedDesc: 'Интерфейс полностью на немецком',
+    onboardingNote: 'Вы можете изменить уровень в настройках',
+    navSearch: 'Поиск', navCards: 'Карточки', navHistory: 'История',
+    navGrammar: 'Грамматика', navSettings: 'Настройки',
+    searchPlaceholder: 'Найти слово на немецком или русском…',
+    searchEmptyText: 'Найдите слово на немецком или русском',
+    searchEmptyHint: 'Система автоматически определяет язык',
+    searchLoading: 'Поиск…', searchErrorTitle: 'Ошибка поиска',
+    searchErrorText: 'Проверьте API Key в настройках',
+    goSettings: 'Перейти в настройки',
+    synonymsLabel: 'Синонимы', tabExamples: 'Примеры', tabGrammar: 'Грамматика',
+    grammarGender: 'Род', grammarPlural: 'Мн. число', grammarType: 'Часть речи', grammarIPA: 'Произношение',
+    cardsTitle: 'Игра с карточками', cardsLoadingText: 'Загрузка…',
+    cardsErrorText: 'Ошибка. Проверьте API Key.',
+    cardsRetry: 'Повторить', cardsStartText: 'Выберите категорию и загрузите карточки',
+    cardsLoad: 'Загрузить', cardHint: 'Нажмите чтобы увидеть', cardListen: 'Слушать',
+    swipeHint: 'Пролистайте или используйте стрелки', cardFlip: 'Перевернуть',
+    cardsComplete: 'Готово!', cardsCompleteText: 'Вы просмотрели все карточки', cardsAgain: 'Ещё раз',
+    settingsTitle: 'Настройки', settingsLevelTitle: '🎯 Уровень',
+    settingsAPITitle: '🔑 API Keys', settingsAPIDesc: 'API Keys хранятся только на вашем устройстве.',
+    settingsSpeechTitle: '🔊 Произношение',
+    geminiKeyLabel: 'Gemini API Key', geminiLinkText: 'Получить Gemini API Key бесплатно',
+    unsplashKeyLabel: 'Unsplash Access Key', unsplashLinkText: 'Получить Unsplash Access Key бесплатно',
+    saveKeys: 'Сохранить Keys', savedFeedback: 'Keys успешно сохранены!',
+    speechRateLabel: 'Скорость произношения',
+    aboutDesc: 'Учите немецкий с ИИ, реальными фото и произношением носителей.',
+    toggleInitial: 'Начинающий', toggleAdvanced: 'Продвинутый',
+  },
+
+  // ── Turkish (tr) ──
+  tr: {
+    onboardingSubtitle: 'Seviyenizi seçin',
+    levelInitialTitle: 'Başlangıç', levelInitialDesc: 'Arayüz ana dilinizde',
+    levelAdvancedTitle: 'İleri', levelAdvancedDesc: 'Arayüz tamamen Almanca',
+    onboardingNote: 'Seviyeyi istediğiniz zaman Ayarlar\'dan değiştirebilirsiniz',
+    navSearch: 'Ara', navCards: 'Kartlar', navHistory: 'Geçmiş',
+    navGrammar: 'Gramer', navSettings: 'Ayarlar',
+    searchPlaceholder: 'Almanca veya Türkçe kelime ara…',
+    searchEmptyText: 'Almanca veya Türkçe bir kelime arayın',
+    searchEmptyHint: 'Sistem dili otomatik olarak algılar',
+    searchLoading: 'Aranıyor…', searchErrorTitle: 'Arama hatası',
+    searchErrorText: 'Ayarlar\'dan API Key\'inizi kontrol edin',
+    goSettings: 'Ayarlara Git',
+    synonymsLabel: 'Eş anlamlılar', tabExamples: 'Örnekler', tabGrammar: 'Gramer',
+    grammarGender: 'Cinsiyet', grammarPlural: 'Çoğul', grammarType: 'Kelime türü', grammarIPA: 'Telaffuz',
+    cardsTitle: 'Kart Oyunu', cardsLoadingText: 'Kartlar yükleniyor…',
+    cardsErrorText: 'Yükleme hatası. API Key\'inizi kontrol edin.',
+    cardsRetry: 'Tekrar dene', cardsStartText: 'Bir kategori seçin ve kartları yükleyin',
+    cardsLoad: 'Kartları yükle', cardHint: 'Görmek için dokunun', cardListen: 'Dinle',
+    swipeHint: 'Kaydırın veya ok tuşlarını kullanın', cardFlip: 'Çevir',
+    cardsComplete: 'Tamamlandı!', cardsCompleteText: 'Tüm kartları gördünüz', cardsAgain: 'Tekrar oyna',
+    settingsTitle: 'Ayarlar', settingsLevelTitle: '🎯 Zorluk Seviyesi',
+    settingsAPITitle: '🔑 API Keys', settingsAPIDesc: 'API Keys yalnızca cihazınızda saklanır.',
+    settingsSpeechTitle: '🔊 Telaffuz',
+    geminiKeyLabel: 'Gemini API Key', geminiLinkText: 'Ücretiz Gemini API Key al',
+    unsplashKeyLabel: 'Unsplash Access Key', unsplashLinkText: 'Ücretiz Unsplash Access Key al',
+    saveKeys: 'Keys Kaydet', savedFeedback: 'Keys başarıyla kaydedildi!',
+    speechRateLabel: 'Telaffuz hızı',
+    aboutDesc: 'Yapay zeka, gerçek görseller ve ana dil telaffuzuyla Almanca öğrenin.',
+    toggleInitial: 'Başlangıç', toggleAdvanced: 'İleri',
+  },
+
+  // ── Polish (pl) ──
+  pl: {
+    onboardingSubtitle: 'Wybierz poziom',
+    levelInitialTitle: 'Początkujący', levelInitialDesc: 'Interfejs w Twoim ojczystym języku',
+    levelAdvancedTitle: 'Zaawansowany', levelAdvancedDesc: 'Interfejs całkowicie po niemiecku',
+    onboardingNote: 'Możesz zmienić poziom w dowolnym momencie w Ustawieniach',
+    navSearch: 'Szukaj', navCards: 'Karty', navHistory: 'Historia',
+    navGrammar: 'Gramatyka', navSettings: 'Ustawienia',
+    searchPlaceholder: 'Szukaj słowa po niemiecku lub polsku…',
+    searchEmptyText: 'Szukaj słowa po niemiecku lub polsku',
+    searchEmptyHint: 'System automatycznie wykrywa język',
+    searchLoading: 'Szukam…', searchErrorTitle: 'Błąd wyszukiwania',
+    searchErrorText: 'Sprawdź klucz API w Ustawieniach',
+    goSettings: 'Przejdź do Ustawień',
+    synonymsLabel: 'Synonimy', tabExamples: 'Przykłady', tabGrammar: 'Gramatyka',
+    grammarGender: 'Rodzaj', grammarPlural: 'L. mn.', grammarType: 'Część mowy', grammarIPA: 'Wymowa',
+    cardsTitle: 'Gra z kartami', cardsLoadingText: 'Ładowanie kart…',
+    cardsErrorText: 'Błąd ładowania. Sprawdź klucz API.',
+    cardsRetry: 'Spróbuj ponownie', cardsStartText: 'Wybierz kategorię i załaduj karty',
+    cardsLoad: 'Załaduj karty', cardHint: 'Dotknij aby zobaczyć', cardListen: 'Posłuchaj',
+    swipeHint: 'Przesuń lub użyj strzałek', cardFlip: 'Odwróć',
+    cardsComplete: 'Gotowe!', cardsCompleteText: 'Zobaczyłeś wszystkie karty', cardsAgain: 'Zagraj ponownie',
+    settingsTitle: 'Ustawienia', settingsLevelTitle: '🎯 Poziom trudności',
+    settingsAPITitle: '🔑 Klucze API', settingsAPIDesc: 'Klucze API są przechowywane tylko na Twoim urządzeniu.',
+    settingsSpeechTitle: '🔊 Wymowa',
+    geminiKeyLabel: 'Klucz API Gemini', geminiLinkText: 'Pobierz klucz API Gemini za darmo',
+    unsplashKeyLabel: 'Klucz dostępu Unsplash', unsplashLinkText: 'Pobierz klucz dostępu Unsplash za darmo',
+    saveKeys: 'Zapisz klucze', savedFeedback: 'Klucze zapisane pomyślnie!',
+    speechRateLabel: 'Szybkość wymowy',
+    aboutDesc: 'Ucz się niemieckiego z AI, prawdziwymi obrazami i wymową rodzimą.',
+    toggleInitial: 'Początkujący', toggleAdvanced: 'Zaawansowany',
+  },
 };
 
 /**
- * Detect the user's native language code (2-letter).
+ * Detect the user's native language from the browser/system.
+ * Scans navigator.languages (full priority list) so multi-language
+ * phones (e.g. German + Chinese) pick the right language.
  * Falls back to 'en'.
  */
 export function detectNativeLanguage() {
-  const lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-  const primary = lang.split('-')[0];
   const supported = Object.keys(TRANSLATIONS).filter(k => k !== 'de');
-  return supported.includes(primary) ? primary : 'en';
+
+  // Check all preferred languages in priority order
+  const candidates = [
+    ...(navigator.languages || []),
+    navigator.language,
+    navigator.userLanguage,
+  ].filter(Boolean);
+
+  for (const lang of candidates) {
+    const primary = lang.toLowerCase().split('-')[0];
+    if (supported.includes(primary)) return primary;
+  }
+
+  return 'en';
 }
 
 /**
