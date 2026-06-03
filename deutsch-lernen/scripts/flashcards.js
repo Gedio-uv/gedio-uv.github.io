@@ -76,12 +76,15 @@ export async function loadCards(category) {
   try {
     const rawCards = await generateFlashcards(category, nativeLangName, geminiKey);
 
-    // Fetch images for all cards in parallel (with fallback)
+    // Fetch images for all cards in parallel
+    // Always try: Unsplash (if key) first, then Pollinations.ai as fallback
     const withImages = await Promise.all(
       rawCards.map(async card => {
-        const imageUrl = unsplashKey
-          ? await fetchImage(card.imageQuery || card.word, unsplashKey).catch(() => null)
-          : null;
+        const imageUrl = await fetchImage(
+          card.imageQuery || card.word,
+          unsplashKey || null,
+          card.partOfSpeech || null
+        ).catch(() => null);
         return { ...card, imageUrl };
       })
     );
@@ -108,6 +111,36 @@ export async function loadCards(category) {
   }
 }
 
+/* ── Private: helpers ── */
+
+/**
+ * Build speech text without duplicating the article.
+ * e.g. article="das" + word="das Pferd" → "das Pferd" (not "das das Pferd")
+ */
+function buildSpeechText(article, word) {
+  if (!article || article === '-') return word;
+  const lower = word.toLowerCase();
+  const artLower = article.toLowerCase();
+  // If word already starts with the article, don't prepend again
+  if (lower.startsWith(artLower + ' ') || lower === artLower) {
+    return word;
+  }
+  return `${article} ${word}`;
+}
+
+/**
+ * Get the display word (stripped of leading article if already in article field).
+ */
+function getDisplayWord(article, word) {
+  if (!article || article === '-') return word;
+  const lower = word.toLowerCase();
+  const artLower = article.toLowerCase();
+  if (lower.startsWith(artLower + ' ')) {
+    return word.slice(article.length).trim(); // strip article prefix
+  }
+  return word;
+}
+
 /* ── Private: render a card ── */
 function showCard(idx, direction = 'from-right') {
   if (!cards[idx]) return;
@@ -119,16 +152,26 @@ function showCard(idx, direction = 'from-right') {
   // Reset flip immediately
   elCard.classList.remove('flipped');
 
-  // Update content
-  const articleText = card.article && card.article !== '-' ? card.article : '';
+  // Update content — strip article from word if already included
+  const articleText  = card.article && card.article !== '-' ? card.article : '';
+  const displayWord  = getDisplayWord(articleText, card.word);
+
   elCardArticle.textContent = articleText;
-  elCardWord.textContent    = card.word;
+  elCardWord.textContent    = displayWord;
   elCardNative.textContent  = card.nativeTranslation || '';
+
+  // Store clean speech text on card for reuse
+  card._speechText = buildSpeechText(articleText, card.word);
 
   // Update image
   if (card.imageUrl) {
     elCardImage.src = card.imageUrl;
     elCardImage.alt = card.word;
+    elCardImage.style.opacity = '0';
+    elCardImage.onload = () => {
+      elCardImage.style.transition = 'opacity 0.4s';
+      elCardImage.style.opacity = '1';
+    };
   } else {
     elCardImage.src = '';
     elCardImage.alt = '';
@@ -162,11 +205,8 @@ function flipCard() {
   elCard.classList.toggle('flipped', isFlipped);
 
   if (isFlipped) {
-    // Auto-pronounce on flip
-    const text = elCardArticle.textContent
-      ? `${elCardArticle.textContent} ${elCardWord.textContent}`
-      : elCardWord.textContent;
-    speak(text);
+    // Auto-pronounce on flip — use pre-built speech text (no echo)
+    speak(cards[currentIdx]?._speechText || elCardWord.textContent);
   }
 }
 
@@ -236,10 +276,8 @@ function bindEvents() {
   // Listen button (back)
   elListenBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    const text = elCardArticle.textContent
-      ? `${elCardArticle.textContent} ${elCardWord.textContent}`
-      : elCardWord.textContent;
-    speak(text, elListenBtn);
+    // Use pre-built speech text to avoid echo
+    speak(cards[currentIdx]?._speechText || elCardWord.textContent, elListenBtn);
   });
 
   // Prev / Next buttons

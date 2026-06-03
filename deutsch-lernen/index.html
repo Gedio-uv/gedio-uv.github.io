@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="styles/search.css" />
   <link rel="stylesheet" href="styles/cards.css" />
   <link rel="stylesheet" href="styles/settings.css" />
+  <link rel="stylesheet" href="styles/extras.css" />
 </head>
 <body>
 <div id="app">
@@ -214,7 +215,7 @@
           <div class="search-error__icon" aria-hidden="true">⚠️</div>
           <p class="search-error__title" id="search-error-title">Error al buscar</p>
           <p class="search-error__text" id="search-error-text">Verifica tu Gemini API Key en Ajustes</p>
-          <button id="search-error-settings" class="btn-secondary" id="go-settings-btn">
+          <button id="search-error-settings" class="btn-secondary">
             <span id="go-settings-label">Ir a Ajustes</span>
           </button>
         </div>
@@ -503,6 +504,38 @@
         </div>
       </section>
 
+      <!-- ─────────── HISTORY VIEW ─────────── -->
+      <section id="view-history" class="view view--history" aria-label="Search history">
+        <div class="extras-header">
+          <h2 class="extras-title" id="history-title">Historial</h2>
+          <button id="history-clear-btn" class="icon-btn" aria-label="Clear history" title="Limpiar historial">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div id="history-empty" class="history-empty">
+          <div class="history-empty__icon" aria-hidden="true">🕐</div>
+          <p class="history-empty__text" id="history-empty-text">Tus búsquedas aparecerán aquí</p>
+          <p class="history-empty__hint" id="history-empty-hint">Empieza buscando una palabra en alemán</p>
+        </div>
+
+        <!-- History list -->
+        <ul id="history-list" class="history-list" aria-label="Search history"></ul>
+      </section>
+
+      <!-- ─────────── GRAMMAR VIEW (JS-rendered) ─────────── -->
+      <section id="view-grammar" class="view view--grammar" aria-label="German grammar rules">
+        <div class="extras-header">
+          <h2 class="extras-title" id="grammar-view-title">Grammatik</h2>
+        </div>
+        <div class="grammar-tabs" role="tablist" aria-label="Grammar sections" id="grammar-tabs-bar"></div>
+        <div id="grammar-content" class="grammar-content-wrap"></div>
+      </section>
+
     </main>
 
     <!-- BOTTOM NAV -->
@@ -521,6 +554,22 @@
           <path d="M6 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-2"/>
         </svg>
         <span class="nav-item__label" id="nav-cards-label">Karten</span>
+      </button>
+      <button class="nav-item" data-view="history" id="nav-history" aria-label="History">
+        <div class="nav-item__indicator" aria-hidden="true"></div>
+        <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="nav-item__label" id="nav-history-label">Historial</span>
+      </button>
+      <button class="nav-item" data-view="grammar" id="nav-grammar" aria-label="Grammar">
+        <div class="nav-item__indicator" aria-hidden="true"></div>
+        <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span class="nav-item__label" id="nav-grammar-label">Gramática</span>
       </button>
       <button class="nav-item" data-view="settings" id="nav-settings" aria-label="Settings">
         <div class="nav-item__indicator" aria-hidden="true"></div>
