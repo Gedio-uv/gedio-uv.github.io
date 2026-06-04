@@ -23,6 +23,17 @@ let currentActiveLineIndex = -1;
 // ── DOM shortcuts ──
 const $ = id => document.getElementById(id);
 
+// ── Native Language Config ──
+const userLangFull = navigator.language || 'es-ES';
+const userLangCode = userLangFull.split('-')[0]; // e.g., 'es', 'en'
+let nativeLangName = 'Translation';
+try {
+  nativeLangName = new Intl.DisplayNames([userLangFull], { type: 'language' }).of(userLangCode);
+  nativeLangName = nativeLangName.charAt(0).toUpperCase() + nativeLangName.slice(1);
+} catch(e) {
+  nativeLangName = userLangCode.toUpperCase();
+}
+
 // ── Hardcoded Option B Suggestions ──
 const YT_SUGGESTIONS = [
   {
@@ -544,6 +555,15 @@ const YT_SUGGESTIONS = [
 
 export function initMusic(state) {
   appState = state;
+  
+  // Setup Dynamic Toggles
+  const toggleGermanBtn = $('toggle-german');
+  if (toggleGermanBtn) {
+    toggleGermanBtn.textContent = nativeLangName; // e.g., 'Español'
+    // Update data attribute for logic mapping
+    toggleGermanBtn.dataset.mode = 'native';
+  }
+  
   loadYouTubeAPI();
   renderSuggestions();
   bindMusicEvents();
@@ -738,34 +758,85 @@ function closePlayer() {
   $('yt-section')?.classList.remove('hidden');
 }
 
-function renderLyrics(song, mode) {
+/* ════════════════════════════════════════════
+   DYNAMIC TRANSLATION
+════════════════════════════════════════════ */
+
+async function translateLyricsChunk(linesText, targetLang) {
+  // Use public Google Translate endpoint
+  const url = \`https://translate.googleapis.com/translate_a/single?client=gtx&sl=de&tl=\${targetLang}&dt=t&q=\${encodeURIComponent(linesText)}\`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    // data[0] contains array of translated sentences
+    return data[0].map(item => item[0]).join('');
+  } catch(e) {
+    console.error("Translation error:", e);
+    return linesText; // fallback to original
+  }
+}
+
+async function getNativeLyrics(song) {
+  if (song.lyrics.native) return song.lyrics.native;
+  
+  $('music-lyrics').classList.add('hidden');
+  $('music-lyrics-loading')?.classList.remove('hidden');
+  
+  // We need to translate line by line, but to avoid 50 API calls, we join them
+  // with newlines and translate in one go.
+  const originalLines = song.lyrics.original.map(l => l.line);
+  const textToTranslate = originalLines.join('\\n');
+  
+  const translatedText = await translateLyricsChunk(textToTranslate, userLangCode);
+  const translatedLines = translatedText.split('\\n');
+  
+  // Cache it
+  song.lyrics.native = song.lyrics.original.map((l, i) => ({
+    line: translatedLines[i] || l.line,
+    timestamp: l.timestamp
+  }));
+  
+  $('music-lyrics-loading')?.classList.add('hidden');
+  $('music-lyrics').classList.remove('hidden');
+  
+  return song.lyrics.native;
+}
+
+async function renderLyrics(song, mode) {
   const lyricsEl = $('music-lyrics');
   if (!lyricsEl) return;
+
+  let nativeLines = null;
+  if (mode === 'native' || mode === 'bilingual') {
+    nativeLines = await getNativeLyrics(song);
+    // If the user changed modes while fetching, abort render
+    if (currentSong !== song || currentMode !== mode) return;
+  }
 
   const lines = mode === 'bilingual'
     ? song.lyrics.original.map((l, i) => ({
         original: l.line,
-        german: song.lyrics.german[i]?.line || l.line,
+        german: nativeLines[i]?.line || l.line, // Actually this is 'native' now
       }))
-    : (mode === 'german' ? song.lyrics.german : song.lyrics.original);
+    : (mode === 'native' ? nativeLines : song.lyrics.original);
 
   if (mode === 'bilingual') {
-    lyricsEl.innerHTML = lines.map((pair, i) => `
-      <div class="lyric-pair" data-index="${i}">
-        <p class="lyric-line lyric-line--original">${pair.original}</p>
-        <p class="lyric-line lyric-line--german">${renderClickableWords(pair.german)}</p>
+    lyricsEl.innerHTML = lines.map((pair, i) => \`
+      <div class="lyric-pair" data-index="\${i}">
+        <p class="lyric-line lyric-line--original">\${renderClickableWords(pair.original)}</p>
+        <p class="lyric-line lyric-line--german">\${pair.german}</p>
       </div>
-    `).join('');
+    \`).join('');
   } else {
-    const isGerman = mode === 'german';
-    lyricsEl.innerHTML = lines.map((l, i) => `
-      <p class="lyric-line${isGerman ? ' lyric-line--german' : ''}" data-index="${i}">
-        ${isGerman ? renderClickableWords(l.line) : escapeHtml(l.line)}
+    const isOriginal = mode === 'original';
+    lyricsEl.innerHTML = lines.map((l, i) => \`
+      <p class="lyric-line\${!isOriginal ? ' lyric-line--german' : ''}" data-index="\${i}">
+        \${isOriginal ? renderClickableWords(l.line) : escapeHtml(l.line)}
       </p>
-    `).join('');
+    \`).join('');
   }
 
-  // Bind word click events on German lines
+  // Bind word click events on Original (German) lines
   lyricsEl.querySelectorAll('.lyric-word').forEach(word => {
     word.addEventListener('click', () => showWordPopup(word.dataset.word));
   });
@@ -923,8 +994,8 @@ function handleQuizAnswer(btn, correctWord) {
 
 function setToggleMode(mode) {
   currentMode = mode;
-  ['original', 'german', 'bilingual'].forEach(m => {
-    const btn = $(`toggle-${m}`);
+  ['original', 'native', 'bilingual'].forEach(m => {
+    const btn = $(`toggle-${m === 'native' ? 'german' : m}`); // ID is still toggle-german
     if (btn) btn.setAttribute('aria-pressed', String(m === mode));
     btn?.classList.toggle('active', m === mode);
   });
@@ -948,8 +1019,8 @@ function bindMusicEvents() {
   $('music-player-back')?.addEventListener('click', closePlayer);
 
   // Toggle buttons
-  ['original', 'german', 'bilingual'].forEach(mode => {
-    $(`toggle-${mode}`)?.addEventListener('click', () => setToggleMode(mode));
+  ['original', 'native', 'bilingual'].forEach(mode => {
+    $(`toggle-${mode === 'native' ? 'german' : mode}`)?.addEventListener('click', () => setToggleMode(mode));
   });
 
   // Word popup close
