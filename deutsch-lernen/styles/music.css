@@ -166,8 +166,9 @@
 .music-player__header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   padding: 16px 20px;
+  flex-shrink: 0;
   border-bottom: 1px solid var(--c-border);
   position: sticky;
   top: 0;
@@ -220,6 +221,7 @@
 /* ─── TOGGLE ─── */
 .music-player__toggle {
   display: flex;
+  flex-shrink: 0;
   gap: 0;
   margin: 16px 20px;
   border-radius: var(--r-sm);
@@ -250,6 +252,7 @@
   padding: 8px 20px 24px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: 4px;
 }
 

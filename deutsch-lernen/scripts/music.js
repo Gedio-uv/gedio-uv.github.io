@@ -97,19 +97,25 @@ const YT_SUGGESTIONS = [
     level: 'B1',
     lyrics: {
       original: [
-        { line: 'Ich steh auf Berlin', timestamp: 15 },
-        { line: 'Weil ich von hier bin', timestamp: 18 },
-        { line: 'Das ist mein Zuhause', timestamp: 20 },
-        { line: 'Hier bin ich zu Hause', timestamp: 22 }
+        { line: 'Ich verbrenn\' mein Studio', timestamp: 14 },
+        { line: 'Schnupfe die Asche wie Koks', timestamp: 17 },
+        { line: 'Ich erschlag\' meinen Goldfisch', timestamp: 19 },
+        { line: 'Vergrab\' ihn im Hof', timestamp: 21 },
+        { line: 'Ich jag\' meine Bude hoch', timestamp: 24 },
+        { line: 'Alles was ich hab\', lass ich los', timestamp: 26 },
+        { line: 'Mein altes Leben schmeckt wie ein fades Toast', timestamp: 29 }
       ],
       german: [
-        { line: 'Ich steh auf Berlin', timestamp: 15 },
-        { line: 'Weil ich von hier bin', timestamp: 18 },
-        { line: 'Das ist mein Zuhause', timestamp: 20 },
-        { line: 'Hier bin ich zu Hause', timestamp: 22 }
+        { line: 'Ich verbrenn\' mein Studio', timestamp: 14 },
+        { line: 'Schnupfe die Asche wie Koks', timestamp: 17 },
+        { line: 'Ich erschlag\' meinen Goldfisch', timestamp: 19 },
+        { line: 'Vergrab\' ihn im Hof', timestamp: 21 },
+        { line: 'Ich jag\' meine Bude hoch', timestamp: 24 },
+        { line: 'Alles was ich hab\', lass ich los', timestamp: 26 },
+        { line: 'Mein altes Leben schmeckt wie ein fades Toast', timestamp: 29 }
       ]
     },
-    vocabulary: ['Berlin', 'stehen', 'Zuhause', 'weil', 'hier']
+    vocabulary: ['verbrennen', 'Asche', 'erschlagen', 'vergraben', 'Leben']
   },
   {
     videoId: '8Xz590x0nEU',
