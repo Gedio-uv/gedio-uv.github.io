@@ -121,7 +121,7 @@ const YT_SUGGESTIONS = [
       ]
     },
     vocabulary: ["Luftballon","Horizont","singen","Krieger","fliegen"]
-  }
+  },
   {
     videoId: 'StZcUAPRRac',
     title: 'Sonne',
@@ -254,7 +254,7 @@ const YT_SUGGESTIONS = [
       ]
     },
     vocabulary: ["Sonne","Stern","hell","kommen","alle"]
-  }
+  },
   {
     videoId: 'v0y6oOBZ7Mk',
     title: 'Autobahn',
@@ -301,7 +301,7 @@ const YT_SUGGESTIONS = [
       ]
     },
     vocabulary: ["Autobahn","fahren","vor","Tal","Sonne"]
-  }
+  },
   {
     videoId: 'qdtLCfEcPL4',
     title: 'Alles Neu',
@@ -394,7 +394,7 @@ const YT_SUGGESTIONS = [
       ]
     },
     vocabulary: ["verbrennen","Asche","erschlagen","vergraben","Leben"]
-  }
+  },
   {
     videoId: 'hK-mYC8QQ3A',
     title: 'Easy',
