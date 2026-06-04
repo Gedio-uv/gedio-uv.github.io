@@ -382,7 +382,7 @@
 }
 .card-listen-btn:hover {
   background: var(--c-gold);
-  color: #1A0E00;
+  color: #FFFFFF;
   transform: scale(1.05);
 }
 .card-listen-btn svg { width: 16px; height: 16px; }
@@ -447,7 +447,7 @@
 }
 .card-flip-manual-btn:hover {
   background: var(--c-gold);
-  color: #1A0E00;
+  color: #FFFFFF;
   transform: scale(1.02);
   box-shadow: 0 4px 20px rgba(167,139,250,0.35);
 }

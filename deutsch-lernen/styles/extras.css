@@ -328,10 +328,13 @@
 }
 
 .grammar-table-wrap {
-  border-radius: 12px;
+  background: var(--c-surface);
   border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-md);
+  margin-bottom: 24px;
   width: 100%;
   max-width: 100%;        /* never wider than panel */
+  overflow: hidden;
   overflow-x: hidden;     /* tables adapt, no h-scroll */
 }
 

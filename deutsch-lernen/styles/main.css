@@ -449,7 +449,7 @@ svg { display: block; }
   padding: 14px 28px;
   border-radius: var(--r-full);
   background: linear-gradient(135deg, var(--c-gold) 0%, #7C5CE8 100%);
-  color: #1A0E00;
+  color: #FFFFFF;
   font-family: var(--f-heading);
   font-size: 15px;
   font-weight: 700;
@@ -520,7 +520,7 @@ svg { display: block; }
 .listen-btn:hover {
   transform: scale(1.1);
   background: var(--c-gold);
-  color: #1A0E00;
+  color: #FFFFFF;
   box-shadow: var(--shadow-gold);
 }
 .listen-btn:active { transform: scale(0.95); }
