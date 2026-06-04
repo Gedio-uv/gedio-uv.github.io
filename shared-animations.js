@@ -37,9 +37,33 @@
     if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('#') && !href.startsWith('//')) {
       link.addEventListener('click', e => {
         e.preventDefault();
-        document.body.style.transition = 'opacity 0.2s ease';
-        document.body.style.opacity = '0';
-        setTimeout(() => { window.location.href = href; }, 200);
+        
+        // SPECIAL TRANSITION FOR AI PROJECTS (DARK MODE)
+        if (href.includes('deutschlernen.html') && !window.location.href.includes('deutschlernen.html')) {
+          const darkOverlay = document.createElement('div');
+          darkOverlay.style.position = 'fixed';
+          darkOverlay.style.top = '0';
+          darkOverlay.style.left = '0';
+          darkOverlay.style.width = '100vw';
+          darkOverlay.style.height = '100vh';
+          darkOverlay.style.backgroundColor = '#0a0a0a';
+          darkOverlay.style.zIndex = '9999';
+          darkOverlay.style.opacity = '0';
+          darkOverlay.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+          document.body.appendChild(darkOverlay);
+          
+          // Force reflow
+          void darkOverlay.offsetWidth;
+          
+          darkOverlay.style.opacity = '1';
+          
+          setTimeout(() => { window.location.href = href; }, 500);
+        } else {
+          // NORMAL TRANSITION
+          document.body.style.transition = 'opacity 0.2s ease';
+          document.body.style.opacity = '0';
+          setTimeout(() => { window.location.href = href; }, 200);
+        }
       });
     }
   });
