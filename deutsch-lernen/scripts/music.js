@@ -573,8 +573,7 @@ function loadYouTubeAPI() {
   if (window.YT && window.YT.Player) return;
   const tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
-  const firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  document.head.appendChild(tag);
 }
 
 // Called automatically by YT API when ready
@@ -782,24 +781,26 @@ async function getNativeLyrics(song) {
   $('music-lyrics').classList.add('hidden');
   $('music-lyrics-loading')?.classList.remove('hidden');
   
-  // We need to translate line by line, but to avoid 50 API calls, we join them
-  // with newlines and translate in one go.
-  const originalLines = song.lyrics.original.map(l => l.line);
-  const textToTranslate = originalLines.join('\n');
-  
-  const translatedText = await translateLyricsChunk(textToTranslate, userLangCode);
-  const translatedLines = translatedText.split('\n');
-  
-  // Cache it
-  song.lyrics.native = song.lyrics.original.map((l, i) => ({
-    line: translatedLines[i] || l.line,
-    timestamp: l.timestamp
-  }));
-  
-  $('music-lyrics-loading')?.classList.add('hidden');
-  $('music-lyrics').classList.remove('hidden');
-  
-  return song.lyrics.native;
+  try {
+    // We need to translate line by line, but to avoid 50 API calls, we join them
+    // with newlines and translate in one go.
+    const originalLines = song.lyrics.original.map(l => l.line);
+    const textToTranslate = originalLines.join('\n');
+    
+    const translatedText = await translateLyricsChunk(textToTranslate, userLangCode);
+    const translatedLines = translatedText.split('\n');
+    
+    // Cache it
+    song.lyrics.native = song.lyrics.original.map((l, i) => ({
+      line: translatedLines[i] || l.line,
+      timestamp: l.timestamp
+    }));
+    
+    return song.lyrics.native;
+  } finally {
+    $('music-lyrics-loading')?.classList.add('hidden');
+    $('music-lyrics').classList.remove('hidden');
+  }
 }
 
 async function renderLyrics(song, mode) {
