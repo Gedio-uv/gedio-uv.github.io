@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Guido Usnayo Vidaurre</title>
+  <title>Approach — Guido Usnayo Vidaurre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -51,7 +51,7 @@
     .nav-links a.active { color: var(--black); font-weight: 500; }
     .nav-divider { width: 1px; height: 12px; background: var(--light-gray); }
 
-    /* HERO — split layout */
+    /* HERO */
     .about-hero {
       padding: 120px 40px 80px;
       display: grid;
@@ -89,9 +89,7 @@
       border-top: 1px solid var(--light-gray);
     }
 
-    .about-meta-row {
-      display: flex; gap: 16px;
-    }
+    .about-meta-row { display: flex; gap: 16px; }
 
     .about-meta-label {
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em;
@@ -99,17 +97,11 @@
       min-width: 120px;
     }
 
-    .about-meta-value {
-      font-size: 0.85rem; color: var(--black);
-    }
+    .about-meta-value { font-size: 0.85rem; color: var(--black); }
 
-    /* PHOTO */
     .about-right {
       opacity: 0;
       animation: fadeIn 0.7s ease forwards 0.3s;
-      max-height: 85vh;
-      overflow: hidden;
-      border-radius: 8px;
     }
 
     .about-photo {
@@ -121,7 +113,30 @@
       border-radius: 8px;
     }
 
-    /* CONTENT SECTIONS */
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .stat-item {
+      padding: 40px 0;
+      border-right: 1px solid var(--light-gray);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-value {
+      font-size: 1.8rem; font-weight: 600;
+      letter-spacing: -0.03em; color: var(--black);
+      line-height: 1; margin-bottom: 6px;
+    }
+    .stat-value span { color: var(--accent); }
+    .stat-label { font-size: 0.72rem; color: var(--gray); line-height: 1.4; padding: 0 12px; }
+
+    /* CONTENT */
     .about-content {
       max-width: 720px;
       margin: 0 auto;
@@ -152,39 +167,79 @@
     }
 
     .about-section p:last-child { margin-bottom: 0; }
+    .about-section p strong { color: var(--black); font-weight: 500; }
 
-    .about-section p strong {
-      color: var(--black); font-weight: 500;
-    }
-
-    /* STATS */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      border-top: 1px solid var(--light-gray);
+    /* TOOLS SECTION */
+    .tools-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 40px 64px;
       border-bottom: 1px solid var(--light-gray);
+      margin-bottom: 0;
     }
 
-    .stat-item {
-      padding: 40px 0;
-      border-right: 1px solid var(--light-gray);
-      text-align: center;
+    .tools-group {
+      margin-bottom: 48px;
     }
 
-    .stat-item:last-child { border-right: none; }
+    .tools-group:last-child { margin-bottom: 0; }
 
-    .stat-value {
-      font-size: 1.8rem; font-weight: 600;
-      letter-spacing: -0.03em; color: var(--black);
-      line-height: 1; margin-bottom: 6px;
+    .tools-group-label {
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gray);
+      margin-bottom: 20px; display: block;
     }
 
-    .stat-value span { color: var(--accent); }
-
-    .stat-label {
-      font-size: 0.72rem; color: var(--gray); line-height: 1.4;
-      padding: 0 12px;
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
+
+    .tool-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      border: 1px solid var(--light-gray);
+    }
+
+    .tool-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .tool-info {}
+
+    .tool-name {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .tool-desc {
+      font-size: 0.75rem;
+      color: var(--gray);
+      line-height: 1.45;
+    }
+
+    /* AI tools — slightly different bg */
+    .tool-card.ai {
+      background: #f0f3ff;
+      border-color: #dde3ff;
+    }
+
+    .tool-card.ai .tool-name { color: var(--accent); }
 
     /* CTA */
     .cs-cta {
@@ -209,17 +264,14 @@
     }
     .btn-pill:hover { background: #1238e0; transform: translateY(-1px); }
 
-    /* FOOTER */
     footer {
       padding: 28px 40px;
       border-top: 1px solid rgba(255,255,255,0.08);
       background: var(--black);
       display: flex; align-items: center; justify-content: space-between;
     }
-
     .footer-text { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
@@ -229,130 +281,33 @@
       to { opacity: 1; }
     }
 
-    /* MOBILE NAV */
-    .nav-mobile-toggle {
-      display: none; width: 24px; height: 24px;
-      background: none; border: none; cursor: pointer;
-      position: relative; z-index: 101;
-    }
-    .nav-mobile-toggle span {
-      display: block; width: 100%; height: 1.5px;
-      background: var(--black); position: absolute; left: 0;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
-    }
-    .nav-mobile-toggle span:nth-child(1) { top: 8px; }
-    .nav-mobile-toggle span:nth-child(2) { bottom: 8px; }
-    
-    body.nav-open .nav-mobile-toggle span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
-    body.nav-open .nav-mobile-toggle span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
-
-    /* RESPONSIVE */
     @media (max-width: 860px) {
       nav { padding: 16px 20px; }
-      .nav-mobile-toggle { display: block; }
-      body.nav-open nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-      .nav-name { position: relative; z-index: 101; }
-      .nav-links {
-        position: fixed; inset: 0;
-        background: rgba(250,250,250,0.98);
-        flex-direction: column; justify-content: center;
-        gap: 32px; font-size: 1.5rem;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-      body.nav-open .nav-links { opacity: 1; pointer-events: auto; }
-      .nav-links a { font-size: 1.25rem; }
-      .nav-divider { width: 40px; height: 1px; }
+      .nav-links { gap: 16px; }
       .about-hero { grid-template-columns: 1fr; padding: 100px 20px 48px; gap: 40px; }
       .about-right { order: -1; }
       .about-photo { max-width: 280px; margin: 0 auto; display: block; }
-      .about-content { padding: 48px 20px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-right: 1px solid var(--light-gray); }
+      .about-content { padding: 48px 20px; }
+      .tools-section { padding: 0 20px 48px; }
+      .tools-grid { grid-template-columns: 1fr; }
       .cs-cta { padding: 48px 20px; flex-direction: column; gap: 32px; text-align: center; }
       footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
-    }
-
-    /* SCROLL REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .reveal-stagger > * {
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
-    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
-    .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
-    .reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
-
-    /* READ PROGRESS */
-    .read-progress {
-      position: fixed; top: 0; left: 0;
-      height: 2px; background: var(--accent);
-      z-index: 200; width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* NAV UNDERLINE */
-    .nav-links a { position: relative; }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 1px; background: var(--black);
-      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active::after { width: 100%; }
-
-    /* STAT HOVER */
-    .stat-item { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    .stat-item:hover { transform: translateY(-2px); }
-
-    /* ABOUT PHOTO HOVER */
-    .about-photo { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .about-right:hover .about-photo { transform: scale(1.012) translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-
-    /* IMPACT TAG HOVER */
-    .impact-tag { transition: border-color 0.18s, background 0.18s, transform 0.18s; }
-    .impact-tag:hover { border-color: var(--accent); background: rgba(26,70,255,0.04); transform: translateY(-1px); }
-
-    /* CTA radial glow */
-    .cs-cta { position: relative; overflow: hidden; }
-    .cs-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 80% at 0% 50%, rgba(26,70,255,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-      .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="read-progress" id="readProgress"></div>
 
   <nav id="nav">
     <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="incode.html">Incode</a></li>
       <li><a href="speaker.html">Speaker</a></li>
       <li><a href="ytem.html">Ytem</a></li>
       <li><a href="other.html">Other work</a></li>
       <li><a href="motion.html">Motion</a></li>
-      <li><a href="deutschlernen.html">AI Projects</a></li>
       <li class="nav-divider"></li>
-      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="about.html" class="active">Approach</a></li>
       <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
     </ul>
   </nav>
@@ -360,7 +315,7 @@
   <!-- HERO -->
   <section class="about-hero">
     <div class="about-left">
-      <span class="about-label">About</span>
+      <span class="about-label">Approach</span>
       <h1 class="about-headline">Designing for products that can't afford a bad flow.</h1>
       <p class="about-tagline">Identity verification · Fintech · B2B platforms used by operators under pressure.</p>
       <div class="about-quick-meta">
@@ -388,25 +343,25 @@
   </section>
 
   <!-- STATS -->
-  <div class="stats-grid reveal-stagger" id="statsGrid">
+  <div class="stats-grid">
     <div class="stat-item">
-      <div class="stat-value" data-target="8" data-suffix="yrs">8<span>yrs</span></div>
+      <div class="stat-value">8<span>yrs</span></div>
       <div class="stat-label">product design experience</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value" data-target="770" data-suffix="K+">770<span>K+</span></div>
+      <div class="stat-value">770<span>K+</span></div>
       <div class="stat-label">fans verified at Incode</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value" data-target="17">17</div>
+      <div class="stat-value">17</div>
       <div class="stat-label">stadiums deployed</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value" data-target="3">3</div>
+      <div class="stat-value">3</div>
       <div class="stat-label">industries · identity, fintech, B2B</div>
     </div>
     <div class="stat-item">
-      <div class="stat-value" data-target="1">1</div>
+      <div class="stat-value">1</div>
       <div class="stat-label">motion practice, built from scratch</div>
     </div>
   </div>
@@ -414,22 +369,193 @@
   <!-- CONTENT -->
   <div class="about-content">
 
-    <div class="about-section reveal">
+    <div class="about-section">
       <span class="section-label">How I work</span>
       <p>I lead end-to-end — framing the problem, building the architecture, designing the system, and shipping the final UI. My work sits at the boundary between product thinking and craft, and I'm equally at home in a research conversation or a late-night animation pass.</p>
-      <p><strong>AI sits in my process as a layer:</strong> Figma AI for component exploration, Gemini for visual concepting, and Claude for structuring information architecture and rationale. It keeps me fast through early thinking so I can spend more time on the decisions that actually need a human.</p>
+      <p>I've integrated AI across my workflow not as a shortcut, but as a process layer — it keeps me fast through early exploration so I can spend more time on decisions that actually need human judgment.</p>
     </div>
 
-    <div class="about-section reveal">
+  </div>
+
+  <!-- TOOLS -->
+  <div class="tools-section">
+
+    <div class="tools-group">
+      <span class="tools-group-label">Design & Craft</span>
+      <div class="tools-grid">
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#1e1e1e;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/figma.svg" width="20" style="filter:invert(1) sepia(1) saturate(5) hue-rotate(200deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Figma</div>
+            <div class="tool-desc">Primary design tool — UX flows, UI systems, components, design tokens, and handoff.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#f5f0e8;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/figma.svg" width="20" style="filter:sepia(1) saturate(2) hue-rotate(10deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">FigJam</div>
+            <div class="tool-desc">Diagrams, flows, and collaborative thinking — used early in problem definition.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#f0f4ff;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/procreate.svg" width="20" style="filter:invert(0.2);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Procreate</div>
+            <div class="tool-desc">Early-stage sketching, concept exploration, and rough ideation on iPad.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#fff0f0;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/protopie.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(320deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">ProtoPie</div>
+            <div class="tool-desc">Advanced interactive prototypes — sensor-based interactions and complex micro-flows.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#f8f0ff;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/spline.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(240deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Spline</div>
+            <div class="tool-desc">3D elements and interactive scenes for product UI and visual storytelling.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#fff5f0;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/framer.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(340deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Framer</div>
+            <div class="tool-desc">High-fidelity web prototypes and published design explorations.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tools-group">
+      <span class="tools-group-label">Motion & Production</span>
+      <div class="tools-grid">
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#1a0533;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobeaftereffects.svg" width="20" style="filter:invert(1) sepia(1) saturate(5) hue-rotate(240deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">After Effects</div>
+            <div class="tool-desc">Motion systems, UI animation, and product interaction prototypes. Led motion practice at Incode.</div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-icon" style="background:#0a0a1a;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/principle.svg" width="20" style="filter:invert(1);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Principle</div>
+            <div class="tool-desc">Rapid motion prototyping — transitions, micro-interactions, and flow animations.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tools-group">
+      <span class="tools-group-label">AI in my process</span>
+      <div class="tools-grid">
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#e8edff;">
+            <span style="font-size:1.2rem;">✦</span>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Claude</div>
+            <div class="tool-desc">Information architecture, design rationale, writing, and structured thinking throughout the process.</div>
+          </div>
+        </div>
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#e8edff;">
+            <span style="font-size:1.1rem;">⬡</span>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Claude Design</div>
+            <div class="tool-desc">Visual mockups, layout exploration, and UI generation before moving into Figma.</div>
+          </div>
+        </div>
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#e8f5f0;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlegemini.svg" width="20" style="filter:sepia(1) saturate(2) hue-rotate(120deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Gemini</div>
+            <div class="tool-desc">Visual concepting, moodboarding, and image generation for product and motion work.</div>
+          </div>
+        </div>
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#fff0e8;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cursor.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(10deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Cursor</div>
+            <div class="tool-desc">AI-assisted code iteration — front-end development and rapid prototyping with code.</div>
+          </div>
+        </div>
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#f0f5ff;">
+            <span style="font-size:1rem; font-weight:700; color:var(--accent);">Ag</span>
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Antigravity</div>
+            <div class="tool-desc">AI-assisted webapp builder — used to ship DeutschLernen, a live German learning tool.</div>
+          </div>
+        </div>
+
+        <div class="tool-card ai">
+          <div class="tool-icon" style="background:#e8edff;">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/figma.svg" width="20" style="filter:sepia(1) saturate(5) hue-rotate(200deg);">
+          </div>
+          <div class="tool-info">
+            <div class="tool-name">Figma AI</div>
+            <div class="tool-desc">Component exploration, auto-layout acceleration, and design system suggestions.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- REMAINING CONTENT -->
+  <div class="about-content">
+
+    <div class="about-section" style="border-top: 1px solid var(--light-gray); padding-top: 64px; margin-top: 0;">
       <span class="section-label">Building what's missing</span>
       <p>At Incode, I led design for the largest stadium identity rollout in Latin America — <strong>770,000+ fans verified across 17 venues</strong>, sub-five-second authentication at the gate.</p>
       <p>Along the way I noticed the product needed motion to communicate trust under pressure, but no one owned that craft. So I built it. I taught myself the toolchain, shipped the first prototypes, and grew it into a formal capability the team could rely on. That's how I tend to work: spot the gap, learn what's needed, and leave behind something the team can keep using.</p>
     </div>
 
-    <div class="about-section reveal">
+    <div class="about-section">
       <span class="section-label">What I'm looking for</span>
       <p>I moved to Leipzig deliberately — looking for a work culture that respects boundaries and supports long-term quality. I'm freelancing selectively while I look for my next senior IC role in Europe, ideally on a product that still has hard problems left to solve.</p>
-      <p>Based in Leipzig, open to roles across Germany and Europe. Available from June 2026.</p>
+      <p>Based in Leipzig, open to roles across Germany and Europe. Available from July 2026.</p>
     </div>
 
   </div>
@@ -443,14 +569,18 @@
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span class="footer-text">© 2026 Guido Usnayo Vidaurre</span>
     <span class="footer-text">Leipzig · Available across Germany and Europe</span>
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
 
 </body>
 </html>
