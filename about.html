@@ -281,9 +281,41 @@
       to { opacity: 1; }
     }
 
+    /* MOBILE NAV */
+    .nav-mobile-toggle {
+      display: none; width: 24px; height: 24px;
+      background: none; border: none; cursor: pointer;
+      position: relative; z-index: 101;
+    }
+    .nav-mobile-toggle span {
+      display: block; width: 100%; height: 1.5px;
+      background: var(--black); position: absolute; left: 0;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
+    }
+    .nav-mobile-toggle span:nth-child(1) { top: 8px; }
+    .nav-mobile-toggle span:nth-child(2) { bottom: 8px; }
+    
+    body.nav-open .nav-mobile-toggle span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+    body.nav-open .nav-mobile-toggle span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+
     @media (max-width: 860px) {
       nav { padding: 16px 20px; }
-      .nav-links { gap: 16px; }
+      .nav-mobile-toggle { display: block; }
+      body.nav-open nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+      .nav-name { position: relative; z-index: 101; }
+      .nav-links {
+        position: fixed; inset: 0;
+        background: rgba(250,250,250,0.98);
+        flex-direction: column; justify-content: center;
+        gap: 32px; font-size: 1.5rem;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      body.nav-open .nav-links { opacity: 1; pointer-events: auto; }
+      .nav-links a { font-size: 1.25rem; }
+      .nav-divider { width: 40px; height: 1px; }
       .about-hero { grid-template-columns: 1fr; padding: 100px 20px 48px; gap: 40px; }
       .about-right { order: -1; }
       .about-photo { max-width: 280px; margin: 0 auto; display: block; }
@@ -300,7 +332,7 @@
 
   <nav id="nav">
     <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="incode.html">Incode</a></li>
       <li><a href="speaker.html">Speaker</a></li>
       <li><a href="ytem.html">Ytem</a></li>
@@ -310,6 +342,7 @@
       <li><a href="about.html" class="active">Approach</a></li>
       <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
     </ul>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
   </nav>
 
   <!-- HERO -->
@@ -405,8 +438,8 @@
         </div>
 
         <div class="tool-card">
-          <div class="tool-icon" style="background:#f0f4ff;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/procreate.svg" width="20" style="filter:invert(0.2);">
+          <div class="tool-icon" style="background:#f0f4ff; color:var(--accent);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:invert(0.2);"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>
           </div>
           <div class="tool-info">
             <div class="tool-name">Procreate</div>
@@ -415,8 +448,8 @@
         </div>
 
         <div class="tool-card">
-          <div class="tool-icon" style="background:#fff0f0;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/protopie.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(320deg);">
+          <div class="tool-icon" style="background:#fff0f0; color:#ff5555;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:sepia(1) saturate(3) hue-rotate(320deg);"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
           </div>
           <div class="tool-info">
             <div class="tool-name">ProtoPie</div>
@@ -425,8 +458,8 @@
         </div>
 
         <div class="tool-card">
-          <div class="tool-icon" style="background:#f8f0ff;">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/spline.svg" width="20" style="filter:sepia(1) saturate(3) hue-rotate(240deg);">
+          <div class="tool-icon" style="background:#f8f0ff; color:#9933ff;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter:sepia(1) saturate(3) hue-rotate(240deg);"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
           <div class="tool-info">
             <div class="tool-name">Spline</div>
@@ -575,12 +608,7 @@
     <span class="footer-text">guido.usnayo@icloud.com</span>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  </script>
+  <script src="shared-animations.js?v=3"></script>
 
 </body>
 </html>
