@@ -491,7 +491,8 @@
       </a>
 
       <a href="deutschlernen.html" class="work-item reveal">
-        <div class="work-item-img" style="display: flex; align-items: center; justify-content: center;">
+        <div class="work-item-img" style="display: flex; align-items: center; justify-content: center; background: #0a0a0a;">
+          <canvas id="aiWaveCanvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; opacity: 0.8;"></canvas>
           <div style="font-size: 2.2rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; position: relative; z-index: 1;">IA Projects</div>
           <div class="work-item-overlay"></div>
           <div class="work-item-info">
@@ -763,6 +764,83 @@
       document.body.style.transition = 'opacity 0.3s ease';
       document.body.style.opacity = '1';
     });
+
+    // ── AI WAVE CANVAS ──
+    (function () {
+      const canvas = document.getElementById('aiWaveCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const parent = canvas.parentElement;
+
+      let W, H, dpr;
+      let time = 0;
+
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        const rect = parent.getBoundingClientRect();
+        W = rect.width;
+        H = rect.height;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.scale(dpr, dpr);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      function hslToRgb(h, s, l) {
+        h /= 360; s /= 100; l /= 100;
+        let r, g, b;
+        if (s === 0) { r = g = b = l; } else {
+          const hue2rgb = (p, q, t) => {
+            if(t < 0) t += 1; if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+          };
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          const p = 2 * l - q;
+          r = hue2rgb(p, q, h + 1/3);
+          g = hue2rgb(p, q, h);
+          b = hue2rgb(p, q, h - 1/3);
+        }
+        return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const rows = 14;
+        const cols = 24;
+        const spacingX = W / (cols - 1);
+        const spacingY = H / (rows - 1);
+
+        for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+            const x = i * spacingX;
+            const y = j * spacingY;
+            const dx = x - W / 2;
+            const dy = y - H / 2;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            // Wave calculation
+            const wave = Math.sin(dist * 0.015 - time * 0.003) * 12;
+            const size = Math.max(0.5, (Math.sin(i * 0.4 + time * 0.002) + 1) * 1.5);
+            
+            // Color changing
+            const hue = (time * 0.06 + dist * 0.4) % 360;
+            ctx.fillStyle = hslToRgb(hue, 85, 60);
+
+            ctx.beginPath();
+            ctx.arc(x, y + wave, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        time += 16;
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
   </script>
   <script src="shared-animations.js?v=2"></script>
 </body>
