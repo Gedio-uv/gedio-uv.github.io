@@ -1,6 +1,8 @@
 /**
  * app.js — Main application orchestrator
  * Handles routing, state, UI updates, and module coordination.
+ */
+
 import { detectNativeLanguage, t, getTranslations } from './i18n.js';
 import { loadSettings, saveDifficulty, saveApiKeys, saveSpeechRate, saveNativeLang, isInitialized } from './settings.js';
 import { lookupWord } from './search.js';
