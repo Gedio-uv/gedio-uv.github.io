@@ -335,7 +335,7 @@ async function doSearch(query) {
     const uiLang = state.difficulty === 'advanced' ? 'de' : state.nativeLang;
     const nativeLangName = LANG_NAMES[state.nativeLang] || 'English';
 
-    const result = await lookupWord(query, state.nativeLang, nativeLangName, state.geminiKey);
+    const result = await lookupWord(query, state.nativeLang, nativeLangName, state.geminiKey, state.difficulty);
     state.lastResult = result;
 
     // Render result immediately (placeholder shows while image loads)
@@ -515,6 +515,10 @@ function renderResult(result, imageUrl, uiLang) {
       row.innerHTML = `<span class="grammar-row__label">${label}</span><span class="grammar-row__value">${value}</span>`;
       grammarEl.appendChild(row);
     });
+
+    if (result.partOfSpeech === 'verb' && result.conjugation && result.principalParts) {
+      renderVerbConjugation(grammarEl, result.principalParts, result.conjugation);
+    }
   }
 
   // Listen button
@@ -525,6 +529,91 @@ function renderResult(result, imageUrl, uiLang) {
       speak(text, listenBtn);
     };
   }
+}
+
+function renderVerbConjugation(parentEl, parts, conj) {
+  const block = document.createElement('div');
+  block.className = 'verb-conjugation-block';
+
+  // Principal Parts
+  const pp = document.createElement('div');
+  pp.className = 'verb-principal-parts';
+  const aux = parts.auxiliary ? `${parts.auxiliary} ` : '';
+  pp.innerHTML = `<span>${parts.infinitive || ''}</span> <span class="pp-dot">·</span> <span>${parts.praeteritum || ''}</span> <span class="pp-dot">·</span> <span>${aux}${parts.partizipII || ''}</span>`;
+  block.appendChild(pp);
+
+  // Tense Selector
+  const tenses = Object.keys(conj);
+  if (tenses.length === 0) {
+    parentEl.appendChild(block);
+    return;
+  }
+
+  const selector = document.createElement('div');
+  selector.className = 'tense-selector';
+
+  const tableWrap = document.createElement('div');
+  tableWrap.className = 'conjugation-table';
+
+  const renderTable = (tense) => {
+    tableWrap.innerHTML = '';
+    const forms = conj[tense];
+    if (!forms) return;
+
+    const orderedPersons = ['ich', 'du', 'er_sie_es', 'wir', 'ihr', 'sie_Sie', 'Sie'];
+    const displayPersons = {
+      'ich': 'ich', 'du': 'du', 'er_sie_es': 'er/sie/es', 'wir': 'wir', 'ihr': 'ihr', 'sie_Sie': 'sie/Sie', 'Sie': 'Sie'
+    };
+
+    orderedPersons.forEach(p => {
+      if (forms[p]) {
+        const row = document.createElement('div');
+        row.className = 'conjugation-row';
+        row.innerHTML = `<span class="conj-person">${displayPersons[p]}</span><span class="conj-form">${escapeHtml(forms[p])}</span>`;
+        tableWrap.appendChild(row);
+      }
+    });
+  };
+
+  const prettyTense = {
+    praesens: 'Präsens',
+    praeteritum: 'Präteritum',
+    perfekt: 'Perfekt',
+    plusquamperfekt: 'Plusquamperfekt',
+    futur1: 'Futur I',
+    futur2: 'Futur II',
+    konjunktiv1: 'Konjunktiv I',
+    konjunktiv2: 'Konjunktiv II',
+    imperativ: 'Imperativ'
+  };
+
+  let activeBtn = null;
+
+  tenses.forEach((tense) => {
+    const btn = document.createElement('button');
+    btn.className = 'tense-chip';
+    btn.textContent = prettyTense[tense] || tense;
+    btn.onclick = () => {
+      if (activeBtn) activeBtn.classList.remove('active');
+      btn.classList.add('active');
+      activeBtn = btn;
+      renderTable(tense);
+    };
+    selector.appendChild(btn);
+  });
+
+  // Default to praesens or first available
+  const defaultTense = tenses.includes('praesens') ? 'praesens' : tenses[0];
+  const defaultBtn = Array.from(selector.children).find(b => b.textContent === (prettyTense[defaultTense] || defaultTense));
+  if (defaultBtn) {
+    defaultBtn.classList.add('active');
+    activeBtn = defaultBtn;
+    renderTable(defaultTense);
+  }
+
+  block.appendChild(selector);
+  block.appendChild(tableWrap);
+  parentEl.appendChild(block);
 }
 
 /* ════════════════════════════════════════════

@@ -183,10 +183,11 @@ function parseJSON(raw) {
  * @param {string} nativeLang        - 'es', 'en', etc.
  * @param {string} nativeLangName    - 'Spanish', 'English', etc.
  * @param {string} apiKey            - Groq (gsk_...) or Gemini key
+ * @param {string} userLevel         - 'initial' or 'advanced'
  * @returns {Promise<WordResult>}
  */
-export async function lookupWord(word, nativeLang, nativeLangName, apiKey) {
-  const prompt = buildWordPrompt(word.trim(), nativeLangName);
+export async function lookupWord(word, nativeLang, nativeLangName, apiKey, userLevel = 'initial') {
+  const prompt = buildWordPrompt(word.trim(), nativeLangName, userLevel);
   const rawText = await callAI(apiKey, prompt);
   const result  = parseJSON(rawText);
 
@@ -234,7 +235,11 @@ export async function generateFlashcards(category, nativeLangName, apiKey) {
    PROMPTS
 ══════════════════════════════════════════════════ */
 
-function buildWordPrompt(word, nativeLangName) {
+function buildWordPrompt(word, nativeLangName, userLevel) {
+  const tensesBeginner = '"praesens", "perfekt", "praeteritum", "futur1", "imperativ"';
+  const tensesAdvanced = '"praesens", "perfekt", "praeteritum", "plusquamperfekt", "futur1", "futur2", "konjunktiv1", "konjunktiv2", "imperativ"';
+  const requestedTenses = userLevel === 'advanced' ? tensesAdvanced : tensesBeginner;
+
   return `You are a German dictionary assistant. Analyze the word or phrase: "${word}"
 
 Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object (no markdown, no explanation):
@@ -253,15 +258,32 @@ Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object 
     { "german": "A third German sentence", "native": "Translation" }
   ],
   "grammarNotes": "Brief grammar note in ${nativeLangName}",
-  "imageQuery": "1-3 word English query for image search (simple nouns only)"
+  "imageQuery": "1-3 word English query for image search (simple nouns only)",
+  "principalParts": {
+    "infinitive": "infinitive form",
+    "praeteritum": "3rd person singular präteritum",
+    "partizipII": "partizip II",
+    "auxiliary": "haben or sein"
+  },
+  "conjugation": {
+    "praesens": { "ich": "...", "du": "...", "er_sie_es": "...", "wir": "...", "ihr": "...", "sie_Sie": "..." }
+  }
 }
 
 Rules:
-- If input is ${nativeLangName}, translate to German first
-- If input is German, keep as-is
-- Synonyms must be German words
-- Examples must be natural everyday sentences
-- Return ONLY the JSON object`;
+- If input is ${nativeLangName}, translate to German first.
+- If input is German, keep as-is.
+- Synonyms must be German words.
+- Examples must be natural everyday sentences.
+- IF AND ONLY IF "partOfSpeech" is "verb":
+  1. Include the "principalParts" object.
+  2. Include the "conjugation" object containing exactly these tenses: ${requestedTenses}.
+  3. Conjugations must list all 6 persons ("ich", "du", "er_sie_es", "wir", "ihr", "sie_Sie"), except "imperativ" which has ("du", "ihr", "Sie").
+  4. Use the CORRECT auxiliary (haben vs sein) for perfect tenses (e.g., "ich bin gegangen", "ich habe gesehen").
+  5. Handle separable prefixes correctly (e.g., "ich sehe an", "ich habe angesehen").
+  6. Return real conjugated forms, not the infinitive repeated.
+- If it is NOT a verb, completely OMIT "principalParts" and "conjugation".
+- Return ONLY the JSON object, absolutely no markdown or prose.`;
 }
 
 function buildFlashcardPrompt(catName, nativeLangName) {

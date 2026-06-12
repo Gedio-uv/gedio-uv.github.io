@@ -70,6 +70,12 @@ State is saved via unified `tolk:progress` JSON schema:
 3. `grammar` — grammar reference
 4. `profile` — user stats and app settings
 
+## Verb Conjugation
+When a user searches for a verb, `app.js` renders a dynamic conjugation table in the Grammar tab.
+- **Beginner Level (`initial`)**: fetches 5 core tenses.
+- **Advanced Level (`advanced`)**: fetches 9 tenses.
+- The UI includes a horizontally scrollable tense selector (`.tense-selector`) and a 2-column person/form table.
+
 ## Games Hub (NEW)
 `scripts/games.js` coordinates mini-games:
 - Reads vocabulary from user's `searchHistory`.
