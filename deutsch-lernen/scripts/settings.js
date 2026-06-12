@@ -3,26 +3,25 @@
  * Reads/writes all app configuration to localStorage.
  */
 
+import { get as getProgress, update as updateProgress } from './progress.js';
+
 const KEYS = {
-  DIFFICULTY:    'dl_difficulty',
   GEMINI_KEY:    'dl_gemini_key',
   UNSPLASH_KEY:  'dl_unsplash_key',
   SPEECH_RATE:   'dl_speech_rate',
-  NATIVE_LANG:   'dl_native_lang',
 };
 
 /**
- * Load all settings from localStorage.
- * Returns an object with all settings.
- * Note: geminiKey defaults to '' — callAI uses the Worker proxy automatically.
+ * Load all settings from localStorage and progress.
  */
 export function loadSettings() {
+  const prog = getProgress();
   return {
-    difficulty:   localStorage.getItem(KEYS.DIFFICULTY)   || null,
+    difficulty:   prog.level || null,
+    nativeLang:   prog.uiLanguage || null,
     geminiKey:    localStorage.getItem(KEYS.GEMINI_KEY)   || '',
     unsplashKey:  localStorage.getItem(KEYS.UNSPLASH_KEY) || '',
     speechRate:   parseFloat(localStorage.getItem(KEYS.SPEECH_RATE) || '0.9'),
-    nativeLang:   localStorage.getItem(KEYS.NATIVE_LANG)  || null,
   };
 }
 
@@ -31,7 +30,7 @@ export function loadSettings() {
  * @param {'initial'|'advanced'} level
  */
 export function saveDifficulty(level) {
-  localStorage.setItem(KEYS.DIFFICULTY, level);
+  updateProgress({ level });
 }
 
 /**
@@ -57,7 +56,7 @@ export function saveSpeechRate(rate) {
  * @param {string} lang - e.g. 'es'
  */
 export function saveNativeLang(lang) {
-  localStorage.setItem(KEYS.NATIVE_LANG, lang);
+  updateProgress({ uiLanguage: lang });
 }
 
 /**
@@ -71,5 +70,5 @@ export function clearSettings() {
  * Check if the app has been initialized (difficulty has been chosen).
  */
 export function isInitialized() {
-  return !!localStorage.getItem(KEYS.DIFFICULTY);
+  return !!localStorage.getItem('tolk:progress') || !!localStorage.getItem('dl_difficulty');
 }

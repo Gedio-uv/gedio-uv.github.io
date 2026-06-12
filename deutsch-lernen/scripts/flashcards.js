@@ -313,8 +313,8 @@ function bindEvents() {
 }
 
 function handleKeydown(e) {
-  // Only when cards view is active
-  const cardsView = document.getElementById('view-cards');
+  // Only when games view is active
+  const cardsView = document.getElementById('view-games');
   if (!cardsView?.classList.contains('active')) return;
   if (document.getElementById('cards-game')?.classList.contains('hidden')) return;
 

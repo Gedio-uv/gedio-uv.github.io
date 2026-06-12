@@ -131,7 +131,7 @@ async function callGemini(apiKey, promptText) {
      3. Gemini key (AIza...) → call Gemini directly
 ══════════════════════════════════════════════════ */
 
-async function callAI(apiKey, promptText) {
+export async function callAI(apiKey, promptText) {
   // No personal key — use the Worker proxy (key lives securely in Cloudflare)
   if (!apiKey || apiKey.trim() === '') {
     return callProxy(promptText);

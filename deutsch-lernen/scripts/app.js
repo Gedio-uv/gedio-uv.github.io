@@ -1,16 +1,15 @@
 /**
  * app.js — Main application orchestrator
  * Handles routing, state, UI updates, and module coordination.
- */
-
 import { detectNativeLanguage, t, getTranslations } from './i18n.js';
 import { loadSettings, saveDifficulty, saveApiKeys, saveSpeechRate, saveNativeLang, isInitialized } from './settings.js';
 import { lookupWord } from './search.js';
 import { fetchImage } from './images.js';
 import { speak, setSpeechRate, initSpeech } from './speech.js';
 import { initFlashcards, updateFlashcardConfig, loadCards } from './flashcards.js';
+import { initGames } from './games.js';
 import { renderGrammarView } from './grammar.js';
-import { initMusic } from './music.js';
+import { get as getProgress, update as updateProgress, saveToHistory, reset as resetProgress } from './progress.js';
 
 // ── Global State ──
 const state = {
@@ -23,28 +22,12 @@ const state = {
   lastResult:  null,
 };
 
-// ── History ──
-const HISTORY_KEY = 'dl_history';
-const HISTORY_MAX = 30;
-
 function getHistory() {
-  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; }
-}
-
-function saveToHistory(result) {
-  const history = getHistory().filter(h => h.word !== result.word);
-  history.unshift({
-    word:            result.word,
-    article:         result.article || '',
-    nativeTranslation: result.nativeTranslation || '',
-    partOfSpeech:    result.partOfSpeech || '',
-    timestamp:       Date.now(),
-  });
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, HISTORY_MAX)));
+  return getProgress().searchHistory;
 }
 
 function clearHistory() {
-  localStorage.removeItem(HISTORY_KEY);
+  updateProgress({ searchHistory: [] });
 }
 
 function renderHistory() {
@@ -85,6 +68,8 @@ function renderHistory() {
       const word = item.dataset.word;
       const searchInput = $('search-input');
       if (searchInput) searchInput.value = word;
+      const historyView = $('view-history');
+      if (historyView) historyView.classList.add('hidden');
       navigateTo('search');
       doSearch(word);
     };
@@ -141,6 +126,9 @@ async function boot() {
     await initSpeech();
     setSpeechRate(state.speechRate);
 
+    // Initialize games
+    initGames();
+
     // Initialize flashcard module
     initFlashcards({
       elCard:         $('flip-card'),
@@ -167,9 +155,6 @@ async function boot() {
       elCardViewport: $('card-viewport'),
       elStartArea:    $('cards-start'),
     });
-
-    // Initialize music module
-    initMusic(state);
 
     if (isInitialized()) {
       // Returning user: go straight to main app
@@ -213,10 +198,9 @@ function applyLanguage(uiLang) {
 
   // Nav
   setText('nav-search-label',       trans.navSearch);
-  setText('nav-cards-label',        trans.navCards);
-  setText('nav-history-label',      trans.navHistory);
+  setText('nav-games-label',        trans.navGames || 'Games');
   setText('nav-grammar-label',      trans.navGrammar);
-  setText('nav-settings-label',     trans.navSettings);
+  setText('nav-profile-label',      trans.navProfile || 'Profile');
 
   // Search
   setAttr('search-input', 'placeholder', trans.searchPlaceholder);
@@ -318,6 +302,10 @@ function navigateTo(viewName) {
     item.classList.toggle('active', active);
     item.setAttribute('aria-current', active ? 'page' : 'false');
   });
+
+  if (viewName === 'profile') {
+    renderProfileStats();
+  }
 }
 
 /* ════════════════════════════════════════════
@@ -538,8 +526,20 @@ function renderResult(result, imageUrl, uiLang) {
 }
 
 /* ════════════════════════════════════════════
-   SETTINGS SYNC
+   PROFILE / SETTINGS
 ════════════════════════════════════════════ */
+
+function renderProfileStats() {
+  const prog = getProgress();
+  
+  const streakEl = $('stat-streak');
+  const wordsEl = $('stat-words');
+  const gamesEl = $('stat-games');
+
+  if (streakEl) streakEl.textContent = prog.streak || 0;
+  if (wordsEl) wordsEl.textContent = prog.wordsSearchedCount || 0;
+  if (gamesEl) gamesEl.textContent = prog.gamesPlayed || 0;
+}
 
 function syncSettingsUI() {
   // API keys
@@ -599,6 +599,16 @@ function bindGlobalEvents() {
   const searchInput  = $('search-input');
   const searchSubmit = $('search-submit');
   const searchClear  = $('search-clear');
+  const searchHistoryBtn = $('search-history-btn');
+  const historyView = $('view-history');
+
+  searchHistoryBtn?.addEventListener('click', () => {
+    if (historyView) {
+      const isHidden = historyView.classList.contains('hidden');
+      if (isHidden) renderHistory();
+      historyView.classList.toggle('hidden');
+    }
+  });
 
   searchInput?.addEventListener('input', () => {
     const hasVal = searchInput.value.trim().length > 0;
@@ -735,10 +745,9 @@ function bindGlobalEvents() {
 
   // Grammar sub-tabs are bound dynamically by renderGrammarView() in grammar.js
 
-  // ── Render history or grammar when navigating to those views ──
+  // ── Render grammar when navigating to those views ──
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => {
-      if (item.dataset.view === 'history') renderHistory();
       if (item.dataset.view === 'grammar') {
         const uiLang = state.difficulty === 'advanced' ? 'de' : state.nativeLang;
         renderGrammarView(uiLang);

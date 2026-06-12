@@ -18,10 +18,9 @@
   <!-- Styles -->
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/search.css" />
-  <link rel="stylesheet" href="styles/cards.css" />
+  <link rel="stylesheet" href="styles/games.css" />
   <link rel="stylesheet" href="styles/settings.css" />
   <link rel="stylesheet" href="styles/extras.css" />
-  <link rel="stylesheet" href="styles/music.css" />
 </head>
 <body>
 <div id="app">
@@ -152,6 +151,11 @@
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
               </button>
+              <button id="search-history-btn" class="search-history-btn" aria-label="History">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </button>
             </div>
             <button id="search-submit" class="search-submit" aria-label="Search">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -253,131 +257,62 @@
         </div>
       </section>
 
-      <!-- ─────────── MUSIC VIEW ─────────── -->
-      <section id="view-music" class="view view--music" aria-label="Learn with music">
-
-        <!-- Header -->
-        <div class="music-header">
-          <h2 class="music-header__title">Music</h2>
-          <p class="music-header__subtitle">Learn German with songs you love</p>
+      <!-- ─────────── GAMES VIEW ─────────── -->
+      <section id="view-games" class="view view--games" aria-label="Games Hub">
+        <div class="games-header">
+          <h2 class="games-title" id="games-title">Games</h2>
+          <p class="games-subtitle">Learn through play</p>
         </div>
 
-        <!-- YouTube Input & Suggestions -->
-        <div class="yt-section" id="yt-section">
-          <div class="yt-input-wrapper">
-            <input type="text" id="yt-link-input" class="yt-input" placeholder="Paste YouTube link here..." />
-            <button id="yt-load-btn" class="btn-primary yt-btn">Load Song</button>
-          </div>
-          <p class="yt-input-hint" style="color: var(--c-text-2); font-size: 13px; margin-top: 8px; margin-bottom: 24px;">Paste any YouTube URL of a German song, or simply choose one from the recommended list below to start learning.</p>
-          <p id="yt-error-msg" class="yt-error-msg hidden"></p>
-
-          <h3 class="yt-suggestions-title">Recommended Songs</h3>
-          <div class="yt-suggestions" id="yt-suggestions">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- Player / Karaoke view -->
-        <div id="music-player" class="music-player hidden" role="dialog" aria-modal="true" aria-label="Song player">
-
-          <!-- Player header -->
-          <div class="music-player__header">
-            <button id="music-player-back" class="music-player__back" aria-label="Back to catalog">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <div class="music-player__meta">
-              <p id="player-song-title" class="music-player__song-title"></p>
-              <p id="player-song-artist" class="music-player__song-artist"></p>
-            </div>
-            <div class="music-player__level-badge" id="player-level-badge"></div>
-          </div>
-
-          <!-- YouTube Player Container -->
-          <div class="yt-player-container" id="yt-player-container">
-            <div id="yt-player"></div>
-          </div>
-
-          <!-- Toggle original / German -->
-          <div class="music-player__toggle" role="group" aria-label="Lyrics language">
-            <button class="music-toggle-btn" id="toggle-original" data-mode="original" aria-pressed="true">Original</button>
-            <button class="music-toggle-btn" id="toggle-german" data-mode="german" aria-pressed="false">🇩🇪 German</button>
-            <button class="music-toggle-btn" id="toggle-bilingual" data-mode="bilingual" aria-pressed="false">Both</button>
-          </div>
-
-          <!-- Lyrics karaoke area -->
-          <div id="music-lyrics" class="music-lyrics" aria-live="polite" aria-label="Song lyrics"></div>
-
-          <!-- Loading state -->
-          <div id="music-lyrics-loading" class="music-lyrics-loading hidden">
-            <div class="loader" aria-hidden="true">
-              <div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div>
-            </div>
-            <p>Translating lyrics...</p>
-          </div>
-
-          <!-- Word detail popup -->
-          <div id="music-word-popup" class="music-word-popup hidden" role="tooltip" aria-live="polite">
-            <div class="music-word-popup__inner">
-              <div class="music-word-popup__header">
-                <span id="popup-article" class="popup-article"></span>
-                <strong id="popup-word" class="popup-word"></strong>
-                <button id="popup-listen" class="popup-listen-btn" aria-label="Listen">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M11 5 6 9H2v6h4l5 4V5z"/>
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                  </svg>
-                </button>
-                <button id="popup-close" class="popup-close-btn" aria-label="Close">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                  </svg>
-                </button>
+        <div id="games-hub" class="games-hub">
+          <div class="games-grid" role="list">
+            <button class="game-card" data-game="flashcards" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">🗂️</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Flashcards</h3>
+                <p class="game-card__desc">Review vocabulary</p>
               </div>
-              <p id="popup-translation" class="popup-translation"></p>
-              <p id="popup-example" class="popup-example"></p>
-            </div>
-          </div>
-
-          <!-- Quiz section -->
-          <div id="music-quiz" class="music-quiz hidden">
-            <div class="music-quiz__header">
-              <h3 class="music-quiz__title">Vocabulary Quiz</h3>
-              <span id="quiz-progress" class="music-quiz__progress">1 / 5</span>
-            </div>
-            <div id="quiz-question" class="music-quiz__question"></div>
-            <div id="quiz-options" class="music-quiz__options" role="list"></div>
-            <div id="quiz-result" class="music-quiz__result hidden"></div>
-          </div>
-
-          <!-- Player bottom actions -->
-          <div class="music-player__actions">
-            <button id="music-quiz-btn" class="btn-secondary music-action-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-              Quiz
             </button>
-            <button id="music-pronounce-btn" class="btn-secondary music-action-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/>
-                <line x1="8" y1="23" x2="16" y2="23"/>
-              </svg>
-              Pronounce
+            <button class="game-card" data-game="quiz" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">❓</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Quiz</h3>
+                <p class="game-card__desc">Test your knowledge</p>
+              </div>
+            </button>
+            <button class="game-card" data-game="wasistdas" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">🖼️</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Was ist das?</h3>
+                <p class="game-card__desc">Guess the image</p>
+              </div>
+            </button>
+            <button class="game-card" data-game="correct" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">✍️</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Correct the sentence</h3>
+                <p class="game-card__desc">Fix grammar errors</p>
+              </div>
+            </button>
+            <button class="game-card" data-game="hangman" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">🔤</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Hangman</h3>
+                <p class="game-card__desc">Guess the word</p>
+              </div>
             </button>
           </div>
-
         </div>
 
-      </section>
-
-      <!-- ─────────── CARDS VIEW ─────────── -->
-      <section id="view-cards" class="view view--cards" aria-label="Flashcard game">
-        <div class="cards-header">
-          <h2 class="cards-title" id="cards-title">Flashcards</h2>
-        </div>
+        <!-- ─────────── FLASHCARDS GAME AREA ─────────── -->
+        <div id="game-area-flashcards" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div class="cards-header" style="margin-top: 16px;">
+            <h3 class="cards-title" id="cards-title" style="font-size: 20px;">Flashcards</h3>
+          </div>
         <div id="cards-loading" class="cards-loading hidden" aria-live="polite">
           <div class="loader" aria-hidden="true">
             <div class="loader__dot"></div><div class="loader__dot"></div><div class="loader__dot"></div>
@@ -472,15 +407,78 @@
           <p id="cards-complete-text" class="cards-complete__text">You've seen all the cards</p>
           <button id="cards-again-btn" class="btn-primary"><span id="cards-again-label">Play again</span></button>
         </div>
+        </div>
+
+        <!-- ─────────── QUIZ GAME AREA ─────────── -->
+        <div id="game-area-quiz" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div id="music-quiz" class="music-quiz" style="margin-top: 16px;">
+            <div class="music-quiz__header">
+              <h3 class="music-quiz__title">Vocabulary Quiz</h3>
+              <span id="quiz-progress" class="music-quiz__progress">1 / 5</span>
+            </div>
+            <div id="quiz-question" class="music-quiz__question"></div>
+            <div id="quiz-options" class="music-quiz__options" role="list"></div>
+            <div id="quiz-result" class="music-quiz__result hidden"></div>
+          </div>
+        </div>
+
+        <!-- Placeholder areas for new games -->
+        <div id="game-area-wasistdas" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div style="margin-top: 24px; text-align: center; color: var(--c-text-2);">Coming soon...</div>
+        </div>
+        
+        <div id="game-area-correct" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div style="margin-top: 24px; text-align: center; color: var(--c-text-2);">Coming soon...</div>
+        </div>
+
+        <div id="game-area-hangman" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div style="margin-top: 24px; text-align: center; color: var(--c-text-2);">Coming soon...</div>
+        </div>
       </section>
 
-      <!-- ─────────── SETTINGS VIEW ─────────── -->
-      <section id="view-settings" class="view view--settings" aria-label="Settings">
-        <div class="settings-container">
-          <div class="settings-hero">
-            <span class="settings-hero__flag" aria-hidden="true">🌍</span>
-            <h2 class="settings-title" id="settings-title">Settings</h2>
+      <!-- ─────────── PROFILE VIEW ─────────── -->
+      <section id="view-profile" class="view view--profile" aria-label="Profile">
+        <div class="profile-header">
+          <h2 class="profile-title" id="profile-title">Profile</h2>
+        </div>
+        
+        <!-- Progress & Stats Area -->
+        <div class="profile-stats">
+          <div class="stat-card">
+            <div class="stat-card__icon" aria-hidden="true">🔥</div>
+            <div class="stat-card__val" id="stat-streak">0</div>
+            <div class="stat-card__label">Day streak</div>
           </div>
+          <div class="stat-card">
+            <div class="stat-card__icon" aria-hidden="true">🔍</div>
+            <div class="stat-card__val" id="stat-words">0</div>
+            <div class="stat-card__label">Words</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon" aria-hidden="true">🎮</div>
+            <div class="stat-card__val" id="stat-games">0</div>
+            <div class="stat-card__label">Games</div>
+          </div>
+        </div>
+
+        <!-- Settings Area -->
+        <div class="settings-container">
           <div class="settings-card">
             <h3 class="settings-card__title" id="settings-level-title">
               <span aria-hidden="true">🎯</span> <span id="settings-level-label">Difficulty Level</span>
@@ -534,7 +532,7 @@
       </section>
 
       <!-- ─────────── HISTORY VIEW ─────────── -->
-      <section id="view-history" class="view view--history" aria-label="Search history">
+      <section id="view-history" class="view-history-modal hidden" aria-label="Search history">
         <div class="extras-header">
           <h2 class="extras-title" id="history-title">History</h2>
           <button id="history-clear-btn" class="icon-btn" aria-label="Clear history">
@@ -572,20 +570,13 @@
         </svg>
         <span class="nav-item__label" id="nav-search-label">Search</span>
       </button>
-      <button class="nav-item" data-view="music" id="nav-music" aria-label="Music">
+      <button class="nav-item" data-view="games" id="nav-games" aria-label="Games">
         <div class="nav-item__indicator" aria-hidden="true"></div>
         <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+          <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
+          <path d="M6 12h4m-2-2v4m8-4h.01M16 14h.01"/>
         </svg>
-        <span class="nav-item__label" id="nav-music-label">Music</span>
-      </button>
-      <button class="nav-item" data-view="cards" id="nav-cards" aria-label="Flashcards">
-        <div class="nav-item__indicator" aria-hidden="true"></div>
-        <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <rect x="2" y="7" width="16" height="13" rx="2"/>
-          <path d="M6 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-2"/>
-        </svg>
-        <span class="nav-item__label" id="nav-cards-label">Cards</span>
+        <span class="nav-item__label" id="nav-games-label">Games</span>
       </button>
       <button class="nav-item" data-view="grammar" id="nav-grammar" aria-label="Grammar">
         <div class="nav-item__indicator" aria-hidden="true"></div>
@@ -595,13 +586,13 @@
         </svg>
         <span class="nav-item__label" id="nav-grammar-label">Grammar</span>
       </button>
-      <button class="nav-item" data-view="settings" id="nav-settings" aria-label="Settings">
+      <button class="nav-item" data-view="profile" id="nav-profile" aria-label="Profile">
         <div class="nav-item__indicator" aria-hidden="true"></div>
         <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-          <circle cx="12" cy="12" r="3"/>
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
         </svg>
-        <span class="nav-item__label" id="nav-settings-label">Settings</span>
+        <span class="nav-item__label" id="nav-profile-label">Profile</span>
       </button>
     </nav>
 
