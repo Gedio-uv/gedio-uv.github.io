@@ -39,22 +39,13 @@ export async function fetchImage(query, unsplashKey, partOfSpeech) {
   const cacheKey = `${query.toLowerCase().trim()}|${pos}`;
   if (CACHE.has(cacheKey)) return CACHE.get(cacheKey);
 
-  const isAction = ['verb', 'adverb', 'preposition'].includes(pos);
   const effectiveUnsplashKey = (unsplashKey && unsplashKey.length > 10)
     ? unsplashKey
     : _UK;
 
-  let url = null;
-
-  if (!isAction) {
-    // Nouns / adjectives → real photo from Unsplash (fast)
-    url = await fetchUnsplash(query, effectiveUnsplashKey);
-  }
-
-  if (!url) {
-    // Verbs / fallback → AI-generated via Pollinations.ai
-    url = await fetchPollinations(query, pos);
-  }
+  // Pollinations AI is now paid (HTTP 402), so we use Unsplash for everything.
+  // Unsplash handles descriptive sentence queries surprisingly well.
+  let url = await fetchUnsplash(query, effectiveUnsplashKey);
 
   if (url) CACHE.set(cacheKey, url);
   return url;
@@ -97,36 +88,7 @@ async function fetchUnsplash(query, apiKey) {
 
 const POLLINATIONS_TIMEOUT_MS = 20000; // 20 s — enough for AI generation
 
-async function fetchPollinations(query, pos) {
-  const prompt = buildPollinationsPrompt(query, pos);
-  const seed   = Math.floor(Math.random() * 99999);
-
-  // flux-schnell is faster (~5–10 s) and handles actions well
-  const url = `${POLLINATIONS_BASE}/${encodeURIComponent(prompt)}`
-    + `?width=800&height=500&nologo=true&model=flux-schnell&seed=${seed}`;
-
-  const loaded = await preloadWithTimeout(url, POLLINATIONS_TIMEOUT_MS);
-  return loaded ? url : null;
-}
-
-/**
- * Build an effective prompt based on part-of-speech.
- * Action words get a human-subject prompt that AI understands well.
- */
-function buildPollinationsPrompt(query, pos) {
-  // Our Gemini prompt already generates a concrete visual description for verbs/adjectives.
-  // We just need to add stylistic keywords to ensure a high-quality, text-free image.
-  return `${query}, photorealistic, dynamic photography, natural light, cinematic, sharp focus, highly detailed, no text, no watermarks`;
-}
-
-// ─────────────────────────────────────────────
-// Helpers
-// ─────────────────────────────────────────────
-
-/**
- * Try to load an image within `ms` milliseconds.
- * @returns {Promise<boolean>}
- */
+// Helper to try to load an image with a timeout
 function preloadWithTimeout(url, ms) {
   return new Promise(resolve => {
     const img   = new Image();
@@ -137,9 +99,6 @@ function preloadWithTimeout(url, ms) {
   });
 }
 
-/**
- * Exported helper — preload any URL with a 10 s timeout.
- */
 export function preloadImage(url) {
   return preloadWithTimeout(url, 10000);
 }

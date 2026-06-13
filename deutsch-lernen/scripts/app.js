@@ -357,10 +357,19 @@ async function doSearch(query) {
         null,                        // use built-in Unsplash key from images.js
         result.partOfSpeech || null
       ).then(imageUrl => {
-        if (!imageUrl) return;
+        const imgContainer = $('result-image-container');
         const imgEl      = $('result-image');
         const placeholder = $('result-image-placeholder');
+        
+        if (!imageUrl) {
+          // If no image is found at all (e.g., Unsplash returned 0 results)
+          if (imgContainer) imgContainer.style.display = 'none';
+          return;
+        }
+
         if (!imgEl || !placeholder) return;
+        if (imgContainer) imgContainer.style.display = ''; // ensure it's visible
+        
         imgEl.src = imageUrl;
         imgEl.alt = result.word;
         imgEl.style.opacity = '0';
@@ -404,6 +413,9 @@ function renderResult(result, imageUrl, uiLang) {
   const placeholder = $('result-image-placeholder');
 
   // Reset state
+  const imgContainer = $('result-image-container');
+  if (imgContainer) imgContainer.style.display = '';
+
   imgEl.style.opacity  = '0';
   imgEl.style.transition = '';
   imgEl.classList.add('hidden');    // start hidden; reveal on successful load
