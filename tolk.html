@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tolk — Guido Usnayo Vidaurre</title>
-  <meta name="description" content="Tolk — a mobile-first German learning web app I designed and shipped. Word lookup, themed flashcards, and grammar reference, built with AI-assisted development.">
+  <meta name="description" content="Tolk — restructuring a feature-first German learning app around a single core intent. Product design: IA, flows, content model, responsive system.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
@@ -22,51 +22,29 @@
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { background: var(--white); color: var(--black); font-family: var(--font); font-weight: 300; -webkit-font-smoothing: antialiased; }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(10,10,10,0.92);
+      padding: 20px 40px; background: rgba(10,10,10,0.92);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid transparent; transition: border-color 0.3s;
     }
     nav.scrolled { border-bottom-color: var(--light-gray); }
     .nav-name { font-size: 0.875rem; font-weight: 400; color: var(--black); text-decoration: none; }
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a {
-      font-size: 0.8rem; color: var(--gray); text-decoration: none;
-      transition: color 0.2s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 1px; background: var(--black);
-      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .nav-links a { font-size: 0.8rem; color: var(--gray); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--black); transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1); }
     .nav-links a:hover { color: var(--black); }
     .nav-links a:hover::after { width: 100%; }
     .nav-links a.active { color: var(--black); font-weight: 500; }
     .nav-links a.active::after { width: 100%; }
     .nav-divider { width: 1px; height: 12px; background: var(--light-gray); }
 
-    .nav-mobile-toggle {
-      display: none; width: 24px; height: 24px;
-      background: none; border: none; cursor: pointer; position: relative; z-index: 101;
-    }
-    .nav-mobile-toggle span {
-      display: block; width: 100%; height: 1.5px; background: var(--black);
-      position: absolute; left: 0;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
-    }
+    .nav-mobile-toggle { display: none; width: 24px; height: 24px; background: none; border: none; cursor: pointer; position: relative; z-index: 101; }
+    .nav-mobile-toggle span { display: block; width: 100%; height: 1.5px; background: var(--black); position: absolute; left: 0; transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s; }
     .nav-mobile-toggle span:nth-child(1) { top: 8px; }
     .nav-mobile-toggle span:nth-child(2) { bottom: 8px; }
     body.nav-open .nav-mobile-toggle span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
@@ -77,166 +55,103 @@
       .nav-mobile-toggle { display: block; }
       body.nav-open nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
       .nav-name { position: relative; z-index: 101; }
-      .nav-links {
-        position: fixed; inset: 0; background: rgba(10,10,10,0.98);
-        flex-direction: column; justify-content: center; gap: 32px; font-size: 1.5rem;
-        opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      }
+      .nav-links { position: fixed; inset: 0; background: rgba(10,10,10,0.98); flex-direction: column; justify-content: center; gap: 32px; font-size: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
       body.nav-open .nav-links { opacity: 1; pointer-events: auto; }
       .nav-links a { font-size: 1.25rem; }
       .nav-divider { width: 40px; height: 1px; }
     }
 
     /* HEADER */
-    .cs-header { padding: 120px 40px 48px; border-bottom: 1px solid var(--light-gray); }
-    .cs-back {
-      font-size: 0.75rem; color: var(--gray); text-decoration: none;
-      display: inline-block; margin-bottom: 18px; transition: color 0.2s;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.05s;
-    }
+    .cs-header { padding: 120px 40px 48px; border-bottom: 1px solid var(--light-gray); max-width: 1000px; margin: 0 auto; }
+    .cs-back { font-size: 0.75rem; color: var(--gray); text-decoration: none; display: inline-block; margin-bottom: 18px; transition: color 0.2s; opacity: 0; animation: fadeUp 0.5s ease forwards 0.05s; }
     .cs-back:hover { color: var(--black); }
-    .cs-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 16px; display: block;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.1s;
-    }
-    .cs-title {
-      font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 600;
-      letter-spacing: -0.03em; line-height: 1.05; color: var(--black); margin-bottom: 16px;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s;
-    }
-    .cs-meta {
-      display: flex; gap: 48px; flex-wrap: wrap; margin-top: 40px;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.4s;
-    }
-    .cs-meta-label {
-      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 4px;
-    }
+    .cs-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: block; opacity: 0; animation: fadeUp 0.5s ease forwards 0.1s; }
+    .cs-title { font-size: clamp(2.1rem, 4vw, 3.2rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.07; color: var(--black); margin-bottom: 16px; max-width: 18ch; opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s; }
+    .cs-note { font-size: 0.95rem; font-style: italic; color: var(--gray); line-height: 1.6; max-width: 640px; margin-top: 8px; opacity: 0; animation: fadeUp 0.5s ease forwards 0.3s; }
+    .cs-meta { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 40px; opacity: 0; animation: fadeUp 0.5s ease forwards 0.4s; }
+    .cs-meta-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; }
     .cs-meta-value { font-size: 0.85rem; color: var(--black); line-height: 1.4; }
 
     .cs-actions { margin-top: 32px; opacity: 0; animation: fadeUp 0.5s ease forwards 0.5s; }
-    .cs-live-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #fff; padding: 14px 28px; border-radius: 100px;
-      font-size: 0.85rem; font-weight: 500; text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .cs-live-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; padding: 14px 28px; border-radius: 100px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; }
     .cs-live-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-    .cs-live-btn .dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #fff;
-      animation: livePulse 2s infinite;
-    }
-    @keyframes livePulse {
-      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.55); }
-      70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
-      100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-    }
+    .cs-live-btn .dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: livePulse 2s infinite; }
+    @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.55); } 70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
 
-    /* HERO IMAGE */
-    .cs-hero-img {
-      display: block; margin: 0 auto; width: 100%; max-width: 320px;
-      border-radius: 32px; border: 6px solid #222;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5); box-sizing: border-box;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    /* HERO IMAGE (phone) */
+    .cs-hero-img { display: block; margin: 0 auto; width: 100%; max-width: 320px; border-radius: 32px; border: 6px solid #222; box-shadow: 0 30px 60px rgba(0,0,0,0.5); box-sizing: border-box; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
     .cs-hero-img:hover { transform: scale(1.01); }
 
-    /* DECISION BLOCK */
-    .decision-split {
-      border-top: 1px solid var(--light-gray); padding-top: 64px; margin-bottom: 64px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
-    }
-    .decision-split .decision-number {
-      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 12px; display: block;
-    }
-    .decision-split h3 {
-      font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 600;
-      letter-spacing: -0.02em; color: var(--black); margin-bottom: 16px; line-height: 1.15;
-    }
-    .decision-split p { font-size: 1rem; line-height: 1.75; color: var(--gray); }
-    .decision-split .decision-img {
-      width: 100%; max-width: 280px; display: block; margin: 0 auto;
-      border-radius: 28px; border: 6px solid #222; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
+    /* CONTENT */
+    .cs-content { max-width: 720px; margin: 0 auto; padding: 80px 40px 0; }
+    .cs-content.tight { padding-top: 56px; }
+    .cs-section { margin-bottom: 72px; }
+    .cs-section h2 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 24px; line-height: 1.2; }
+    .cs-section p { font-size: 1.05rem; line-height: 1.7; color: var(--gray); margin-bottom: 20px; }
+    .cs-section p:last-child { margin-bottom: 0; }
+    .cs-section strong { color: var(--black); font-weight: 500; }
+
+    .feature-list { list-style: none; margin-top: 28px; }
+    .feature-list li { margin-bottom: 22px; }
+    .feature-list h4 { font-size: 1.02rem; font-weight: 600; color: var(--black); margin-bottom: 6px; }
+    .feature-list p { margin-bottom: 0; font-size: 1rem; }
+
+    /* DECISION — split (phone) */
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
+    .decision-split { border-top: 1px solid var(--light-gray); padding-top: 64px; margin-bottom: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .decision-number { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
+    .decision-split h3, .decision-block h3 { font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 16px; line-height: 1.15; }
+    .decision-split p, .decision-block p { font-size: 1rem; line-height: 1.75; color: var(--gray); }
+    .decision-split strong, .decision-block strong { color: var(--black); font-weight: 500; }
+    .decision-split .decision-img { width: 100%; max-width: 280px; display: block; margin: 0 auto; border-radius: 28px; border: 6px solid #222; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+
+    /* DECISION — full-width (diagrams / desktop) */
+    .decision-block { border-top: 1px solid var(--light-gray); padding-top: 64px; margin-bottom: 64px; }
+    .decision-block .d-text { max-width: 720px; }
+    .decision-block .d-figure { margin-top: 40px; }
+    .d-shows { font-size: 0.82rem; font-style: italic; color: #6f6f6f; margin-top: 18px; }
+
+    .diagram-img { width: 100%; display: block; border-radius: 14px; border: 1px solid var(--light-gray); background: #000; }
+    .diagram-img.portrait { max-width: 540px; margin: 0 auto; }
+    .shot-img { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--light-gray); box-shadow: 0 24px 50px rgba(0,0,0,0.5); }
+    .fig-caption { text-align: center; font-size: 0.8rem; color: var(--gray); margin-top: 16px; }
+
+    .img-2up { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px; margin: 0 auto 64px; padding: 0 40px; }
+    .img-2up img { width: 100%; max-width: 260px; display: block; margin: 0 auto; border-radius: 26px; border: 6px solid #222; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
     @media (max-width: 860px) {
       .decision-split { grid-template-columns: 1fr; gap: 32px; }
+      .img-2up { grid-template-columns: 1fr; gap: 28px; }
       .cs-header { padding: 100px 20px 40px; }
+      .cs-content { padding: 56px 20px 0; }
+      .wrap { padding: 0 20px; }
       .cs-meta { gap: 24px; flex-direction: column; }
       .cs-cta { padding: 48px 20px; flex-direction: column; gap: 32px; text-align: center; }
       footer { flex-direction: column; gap: 16px; align-items: flex-start; }
     }
 
-    /* CONTENT */
-    .cs-content { max-width: 720px; margin: 0 auto; padding: 80px 40px; }
-    .cs-section { margin-bottom: 80px; }
-    .cs-section:last-child { margin-bottom: 0; }
-    .cs-section h2 {
-      font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em;
-      color: var(--black); margin-bottom: 24px; line-height: 1.2;
-    }
-    .cs-section p { font-size: 1.05rem; line-height: 1.7; color: var(--gray); margin-bottom: 20px; }
-    .cs-section p:last-child { margin-bottom: 0; }
-
-    .feature-list { list-style: none; margin-top: 32px; }
-    .feature-list li { margin-bottom: 24px; }
-    .feature-list h4 { font-size: 1.05rem; font-weight: 600; color: var(--black); margin-bottom: 8px; }
-    .feature-list h4 .emoji { margin-right: 8px; }
-    .feature-list p { margin-bottom: 0; font-size: 1rem; }
-
     /* CTA */
-    .cs-cta {
-      padding: 64px 40px; background: #050505;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .cta-left h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600;
-      letter-spacing: -0.03em; color: #fff; line-height: 1.1; margin-bottom: 8px;
-    }
+    .cs-cta { padding: 64px 40px; background: #050505; display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+    .cta-left h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; color: #fff; line-height: 1.1; margin-bottom: 8px; }
     .cta-left p { font-size: 0.875rem; color: rgba(255,255,255,0.45); }
-    .btn-pill {
-      display: inline-flex; align-items: center; gap: 8px; background: var(--accent);
-      color: #fff; padding: 13px 26px; border-radius: 100px; font-size: 0.8rem;
-      font-weight: 500; text-decoration: none; white-space: nowrap;
-      transition: background 0.2s, transform 0.15s;
-    }
+    .btn-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 13px 26px; border-radius: 100px; font-size: 0.8rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; }
     .btn-pill:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
     /* FOOTER */
-    footer {
-      padding: 28px 40px; border-top: 1px solid rgba(255,255,255,0.08);
-      background: #050505; display: flex; align-items: center; justify-content: space-between;
-    }
+    footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,0.08); background: #050505; display: flex; align-items: center; justify-content: space-between; }
     .footer-text { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
     /* REVEAL & PROGRESS */
-    .reveal {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-stagger > * {
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.08s; }
-    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
-    .reveal-stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
-    .reveal-stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
 
-    .read-progress {
-      position: fixed; top: 0; left: 0; height: 2px; background: var(--accent);
-      z-index: 200; width: 0%; transition: width 0.1s linear;
-    }
+    .read-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 200; width: 0%; transition: width 0.1s linear; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -261,25 +176,26 @@
 
   <header class="cs-header">
     <a href="ai-projects.html" class="cs-back">← AI Projects</a>
-    <span class="cs-label">Self-initiated · AI-assisted · 2026</span>
-    <h1 class="cs-title">Tolk — a German learning tool I built because the existing ones didn't fit how I learn.</h1>
+    <span class="cs-label">Self-initiated · Product design · 2026</span>
+    <h1 class="cs-title">Tolk — restructuring a feature-first language app around one core intent.</h1>
+    <p class="cs-note">An early-stage, in-progress product. This case study focuses on the design decisions and the reasoning behind them — which is where most of the work lived.</p>
 
     <div class="cs-meta">
       <div class="cs-meta-item">
         <div class="cs-meta-label">Role</div>
-        <div class="cs-meta-value">UX Designer + Builder</div>
+        <div class="cs-meta-value">Product &amp; UX Design — end to end</div>
+      </div>
+      <div class="cs-meta-item">
+        <div class="cs-meta-label">Scope</div>
+        <div class="cs-meta-value">IA · Flows · Content model · Responsive</div>
       </div>
       <div class="cs-meta-item">
         <div class="cs-meta-label">Built with</div>
-        <div class="cs-meta-value">Antigravity · Groq API · Unsplash API</div>
-      </div>
-      <div class="cs-meta-item">
-        <div class="cs-meta-label">Surface</div>
-        <div class="cs-meta-value">Mobile-first web app</div>
+        <div class="cs-meta-value">AI-assisted · Antigravity · Groq</div>
       </div>
       <div class="cs-meta-item">
         <div class="cs-meta-label">Status</div>
-        <div class="cs-meta-value">Live · In active use</div>
+        <div class="cs-meta-value">Live · In progress</div>
       </div>
     </div>
 
@@ -288,98 +204,134 @@
     </div>
   </header>
 
-  <img src="images/tolk_levels.png" alt="Tolk — choose your level screen" class="cs-hero-img">
+  <img src="images/tolk_search.png" alt="Tolk — word search result for Hund" class="cs-hero-img">
 
   <main class="cs-content">
     <section class="cs-section reveal">
-      <h2>Context</h2>
-      <p>Living in Leipzig and studying German, I kept bouncing off the existing vocabulary apps — they were either too gamified or too rigid. None gave me what I actually needed: fast word lookup with visual context, grammar I could reference on the go, and a way to practice recognition without committing to a full lesson.</p>
-      <p>So I built one. Tolk (formerly DeutschLernen) is a mobile-first web app for German learners, designed around real daily use rather than engagement metrics.</p>
+      <h2>The starting point</h2>
+      <p>I'd built Tolk feature-first: a word search, a music-lyrics mode, flashcards, a quiz, grammar, settings, and history — all surfaced flat in a five-item bottom navigation. Each feature worked in isolation, but the product had no spine. My first planning artifact was a single diagram trying to be three things at once — a user flow, a sitemap, and a data model — with shapes and arrows that meant different things in different places.</p>
+      <p>So the real problem wasn't "add features." It was: <strong>what is this product, what's the one thing a user comes here to do, and how should everything else organize around that?</strong></p>
     </section>
 
     <section class="cs-section reveal">
-      <h2>The Problem</h2>
-      <p>Learning German as an adult living in Germany means needing answers fast — on the street, in a shop, reading a sign. Existing tools take too many taps to surface a simple answer, and none adapt to whether you're just starting out or already comfortable in the language.</p>
-    </section>
-
-    <section class="cs-section reveal">
-      <h2>One choice reshapes the whole app</h2>
-      <p>The first screen asks for your level, and that single decision changes the interface language across the entire product — no setting buried in a menu.</p>
+      <h2>How I approached it</h2>
+      <p>I worked validation-first and decision-led, not feature-led. Three principles drove the work:</p>
       <ul class="feature-list reveal-stagger">
         <li>
-          <h4>Beginner (A1–B1)</h4>
-          <p>The interface speaks your native language, so the tool never becomes a second thing to decode.</p>
+          <h4>Separate the concerns</h4>
+          <p>A flow, a sitemap, and a content model are three documents with three conventions. Collapsing them is what made the original unreadable — so I split them apart, each with one shape language and one meaning per arrow.</p>
         </li>
         <li>
-          <h4>Advanced (B2–C2)</h4>
-          <p>The interface runs entirely in German, turning everyday use into passive immersion.</p>
+          <h4>Build only what's validated</h4>
+          <p>Where a feature implied real infrastructure (accounts, a backend), I looked for the cheapest way to test the underlying assumption before committing engineering to it.</p>
         </li>
         <li>
-          <h4>Not sure?</h4>
-          <p>A five-minute placement test points you to the right starting level. It's all changeable later in Settings.</p>
+          <h4>Match complexity to the user</h4>
+          <p>Depth should scale with the learner's level and the device's space — not show everything to everyone everywhere.</p>
         </li>
       </ul>
     </section>
   </main>
 
-  <!-- SPLIT 1 — SEARCH -->
-  <div style="max-width: 1000px; margin: 0 auto; padding: 0 40px;">
+  <!-- DECISION 1 -->
+  <section class="decision-block wrap reveal">
+    <div class="d-text">
+      <span class="decision-number">Decision 01 · Information architecture</span>
+      <h3>Navigation by intent: five tabs down to four</h3>
+      <p>The old bottom bar mixed unrelated mental modes — a lookup tool, passive learning, active practice, reference, and configuration — competing for the same scarce space. I regrouped navigation around <strong>user intent</strong> and cut it to four: Search, Games, Grammar, Profile. Settings, low-frequency, moved into Profile; an underdeveloped Music mode was deferred rather than shipped half-built.</p>
+      <p class="d-shows">Shows: information architecture, mental models, editing down.</p>
+    </div>
+    <div class="d-figure">
+      <img src="images/tolk_sitemap.png" alt="Tolk sitemap — Home branching into Search, Games, Grammar, Profile" class="diagram-img">
+      <p class="fig-caption">Sitemap — the restructured four-tab architecture, organized by intent.</p>
+    </div>
+  </section>
+
+  <!-- 2-UP: GAMES + GRAMMAR -->
+  <div class="img-2up reveal">
+    <img src="images/tolk_games.png" alt="Tolk Games — Was ist das quiz">
+    <img src="images/tolk_grammar.png" alt="Tolk Grammar — declension tables">
+  </div>
+
+  <!-- DECISION 2 -->
+  <div class="wrap">
     <div class="decision-split reveal">
       <div class="decision-text">
-        <span class="decision-number">Surface 01 · Search</span>
-        <h3>Search that meets you in either language</h3>
-        <p>The search bar takes a word in German or in your own language and detects which one automatically — there's no mode to toggle. One result screen then answers the whole question, so the primary use case needs zero navigation.</p>
+        <span class="decision-number">Decision 02 · Prioritization</span>
+        <h3>Protecting activation: Search stays the landing screen</h3>
+        <p>The original structure proposed a summary dashboard as home. I pushed back: Tolk is dictionary-first, so the highest-value move is to land the user directly in the core action with zero friction — that serves <strong>activation</strong>. A progress dashboard serves retention, which wasn't validated yet, so I moved those stats into Profile rather than letting them gate the main task. I documented a lighter option — a thin progress strip above Search — as a future move if retention becomes the priority.</p>
+        <p class="d-shows">Shows: separating activation from retention, resisting vanity surfaces, sequencing by what's validated.</p>
       </div>
-      <img src="images/tolk_search.png" alt="Tolk search screen" class="decision-img">
+      <img src="images/tolk_profile.png" alt="Tolk Profile — progress, difficulty, pronunciation" class="decision-img">
     </div>
   </div>
 
-  <!-- SPLIT 2 — WORD RESULT -->
-  <div style="max-width: 1000px; margin: 0 auto; padding: 0 40px;">
-    <div class="decision-split reveal" style="direction: rtl;">
-      <div class="decision-text" style="direction: ltr;">
-        <span class="decision-number">Surface 02 · Word result</span>
-        <h3>One word, one screen</h3>
-        <p>A lookup returns the article and gender, IPA pronunciation with audio, the translation, synonyms, and example sentences — alongside a contextual image pulled from Unsplash that anchors the word to a real scene. Beispiele and Grammatik sit one tap away on the same result.</p>
-      </div>
-      <img src="images/tolk_word.png" alt="Tolk word result for schön" class="decision-img">
+  <!-- DECISION 3 -->
+  <section class="decision-block wrap reveal">
+    <div class="d-text">
+      <span class="decision-number">Decision 03 · Flow rigor</span>
+      <h3>Resolving the onboarding flow</h3>
+      <p>Onboarding branched on the user's level — beginner, advanced, or "not sure" — but the original flow never showed how "not sure" resolved. I closed the gap: the placement test routes into the same two outcomes as the explicit choices, and each path sets both the interface language and the level (beginner → native-language UI; advanced → German UI). I also removed the account-creation step, because it contradicted a later decision about authentication.</p>
+      <p class="d-shows">Shows: flow rigor, handling the branch everyone forgets, internal consistency.</p>
     </div>
-  </div>
-
-  <!-- SPLIT 3 — CARDS -->
-  <div style="max-width: 1000px; margin: 0 auto; padding: 0 40px;">
-    <div class="decision-split reveal">
-      <div class="decision-text">
-        <span class="decision-number">Surface 03 · Flashcards</span>
-        <h3>Recognition over recall</h3>
-        <p>The card game drills vocabulary through visual recognition rather than translation, across ten everyday categories — Animals, Food, Colors, Nature, Home, Body, Transport, Emotions, Travel, and Work. You see the image, name the word, and flip to confirm. Low friction, high retention.</p>
-      </div>
-      <img src="images/tolk_cards.png" alt="Tolk flashcard categories" class="decision-img">
+    <div class="d-figure">
+      <img src="images/tolk_flow.png" alt="Tolk onboarding flow — intro, optional register, choose level, placement test resolving to level + UI, home" class="diagram-img portrait">
+      <p class="fig-caption">Onboarding flow — the "not sure" path resolves into the same two outcomes.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- SPLIT 4 — GRAMMAR -->
-  <div style="max-width: 1000px; margin: 0 auto; padding: 0 40px;">
-    <div class="decision-split reveal" style="direction: rtl;">
-      <div class="decision-text" style="direction: ltr;">
-        <span class="decision-number">Surface 04 · Grammar</span>
-        <h3>Grammar you can scan, not study</h3>
-        <p>Grammar is built as a quick reference, not a course — four sections for cases, articles, verbs, and word order. The declension tables are colour-coded by case, and any form that changes from the nominative is highlighted in gold, so the underlying pattern is visible at a glance instead of memorised cold.</p>
-      </div>
-      <img src="images/tolk_grammar.png" alt="Tolk grammar reference tables" class="decision-img">
+  <!-- DECISION 4 (text only) -->
+  <main class="cs-content tight">
+    <section class="cs-section reveal" style="border-top:1px solid var(--light-gray); padding-top:64px; margin-bottom:0;">
+      <span class="decision-number">Decision 04 · Scope discipline</span>
+      <h2 style="margin-top:12px;">Deferring accounts: local-first persistence</h2>
+      <p>"Save my progress" reads as "build login," but they're not the same thing. I separated them: progress persists locally on the device first, with no account required. This keeps the product feeling like it remembers the user while a lightweight email-capture test measures whether people actually want to register — <em>before</em> committing to building authentication. I structured the saved data as a single versioned store, so that once registration intent is validated, migrating local progress into real accounts is a clean one-step job rather than a rewrite.</p>
+      <p class="d-shows">Shows: scope discipline, validation-driven design, designing for a future state without over-building the present.</p>
+    </section>
+  </main>
+
+  <!-- DECISION 5 -->
+  <section class="decision-block wrap reveal">
+    <div class="d-text">
+      <span class="decision-number">Decision 05 · Progressive disclosure</span>
+      <h3>Level-adaptive conjugation, on a real content model</h3>
+      <p>German verbs carry a lot of conjugation. Showing all nine tenses to a beginner is noise; hiding them from an advanced learner is a gap. I tied conjugation depth to the user's level — a compact everyday set for beginners, the full set for advanced — and designed the display to adapt per device. Underneath sits a structured content model: every word entry resolves to an image, gender, meaning, a sample sentence, and a grammatical type that branches into verb, noun, adjective, or connector — each carrying only the depth that type needs.</p>
+      <p class="d-shows">Shows: progressive disclosure, content-dense UX, a real linguistic data model.</p>
     </div>
-  </div>
+    <div class="d-figure">
+      <img src="images/tolk_content.png" alt="Tolk content model — word entry resolving to image, word+gender, meaning, sentence, grammatical type" class="diagram-img">
+      <p class="fig-caption">Content model — one entry, typed by part of speech, with depth scaled to type.</p>
+    </div>
+  </section>
 
+  <!-- DECISION 6 -->
+  <section class="decision-block wrap reveal">
+    <div class="d-text">
+      <span class="decision-number">Decision 06 · Responsive system</span>
+      <h3>One consistent pattern across devices</h3>
+      <p>I extended the mobile-first app to iPad and laptop with a hybrid model — most views stay a centered, readable column; a few (word entry, conjugation, games, stats) use the extra width — while keeping one navigation pattern across devices so users never relearn the layout. Along the way I corrected a stats block that had shipped unstyled, rebuilding it so the number is the visual hero and the label recedes, making progress legible at a glance.</p>
+      <p class="d-shows">Shows: responsive / cross-device design, design-system consistency, visual hierarchy.</p>
+    </div>
+    <div class="d-figure">
+      <img src="images/tolk_desktop.png" alt="Tolk on desktop — two-column word entry with conjugation grid" class="shot-img">
+      <p class="fig-caption">Desktop — the word entry opens into a two-column layout, with the conjugation grid showing multiple tenses at once.</p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
   <main class="cs-content">
     <section class="cs-section reveal">
-      <h2>Music — learning through lyrics</h2>
-      <p>Plenty of people listen to music while learning a language, but matching the sounds you hear to the actual words is hard. The Music tab is a YouTube player that shows the lyrics of your favourite songs in German, so you can see what you're hearing — and it works both ways, rendering lyrics in the device's native language too. It also surfaces German-language recommendations to learn from.</p>
+      <h2>What this project shows</h2>
+      <ul class="feature-list reveal-stagger">
+        <li><p>Turning an ambiguous, feature-first product into a coherent structure organized around a single core intent.</p></li>
+        <li><p>Information architecture and user-flow design — including the edge cases that usually get skipped — plus prioritization and the discipline to decide what <em>not</em> to build yet, and why.</p></li>
+        <li><p>Designing for validation (cheap signals before expensive infrastructure), progressive disclosure over a real content model, and a responsive system kept consistent by design-system thinking — every choice paired with its rationale and trade-offs.</p></li>
+      </ul>
     </section>
 
-    <section class="cs-section reveal">
-      <h2>How I built it</h2>
-      <p><strong style="color:var(--black); font-weight:500;">UX first, AI second.</strong> My focus was entirely on the UX — the flows, hierarchy, and information architecture. I delegated UI execution to AI tooling within a system I defined, trusting the tool with the visual layer while owning the structure. That's exactly how I approach AI-assisted design in product work.</p>
-      <p><strong style="color:var(--black); font-weight:500;">Built for speed.</strong> Groq powers instant lookups, definitions, and example generation; the Unsplash API surfaces the contextual imagery; Antigravity handled UI generation and front-end assembly. The first working version came together in a single focused build, and it's grown new modes since.</p>
+    <section class="cs-section reveal" style="margin-bottom:0;">
+      <h2>Status &amp; next steps</h2>
+      <p>The restructured app is a working prototype, live now. Next: validate registration intent via the email-capture test, expand content, and — if the signal is there — layer in accounts, migrating the local progress already designed for it. A longer-term path moves the app toward the iOS App Store.</p>
     </section>
   </main>
 
@@ -417,12 +369,7 @@
       const particles = [];
       const particleCount = window.innerWidth < 800 ? 35 : 75;
       for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * w, y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.5,
-          vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-          hue: Math.random() * 60 + 250
-        });
+        particles.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.5 + 0.5, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, hue: Math.random() * 60 + 250 });
       }
       function draw() {
         ctx.clearRect(0, 0, w, h);
