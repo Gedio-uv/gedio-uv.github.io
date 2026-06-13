@@ -424,10 +424,16 @@
 }
 
 /* ─── RESPONSIVE LAYOUT ─── */
-/* Removed redundant profile-stats media query */
+
+@media (min-width: 768px) {
+  .settings-container {
+    max-width: var(--max-w-reading); /* iPad width */
+  }
+}
 
 @media (min-width: 1024px) {
   .settings-container {
+    max-width: var(--max-w-wide); /* Desktop width */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
