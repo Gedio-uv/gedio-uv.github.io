@@ -390,7 +390,7 @@
       .nav-divider { width: 40px; height: 1px; }
       .hero { padding: 110px 20px 60px; min-height: auto; }
       .stats { padding: 40px 20px; flex-wrap: wrap; gap: 24px; }
-      .stat { flex: 1 1 40%; border-right: none; padding: 0; }
+      .stat, .stat:not(:first-child) { flex: 1 1 40%; border-right: none; padding: 0; }
       .work { padding: 40px 20px; }
       .work-grid { grid-template-columns: 1fr; }
       .work-item:first-child { grid-column: 1; }
@@ -455,7 +455,7 @@
     </div>
     <div class="stat">
       <div class="stat-value" data-target="1">0</div>
-      <div class="stat-label">motion practice, built from scratch</div>
+      <div class="stat-label">motion practice,<br>built from scratch</div>
     </div>
   </section>
 
