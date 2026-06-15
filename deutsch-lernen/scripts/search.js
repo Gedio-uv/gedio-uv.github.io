@@ -250,14 +250,14 @@ Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object 
   "plural": "plural form for nouns, - for others",
   "ipa": "/IPA transcription/",
   "partOfSpeech": "noun/verb/adjective/adverb/preposition/conjunction",
-  "nativeTranslation": "translation in ${nativeLangName}",
-  "synonyms": ["German synonym 1", "German synonym 2", "German synonym 3"],
+  "nativeTranslation": "<Write translation in ${nativeLangName} here>",
+  "synonyms": ["<German synonym 1>", "<German synonym 2>", "<German synonym 3>"],
   "examples": [
-    { "german": "Natural German sentence using the word", "native": "Translation in ${nativeLangName}" },
-    { "german": "Another German sentence", "native": "Translation" },
-    { "german": "A third German sentence", "native": "Translation" }
+    { "german": "<Natural German sentence using the word>", "native": "<Write translation in ${nativeLangName} here>" },
+    { "german": "<Another German sentence>", "native": "<Write translation in ${nativeLangName} here>" },
+    { "german": "<A third German sentence>", "native": "<Write translation in ${nativeLangName} here>" }
   ],
-  "grammarNotes": "Brief grammar note in ${nativeLangName}",
+  "grammarNotes": "<Brief grammar note in ${nativeLangName}>",
   "imageQuery": "If noun: 1-3 word English keyword. If verb: a short, concrete visual description in English of the first example sentence",
   "principalParts": {
     "infinitive": "infinitive form",
@@ -275,6 +275,7 @@ Rules:
 - If input is German, keep as-is.
 - Synonyms must be German words.
 - Examples must be natural everyday sentences.
+- You MUST provide the translations in ${nativeLangName} for "nativeTranslation", "native", and "grammarNotes". DO NOT leave them empty. If translating to Chinese or Japanese, output the actual characters (e.g., 房子).
 - IF AND ONLY IF "partOfSpeech" is "verb":
   1. Include the "principalParts" object.
   2. Include the "conjugation" object containing exactly these tenses: ${requestedTenses}.
@@ -294,10 +295,10 @@ Return ONLY a valid JSON object with a "cards" array (no markdown):
 {
   "cards": [
     {
-      "word": "German noun/word",
-      "article": "der/die/das or - for non-nouns",
-      "plural": "plural form or -",
-      "nativeTranslation": "translation in ${nativeLangName}",
+      "word": "<German noun/word>",
+      "article": "<der/die/das or - for non-nouns>",
+      "plural": "<plural form or ->",
+      "nativeTranslation": "<Write translation in ${nativeLangName} here>",
       "imageQuery": "If noun: simple English noun. If verb: short visual description of the action"
     }
   ]
@@ -309,6 +310,7 @@ Rules:
 - Verbs/adjectives use article "-"
 - imageQuery: use nouns for nouns, use descriptive visual scenes for verbs
 - Vary difficulty from basic to intermediate
+- You MUST provide the nativeTranslation. DO NOT leave it empty. If translating to Chinese or Japanese, output the actual characters (e.g., 房子).
 - Return ONLY the JSON object with the cards array`;
 }
 
