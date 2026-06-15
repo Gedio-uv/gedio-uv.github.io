@@ -103,11 +103,11 @@ export async function loadCards(category) {
     showState('error');
     if (elErrorText) {
       if (err.message === 'NO_API_KEY') {
-        elErrorText.textContent = 'Gemini API Key no configurada. Ve a Ajustes.';
+        elErrorText.textContent = 'Gemini API Key missing. Go to Settings.';
       } else if (err.message === 'INVALID_KEY') {
-        elErrorText.textContent = 'API Key inválida. Verifica en Ajustes.';
+        elErrorText.textContent = 'Invalid API Key. Check Settings.';
       } else {
-        elErrorText.textContent = 'Error al cargar tarjetas. Intenta de nuevo.';
+        elErrorText.textContent = 'Error loading cards. Please try again.';
       }
     }
   }

@@ -50,6 +50,41 @@
   align-items: center;
 }
 
+.search-quick-keys {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.quick-key-btn {
+  background: var(--c-surface);
+  color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.quick-key-btn:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-border-2);
+  transform: translateY(-2px);
+}
+
+.quick-key-btn:active {
+  transform: scale(0.95);
+}
+
 .search-bar {
   flex: 1;
   position: relative;

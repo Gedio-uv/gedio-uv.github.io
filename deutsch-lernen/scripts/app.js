@@ -395,12 +395,15 @@ async function doSearch(query) {
     showSearchState('error');
     const errEl = $('search-error-text');
     if (errEl) {
-      if (err.message === 'NO_API_KEY' || err.message === 'INVALID_KEY') {
-        errEl.textContent = 'API Key inválida o no configurada. Ve a Ajustes.';
+      if (err.message === 'WORD_NOT_FOUND') {
+        const trans = getTranslations(state.uiLang);
+        errEl.textContent = trans.wordNotFoundText || 'Word not found. Please refine your search.';
+      } else if (err.message === 'NO_API_KEY' || err.message === 'INVALID_KEY') {
+        errEl.textContent = 'Invalid or missing API Key. Go to Settings.';
       } else if (err.message === 'RATE_LIMIT') {
-        errEl.textContent = 'Límite de uso alcanzado. Espera un momento.';
+        errEl.textContent = 'Rate limit reached. Please wait a moment.';
       } else {
-        errEl.textContent = `Error: ${err.message}. Verifica tu conexión y API Key.`;
+        errEl.textContent = `Error: ${err.message}. Please check your connection and API Key.`;
       }
     }
   }
@@ -750,6 +753,22 @@ function bindGlobalEvents() {
     searchClear.classList.add('hidden');
     showSearchState('empty');
     searchInput?.focus();
+  });
+
+  // Quick-keys
+  document.querySelectorAll('.quick-key-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!searchInput) return;
+      const char = btn.textContent;
+      const start = searchInput.selectionStart;
+      const end = searchInput.selectionEnd;
+      const val = searchInput.value;
+      searchInput.value = val.substring(0, start) + char + val.substring(end);
+      searchInput.selectionStart = searchInput.selectionEnd = start + 1;
+      searchInput.focus();
+      searchClear?.classList.remove('hidden');
+    });
   });
 
   // Search suggestions

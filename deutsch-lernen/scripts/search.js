@@ -273,6 +273,7 @@ Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object 
 Rules:
 - If input is ${nativeLangName}, translate to German first.
 - If input is German, keep as-is.
+- If the word does not exist, is a severe typo, or makes no sense, return EXACTLY this JSON: {"error": "WORD_NOT_FOUND"}
 - Synonyms must be German words.
 - Examples must be natural everyday sentences.
 - You MUST provide the translations in ${nativeLangName} for "nativeTranslation", "native", and "grammarNotes". DO NOT leave them empty. If translating to Chinese or Japanese, output the actual characters (e.g., 房子).
@@ -315,6 +316,7 @@ Rules:
 }
 
 function validateResult(result) {
+  if (result.error) throw new Error(result.error);
   const required = ['word', 'nativeTranslation', 'examples'];
   for (const key of required) {
     if (!result[key]) throw new Error(`Missing field: ${key}`);
