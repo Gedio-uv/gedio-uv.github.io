@@ -34,8 +34,7 @@ async function callGroq(apiKey, promptText) {
       model:           GROQ_MODEL,
       messages:        [{ role: 'user', content: promptText }],
       temperature:     0.3,
-      max_tokens:      1024,
-      response_format: { type: 'json_object' },
+      max_tokens:      1024
     }),
   });
 
@@ -61,8 +60,7 @@ async function callProxy(promptText) {
       model:           GROQ_MODEL,
       messages:        [{ role: 'user', content: promptText }],
       temperature:     0.3,
-      max_tokens:      1024,
-      response_format: { type: 'json_object' },
+      max_tokens:      1024
     }),
   });
 
@@ -242,7 +240,7 @@ function buildWordPrompt(word, nativeLangName, userLevel) {
 
   return `You are a German dictionary assistant. Analyze the word or phrase: "${word}"
 
-Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object (no markdown, no explanation):
+Determine its base form and translate it to ${nativeLangName}. Return ONLY a valid JSON object. Do not include markdown or explanations.
 
 {
   "word": "German word (base form)",
@@ -250,15 +248,14 @@ Determine if it is German or ${nativeLangName}. Return ONLY a valid JSON object 
   "plural": "plural form for nouns, - for others",
   "ipa": "/IPA transcription/",
   "partOfSpeech": "noun/verb/adjective/adverb/preposition/conjunction",
-  "nativeTranslation": "<Write translation in ${nativeLangName} here>",
-  "synonyms": ["<German synonym 1>", "<German synonym 2>", "<German synonym 3>"],
+  "nativeTranslation": "[Put ${nativeLangName} translation here]",
+  "synonyms": ["[German synonym 1]", "[German synonym 2]"],
   "examples": [
-    { "german": "<Natural German sentence using the word>", "native": "<Write translation in ${nativeLangName} here>" },
-    { "german": "<Another German sentence>", "native": "<Write translation in ${nativeLangName} here>" },
-    { "german": "<A third German sentence>", "native": "<Write translation in ${nativeLangName} here>" }
+    { "german": "[German sentence]", "native": "[${nativeLangName} translation]" },
+    { "german": "[German sentence]", "native": "[${nativeLangName} translation]" }
   ],
-  "grammarNotes": "<Brief grammar note in ${nativeLangName}>",
-  "imageQuery": "If noun: 1-3 word English keyword. If verb: a short, concrete visual description in English of the first example sentence",
+  "grammarNotes": "[Brief grammar note in ${nativeLangName}]",
+  "imageQuery": "1-3 word English visual keyword",
   "principalParts": {
     "infinitive": "infinitive form",
     "praeteritum": "3rd person singular präteritum",

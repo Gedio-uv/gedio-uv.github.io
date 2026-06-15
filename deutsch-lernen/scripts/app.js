@@ -103,7 +103,7 @@ function escapeAttr(str) {
 const LANG_NAMES = {
   es: 'Spanish', en: 'English', pt: 'Portuguese',
   fr: 'French',  it: 'Italian', de: 'German',
-  zh: 'Simplified Chinese'
+  zh: 'Simplified Chinese (中文)'
 };
 
 // ── DOM shortcuts ──
@@ -329,6 +329,11 @@ function showSearchState(state) {
 
 async function doSearch(query) {
   if (!query.trim()) return;
+
+  const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
+  if (autocompleteDropdown) {
+    autocompleteDropdown.classList.add('hidden');
+  }
 
   showSearchState('loading');
 
