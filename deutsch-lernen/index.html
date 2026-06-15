@@ -163,12 +163,7 @@
               </svg>
             </button>
           </div>
-          <div class="search-quick-keys" aria-label="Special German characters">
-            <button type="button" class="quick-key-btn">ä</button>
-            <button type="button" class="quick-key-btn">ö</button>
-            <button type="button" class="quick-key-btn">ü</button>
-            <button type="button" class="quick-key-btn">ß</button>
-          </div>
+          <div id="autocomplete-dropdown" class="autocomplete-dropdown hidden" role="listbox"></div>
         </div>
 
         <div id="search-empty" class="search-empty">
@@ -260,7 +255,8 @@
         </div>
 
         <div id="search-error" class="search-error hidden" role="alert">
-          <div class="search-error__icon" aria-hidden="true">⚠️</div>
+          <img id="search-error-img" src="./assets/not-found.png" alt="Not found" class="search-error__img hidden" />
+          <div class="search-error__icon" id="search-error-icon" aria-hidden="true">⚠️</div>
           <p class="search-error__title" id="search-error-title">Search error</p>
           <p class="search-error__text" id="search-error-text">Check your API Key in Settings</p>
           <button id="search-error-settings" class="btn-secondary">

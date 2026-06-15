@@ -395,15 +395,23 @@ async function doSearch(query) {
     showSearchState('error');
     const errEl = $('search-error-text');
     if (errEl) {
+      const errImg = $('search-error-img');
+      const errIcon = $('search-error-icon');
       if (err.message === 'WORD_NOT_FOUND') {
         const trans = getTranslations(state.uiLang);
         errEl.textContent = trans.wordNotFoundText || 'Word not found. Please refine your search.';
-      } else if (err.message === 'NO_API_KEY' || err.message === 'INVALID_KEY') {
-        errEl.textContent = 'Invalid or missing API Key. Go to Settings.';
-      } else if (err.message === 'RATE_LIMIT') {
-        errEl.textContent = 'Rate limit reached. Please wait a moment.';
+        if (errImg) errImg.classList.remove('hidden');
+        if (errIcon) errIcon.classList.add('hidden');
       } else {
-        errEl.textContent = `Error: ${err.message}. Please check your connection and API Key.`;
+        if (errImg) errImg.classList.add('hidden');
+        if (errIcon) errIcon.classList.remove('hidden');
+        if (err.message === 'NO_API_KEY' || err.message === 'INVALID_KEY') {
+          errEl.textContent = 'Invalid or missing API Key. Go to Settings.';
+        } else if (err.message === 'RATE_LIMIT') {
+          errEl.textContent = 'Rate limit reached. Please wait a moment.';
+        } else {
+          errEl.textContent = `Error: ${err.message}. Please check your connection and API Key.`;
+        }
       }
     }
   }
@@ -755,20 +763,54 @@ function bindGlobalEvents() {
     searchInput?.focus();
   });
 
-  // Quick-keys
-  document.querySelectorAll('.quick-key-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (!searchInput) return;
-      const char = btn.textContent;
-      const start = searchInput.selectionStart;
-      const end = searchInput.selectionEnd;
-      const val = searchInput.value;
-      searchInput.value = val.substring(0, start) + char + val.substring(end);
-      searchInput.selectionStart = searchInput.selectionEnd = start + 1;
-      searchInput.focus();
-      searchClear?.classList.remove('hidden');
-    });
+  // Autocomplete Logic
+  let autocompleteTimeout = null;
+  const autocompleteDropdown = $('autocomplete-dropdown');
+
+  searchInput?.addEventListener('input', (e) => {
+    const val = e.target.value.trim();
+    if (!val) {
+      if (autocompleteDropdown) autocompleteDropdown.classList.add('hidden');
+      return;
+    }
+    
+    clearTimeout(autocompleteTimeout);
+    autocompleteTimeout = setTimeout(async () => {
+      try {
+        const res = await fetch(`https://de.wiktionary.org/w/api.php?action=opensearch&search=${encodeURIComponent(val)}&limit=5&format=json&origin=*`);
+        const data = await res.json();
+        const suggestions = data[1] || [];
+        
+        if (suggestions.length > 0) {
+          if (autocompleteDropdown) {
+            autocompleteDropdown.innerHTML = '';
+            suggestions.forEach(s => {
+              const item = document.createElement('div');
+              item.className = 'autocomplete-item';
+              item.textContent = s;
+              item.addEventListener('click', () => {
+                searchInput.value = s;
+                autocompleteDropdown.classList.add('hidden');
+                doSearch(s);
+              });
+              autocompleteDropdown.appendChild(item);
+            });
+            autocompleteDropdown.classList.remove('hidden');
+          }
+        } else {
+          if (autocompleteDropdown) autocompleteDropdown.classList.add('hidden');
+        }
+      } catch (err) {
+        console.error('Autocomplete error:', err);
+      }
+    }, 300);
+  });
+
+  // Hide autocomplete when clicking outside
+  document.addEventListener('click', (e) => {
+    if (searchInput && autocompleteDropdown && !searchInput.contains(e.target) && !autocompleteDropdown.contains(e.target)) {
+      autocompleteDropdown.classList.add('hidden');
+    }
   });
 
   // Search suggestions
