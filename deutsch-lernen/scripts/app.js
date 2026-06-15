@@ -103,6 +103,7 @@ function escapeAttr(str) {
 const LANG_NAMES = {
   es: 'Spanish', en: 'English', pt: 'Portuguese',
   fr: 'French',  it: 'Italian', de: 'German',
+  zh: 'Simplified Chinese'
 };
 
 // ── DOM shortcuts ──
