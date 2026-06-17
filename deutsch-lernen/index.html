@@ -505,18 +505,20 @@
             <h3 class="music-quiz__title" style="margin-bottom:20px;">Alphabet Spiel</h3>
             <div class="settings-card">
               <div class="settings-field">
-                <label style="color:var(--c-text-sec); margin-bottom:8px; display:block;">Anzahl der Spieler</label>
-                <input type="number" id="alphabet-players" class="search-bar__input" value="2" min="2" max="10" style="width:100%; padding:12px; background:var(--c-surface-2); border:1px solid var(--c-border); color:white; border-radius:8px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <label style="color:var(--c-text-sec);">Anzahl der Spieler</label>
+                  <span id="alphabet-players-val" style="color:white; font-weight:bold;">2</span>
+                </div>
+                <input type="range" id="alphabet-players" class="search-bar__input" value="2" min="2" max="10" step="1" oninput="document.getElementById('alphabet-players-val').textContent = this.value" style="width:100%; padding:0; height:6px; background:var(--c-surface-2); border-radius:8px; accent-color:var(--c-accent); cursor:pointer;">
               </div>
-              <div class="settings-field" style="margin-top:16px;">
-                <label style="color:var(--c-text-sec); margin-bottom:8px; display:block;">Zeit (Minuten)</label>
-                <select id="alphabet-time" class="search-bar__input" style="width:100%; padding:12px; background:var(--c-surface-2); border:1px solid var(--c-border); color:white; border-radius:8px;">
-                  <option value="3">3 Minuten</option>
-                  <option value="5" selected>5 Minuten</option>
-                  <option value="10">10 Minuten</option>
-                </select>
+              <div class="settings-field" style="margin-top:24px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <label style="color:var(--c-text-sec);">Zeit (Minuten)</label>
+                  <span id="alphabet-time-val" style="color:white; font-weight:bold;">5</span>
+                </div>
+                <input type="range" id="alphabet-time" class="search-bar__input" value="5" min="1" max="15" step="1" oninput="document.getElementById('alphabet-time-val').textContent = this.value" style="width:100%; padding:0; height:6px; background:var(--c-surface-2); border-radius:8px; accent-color:var(--c-accent); cursor:pointer;">
               </div>
-              <button id="alphabet-start-btn" class="btn-primary" style="width:100%; margin-top:24px;">Start Game</button>
+              <button id="alphabet-start-btn" class="btn-primary" style="width:100%; margin-top:32px;">Start Game</button>
             </div>
           </div>
 
@@ -530,9 +532,11 @@
               <div id="roulette-wheel" class="roulette-wheel" style="font-size:5rem; font-weight:900; color:white; text-shadow:0 0 20px var(--c-accent); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style:preserve-3d;">?</div>
             </div>
             
-            <button id="alphabet-next-player-btn" class="btn-primary" style="width:100%; height:80px; font-size:1.2rem; border-radius:16px; box-shadow:0 4px 20px rgba(139, 92, 246, 0.4);">
-              Wort gesagt! Nächster Spieler
-            </button>
+            <div style="display:flex; justify-content:center; align-items:center; margin-top:20px;">
+              <button id="alphabet-next-player-btn" class="btn-primary" style="width:200px; height:200px; font-size:1.5rem; font-weight:800; border-radius:50%; box-shadow:0 10px 30px rgba(239, 68, 68, 0.4); background: linear-gradient(135deg, #ef4444, #dc2626); color:white; border:none; display:flex; align-items:center; justify-content:center; text-align:center; transition:transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;">
+                Wort<br>gesagt!
+              </button>
+            </div>
           </div>
 
           <div id="alphabet-gameover" class="alphabet-gameover hidden" style="text-align:center; padding:40px 0;">

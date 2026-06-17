@@ -692,6 +692,15 @@
   font-variant-numeric: tabular-nums;
 }
 
+#alphabet-next-player-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6) !important;
+}
+#alphabet-next-player-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4) !important;
+}
+
 /* ─── RESPONSIVE LAYOUT ─── */
 @media (min-width: 768px) {
   .games-grid {
