@@ -1,0 +1,11 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a German dictionary assistant. Analyze the word or phrase: \"verwirrt\"\n\nDetermine its base form, article (if noun), part of speech, German definition, CEFR level, plural/conjugation forms if applicable, synonyms, and 2 example sentences.\n\nCRITICAL: Provide the primary translation of the word into Simplified Chinese in the 'nativeTranslation' field.\nAll other JSON keys and values must be in English or German as specified.\n\nRespond ONLY with a valid JSON object matching this exact structure:\n{\n  \"word\": \"<base form>\",\n  \"article\": \"<der/die/das or null>\",\n  \"partOfSpeech\": \"<noun/verb/adjective/etc>\",\n  \"level\": \"<A1-C2>\",\n  \"forms\": \"<plural/past/participle or null>\",\n  \"germanDefinition\": \"<German definition>\",\n  \"nativeTranslation\": \"<Write translation in Simplified Chinese here>\",\n  \"synonyms\": [\"<German synonym 1>\", \"<German synonym 2>\", \"<German synonym 3>\"],\n  \"examples\": [\n    { \"german\": \"<Example 1>\", \"translation\": \"<English translation 1>\" },\n    { \"german\": \"<Example 2>\", \"translation\": \"<English translation 2>\" }\n  ],\n  \"grammarNotes\": \"<Brief grammar notes in English>\",\n  \"imageQuery\": \"<1 English keyword for Unsplash>\"\n}\n\nDO NOT output any extra text, markdown, or explanations. Just the JSON object."
+    }
+  ],
+  "temperature": 0.1,
+  "response_format": {"type": "json_object"}
+}

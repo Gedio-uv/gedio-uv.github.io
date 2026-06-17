@@ -309,6 +309,20 @@
                 <p class="game-card__desc">Guess the word</p>
               </div>
             </button>
+            <button class="game-card" data-game="sentencetype" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">🏷️</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Sentence Type</h3>
+                <p class="game-card__desc">Identify the case</p>
+              </div>
+            </button>
+            <button class="game-card" data-game="alphabet" role="listitem">
+              <span class="game-card__icon" aria-hidden="true">🎡</span>
+              <div class="game-card__info">
+                <h3 class="game-card__title">Alphabet Spiel</h3>
+                <p class="game-card__desc">Roulette word game</p>
+              </div>
+            </button>
           </div>
         </div>
 
@@ -458,6 +472,75 @@
           </button>
 
         </div>
+
+        <div id="game-area-sentencetype" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <div class="sentence-game-container">
+            <h3 class="music-quiz__title">Welcher Fall ist das?</h3>
+            <div class="music-quiz__header">
+              <span id="sentencetype-progress" class="music-quiz__progress">Score: 0</span>
+            </div>
+            <div id="sentencetype-question" class="music-quiz__question" style="font-size: 1.2rem; margin: 20px 0;"></div>
+            <div id="sentencetype-options" class="music-quiz__options" role="list">
+              <button class="music-quiz__option" data-case="Nominativ">Nominativ</button>
+              <button class="music-quiz__option" data-case="Akkusativ">Akkusativ</button>
+              <button class="music-quiz__option" data-case="Dativ">Dativ</button>
+              <button class="music-quiz__option" data-case="Genitiv">Genitiv</button>
+            </div>
+            <div id="sentencetype-result" class="music-quiz__result hidden"></div>
+            <button id="sentencetype-next" class="btn-primary hidden" style="margin-top:20px; width:100%;">Nächste Frage</button>
+          </div>
+        </div>
+
+        <div id="game-area-alphabet" class="game-area hidden">
+          <button class="game-back-btn" data-back-to="hub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          
+          <div id="alphabet-setup" class="alphabet-setup">
+            <h3 class="music-quiz__title" style="margin-bottom:20px;">Alphabet Spiel</h3>
+            <div class="settings-card">
+              <div class="settings-field">
+                <label style="color:var(--c-text-sec); margin-bottom:8px; display:block;">Anzahl der Spieler</label>
+                <input type="number" id="alphabet-players" class="search-bar__input" value="2" min="2" max="10" style="width:100%; padding:12px; background:var(--c-surface-2); border:1px solid var(--c-border); color:white; border-radius:8px;">
+              </div>
+              <div class="settings-field" style="margin-top:16px;">
+                <label style="color:var(--c-text-sec); margin-bottom:8px; display:block;">Zeit (Minuten)</label>
+                <select id="alphabet-time" class="search-bar__input" style="width:100%; padding:12px; background:var(--c-surface-2); border:1px solid var(--c-border); color:white; border-radius:8px;">
+                  <option value="3">3 Minuten</option>
+                  <option value="5" selected>5 Minuten</option>
+                  <option value="10">10 Minuten</option>
+                </select>
+              </div>
+              <button id="alphabet-start-btn" class="btn-primary" style="width:100%; margin-top:24px;">Start Game</button>
+            </div>
+          </div>
+
+          <div id="alphabet-gameplay" class="alphabet-gameplay hidden">
+            <div class="alphabet-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+              <div id="alphabet-timer" class="alphabet-timer" style="font-size:1.5rem; font-weight:bold; color:var(--c-accent);">05:00</div>
+              <div id="alphabet-player-indicator" class="alphabet-player" style="background:var(--c-surface-2); padding:8px 16px; border-radius:20px; font-weight:600;">Spieler 1</div>
+            </div>
+            
+            <div class="roulette-container" style="display:flex; justify-content:center; align-items:center; margin:40px 0; height:150px; perspective:1000px;">
+              <div id="roulette-wheel" class="roulette-wheel" style="font-size:5rem; font-weight:900; color:white; text-shadow:0 0 20px var(--c-accent); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style:preserve-3d;">?</div>
+            </div>
+            
+            <button id="alphabet-next-player-btn" class="btn-primary" style="width:100%; height:80px; font-size:1.2rem; border-radius:16px; box-shadow:0 4px 20px rgba(139, 92, 246, 0.4);">
+              Wort gesagt! Nächster Spieler
+            </button>
+          </div>
+
+          <div id="alphabet-gameover" class="alphabet-gameover hidden" style="text-align:center; padding:40px 0;">
+            <h2 style="font-size:2rem; color:var(--c-accent); margin-bottom:16px;">Zeit abgelaufen!</h2>
+            <p id="alphabet-loser-text" style="font-size:1.2rem; margin-bottom:30px;">Spieler X hat verloren.</p>
+            <button id="alphabet-restart-btn" class="btn-primary">Nochmal spielen</button>
+          </div>
+        </div>
       </section>
 
       <!-- ─────────── PROFILE VIEW ─────────── -->
@@ -521,6 +604,7 @@
                 <option value="fr">Français</option>
                 <option value="it">Italiano</option>
                 <option value="zh">中文 (Simplified)</option>
+                <option value="vi">Tiếng Việt</option>
               </select>
             </div>
           </div>

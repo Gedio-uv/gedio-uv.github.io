@@ -24,6 +24,9 @@ const state = {
   lastResult:  null,
 };
 
+let autocompleteTimeout = null;
+let autocompleteAbortController = null;
+
 function getHistory() {
   return getProgress().searchHistory;
 }
@@ -103,7 +106,7 @@ function escapeAttr(str) {
 const LANG_NAMES = {
   es: 'Spanish', en: 'English', pt: 'Portuguese',
   fr: 'French',  it: 'Italian', de: 'German',
-  zh: 'Simplified Chinese (中文)'
+  zh: 'Simplified Chinese (中文)', vi: 'Vietnamese'
 };
 
 // ── DOM shortcuts ──
@@ -329,6 +332,12 @@ function showSearchState(state) {
 
 async function doSearch(query) {
   if (!query.trim()) return;
+
+  if (autocompleteTimeout) clearTimeout(autocompleteTimeout);
+  if (autocompleteAbortController) {
+    autocompleteAbortController.abort();
+    autocompleteAbortController = null;
+  }
 
   const autocompleteDropdown = document.getElementById('autocomplete-dropdown');
   if (autocompleteDropdown) {
@@ -769,7 +778,6 @@ function bindGlobalEvents() {
   });
 
   // Autocomplete Logic
-  let autocompleteTimeout = null;
   const autocompleteDropdown = $('autocomplete-dropdown');
 
   searchInput?.addEventListener('input', (e) => {
@@ -779,10 +787,15 @@ function bindGlobalEvents() {
       return;
     }
     
-    clearTimeout(autocompleteTimeout);
+    if (autocompleteTimeout) clearTimeout(autocompleteTimeout);
+    if (autocompleteAbortController) autocompleteAbortController.abort();
+    
+    autocompleteAbortController = new AbortController();
+    const signal = autocompleteAbortController.signal;
+
     autocompleteTimeout = setTimeout(async () => {
       try {
-        const res = await fetch(`https://de.wiktionary.org/w/api.php?action=opensearch&search=${encodeURIComponent(val)}&limit=5&format=json&origin=*`);
+        const res = await fetch(`https://de.wiktionary.org/w/api.php?action=opensearch&search=${encodeURIComponent(val)}&limit=5&format=json&origin=*`, { signal });
         const data = await res.json();
         const suggestions = data[1] || [];
         

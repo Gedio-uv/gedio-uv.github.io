@@ -660,6 +660,38 @@
   border-color: var(--c-gold);
 }
 
+/* ── Alphabet Roulette ── */
+.roulette-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.roulette-wheel {
+  font-size: 5rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 0 20px var(--c-accent);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.alphabet-player {
+  background: var(--c-surface-2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.alphabet-timer {
+  font-family: var(--f-heading);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ─── RESPONSIVE LAYOUT ─── */
 @media (min-width: 768px) {
   .games-grid {

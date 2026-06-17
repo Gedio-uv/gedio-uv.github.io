@@ -1,0 +1,10 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a German dictionary assistant. Analyze the word or phrase: \"Haus\"\n\nDetermine if it is German or Spanish. Return ONLY a valid JSON object (no markdown, no explanation):\n\n{\n  \"word\": \"<German word (base form)>\",\n  \"article\": \"<der/die/das for nouns, - for others>\",\n  \"plural\": \"<plural form for nouns, - for others>\",\n  \"ipa\": \"</IPA transcription/>\",\n  \"partOfSpeech\": \"<noun/verb/adjective/adverb/preposition/conjunction>\",\n  \"nativeTranslation\": \"<WRITE TRANSLATION IN Spanish HERE>\",\n  \"synonyms\": [\"<German synonym 1>\", \"<German synonym 2>\", \"<German synonym 3>\"],\n  \"examples\": [\n    { \"german\": \"<Natural German sentence>\", \"native\": \"<WRITE TRANSLATION IN Spanish HERE>\" }\n  ],\n  \"grammarNotes\": \"<Brief grammar note in Spanish>\",\n  \"imageQuery\": \"house\"\n}\n\nRules:\n- If input is Spanish, translate to German first.\n- If input is German, keep as-is.\n- You MUST provide the translations in Spanish for \"nativeTranslation\", \"native\", and \"grammarNotes\". DO NOT leave them empty.\n- IF AND ONLY IF \"partOfSpeech\" is \"verb\":\n  1. Include the \"principalParts\" object.\n  2. Include the \"conjugation\" object containing exactly these tenses: \"praesens\", \"perfekt\", \"praeteritum\", \"futur1\", \"imperativ\".\n  3. Conjugations must list all 6 persons (\"ich\", \"du\", \"er_sie_es\", \"wir\", \"ihr\", \"sie_Sie\"), except \"imperativ\" which has (\"du\", \"ihr\", \"Sie\").\n  4. Use the CORRECT auxiliary (haben vs sein) for perfect tenses (e.g., \"ich bin gegangen\", \"ich habe gesehen\").\n  5. Handle separable prefixes correctly (e.g., \"ich sehe an\", \"ich habe angesehen\").\n  6. Return real conjugated forms, not the infinitive repeated.\n- If it is NOT a verb, completely OMIT \"principalParts\" and \"conjugation\".\n- Return ONLY the JSON object, absolutely no markdown or prose."
+    }
+  ],
+  "response_format": {"type": "json_object"}
+}

@@ -1,0 +1,10 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a German dictionary assistant. Analyze the word or phrase: \"verwirrt\"\n\nDetermine if it is German or Spanish. Return ONLY a valid JSON object (no markdown, no explanation):\n\n{\n  \"word\": \"German word (base form)\",\n  \"article\": \"der/die/das for nouns, - for others\",\n  \"plural\": \"plural form for nouns, - for others\",\n  \"ipa\": \"/IPA transcription/\",\n  \"partOfSpeech\": \"noun/verb/adjective/adverb/preposition/conjunction\",\n  \"nativeTranslation\": \"[TRANSLATION IN Spanish]\",\n  \"synonyms\": [\"[German synonym 1]\", \"[German synonym 2]\", \"[German synonym 3]\"],\n  \"examples\": [\n    { \"german\": \"[Natural German sentence]\", \"native\": \"[TRANSLATION IN Spanish]\" }\n  ],\n  \"grammarNotes\": \"[Brief grammar note in Spanish]\",\n  \"imageQuery\": \"If noun: 1-3 word English keyword. If verb: a short, concrete visual description in English of the first example sentence\",\n  \"principalParts\": {\n    \"infinitive\": \"infinitive form\",\n    \"praeteritum\": \"3rd person singular präteritum\",\n    \"partizipII\": \"partizip II\",\n    \"auxiliary\": \"haben or sein\"\n  },\n  \"conjugation\": {\n    \"praesens\": { \"ich\": \"...\", \"du\": \"...\", \"er_sie_es\": \"...\", \"wir\": \"...\", \"ihr\": \"...\", \"sie_Sie\": \"...\" }\n  }\n}\n"
+    }
+  ],
+  "temperature": 0.1
+}

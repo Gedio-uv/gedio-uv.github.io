@@ -37,6 +37,8 @@ export function initGames() {
       else if (gameId === 'wasistdas') startWasIstDas();
       else if (gameId === 'correct') startCorrect();
       else if (gameId === 'hangman') startHangman();
+      else if (gameId === 'sentencetype') startSentenceType();
+      else if (gameId === 'alphabet') startAlphabet();
     });
   });
 
@@ -366,4 +368,200 @@ function startHangman() {
   }
   
   render();
+}
+
+// ================= SENTENCE TYPE =================
+export function startSentenceType() {
+  const sentences = [
+    { text: "Ich gebe ____ Mann das Buch.", missing: "dem", case: "Dativ" },
+    { text: "Wir sehen ____ Hund im Park.", missing: "den", case: "Akkusativ" },
+    { text: "____ Auto ist rot.", missing: "Das", case: "Nominativ" },
+    { text: "Das Haus ____ Vaters ist groß.", missing: "des", case: "Genitiv" },
+    { text: "Sie hilft ____ Kind.", missing: "dem", case: "Dativ" },
+    { text: "Er kauft ____ Blume für sie.", missing: "die", case: "Akkusativ" },
+    { text: "____ Frau singt ein Lied.", missing: "Die", case: "Nominativ" },
+    { text: "Die Farbe ____ Kleides ist schön.", missing: "des", case: "Genitiv" },
+    { text: "Ich danke ____ Freund.", missing: "dem", case: "Dativ" },
+    { text: "Wir brauchen ____ Schlüssel.", missing: "den", case: "Akkusativ" }
+  ].sort(() => 0.5 - Math.random());
+  
+  let currentQ = 0;
+  let score = 0;
+  
+  const questionEl = document.getElementById('sentencetype-question');
+  const optionsEl = document.getElementById('sentencetype-options');
+  const resultEl = document.getElementById('sentencetype-result');
+  const nextBtn = document.getElementById('sentencetype-next');
+  const progressEl = document.getElementById('sentencetype-progress');
+  
+  resultEl.classList.add('hidden');
+  nextBtn.classList.add('hidden');
+  
+  function renderQ() {
+    if (currentQ >= sentences.length) {
+      questionEl.innerHTML = "Spiel beendet!";
+      optionsEl.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+      resultEl.classList.remove('hidden');
+      resultEl.innerHTML = `Dein Score: ${score} / ${sentences.length}`;
+      return;
+    }
+    
+    optionsEl.classList.remove('hidden');
+    resultEl.classList.add('hidden');
+    nextBtn.classList.add('hidden');
+    
+    const s = sentences[currentQ];
+    progressEl.textContent = `Score: ${score}`;
+    questionEl.innerHTML = s.text.replace('____', '<strong>____</strong>');
+    
+    Array.from(optionsEl.children).forEach(btn => {
+      btn.disabled = false;
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.onclick = () => {
+        // Disable all
+        Array.from(optionsEl.children).forEach(b => b.disabled = true);
+        const selected = btn.dataset.case;
+        if (selected === s.case) {
+          btn.style.background = 'rgba(34, 197, 94, 0.2)';
+          btn.style.borderColor = '#22c55e';
+          score++;
+          resultEl.innerHTML = `<span style="color:#22c55e">Richtig!</span> Das fehlende Wort ist "<strong>${s.missing}</strong>".`;
+        } else {
+          btn.style.background = 'rgba(239, 68, 68, 0.2)';
+          btn.style.borderColor = '#ef4444';
+          // Find correct
+          const correctBtn = Array.from(optionsEl.children).find(b => b.dataset.case === s.case);
+          if (correctBtn) {
+            correctBtn.style.background = 'rgba(34, 197, 94, 0.2)';
+            correctBtn.style.borderColor = '#22c55e';
+          }
+          resultEl.innerHTML = `<span style="color:#ef4444">Falsch!</span> Es ist <strong>${s.case}</strong> ("${s.missing}").`;
+        }
+        progressEl.textContent = `Score: ${score}`;
+        resultEl.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+      };
+    });
+  }
+  
+  nextBtn.onclick = () => {
+    currentQ++;
+    renderQ();
+  };
+  
+  renderQ();
+}
+
+// ================= ALPHABET SPIEL =================
+let alphabetInterval = null;
+export function startAlphabet() {
+  const setupEl = document.getElementById('alphabet-setup');
+  const gameplayEl = document.getElementById('alphabet-gameplay');
+  const gameoverEl = document.getElementById('alphabet-gameover');
+  
+  setupEl.classList.remove('hidden');
+  gameplayEl.classList.add('hidden');
+  gameoverEl.classList.add('hidden');
+  
+  if (alphabetInterval) clearInterval(alphabetInterval);
+  
+  document.getElementById('alphabet-start-btn').onclick = () => {
+    const players = parseInt(document.getElementById('alphabet-players').value) || 2;
+    const timeMins = parseInt(document.getElementById('alphabet-time').value) || 5;
+    
+    setupEl.classList.add('hidden');
+    gameplayEl.classList.remove('hidden');
+    
+    playAlphabetGame(players, timeMins);
+  };
+}
+
+function playAlphabetGame(numPlayers, timeMins) {
+  let timeLeft = timeMins * 60;
+  let currentPlayer = 1;
+  
+  const timerEl = document.getElementById('alphabet-timer');
+  const playerEl = document.getElementById('alphabet-player-indicator');
+  const wheelEl = document.getElementById('roulette-wheel');
+  const nextBtn = document.getElementById('alphabet-next-player-btn');
+  
+  let availableLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+  let currentLetter = "?";
+  let isSpinning = false;
+  
+  function updateTimerUI() {
+    const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+    const s = (timeLeft % 60).toString().padStart(2, '0');
+    timerEl.textContent = `${m}:${s}`;
+    if (timeLeft <= 10) timerEl.style.color = '#ef4444';
+    else timerEl.style.color = 'var(--c-accent)';
+  }
+  
+  function endGame() {
+    clearInterval(alphabetInterval);
+    document.getElementById('alphabet-gameplay').classList.add('hidden');
+    const gameoverEl = document.getElementById('alphabet-gameover');
+    gameoverEl.classList.remove('hidden');
+    document.getElementById('alphabet-loser-text').textContent = `Spieler ${currentPlayer} hat verloren!`;
+  }
+  
+  alphabetInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+  
+  async function spinRoulette() {
+    if (availableLetters.length === 0) {
+      availableLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+    }
+    
+    isSpinning = true;
+    nextBtn.disabled = true;
+    wheelEl.style.color = 'rgba(255,255,255,0.5)';
+    
+    // Spin animation effect
+    let spins = 0;
+    const spinInterval = setInterval(() => {
+      wheelEl.textContent = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
+      wheelEl.style.transform = `rotateY(${spins * 45}deg) scale(1.1)`;
+      spins++;
+    }, 50);
+    
+    setTimeout(() => {
+      clearInterval(spinInterval);
+      const idx = Math.floor(Math.random() * availableLetters.length);
+      currentLetter = availableLetters.splice(idx, 1)[0];
+      wheelEl.textContent = currentLetter;
+      wheelEl.style.transform = `rotateY(0deg) scale(1)`;
+      wheelEl.style.color = 'white';
+      
+      isSpinning = false;
+      nextBtn.disabled = false;
+    }, 2000); // 2 seconds spin
+  }
+  
+  nextBtn.onclick = () => {
+    if (isSpinning) return;
+    
+    currentPlayer++;
+    if (currentPlayer > numPlayers) {
+      currentPlayer = 1;
+      // Round complete, spin for a new letter
+      spinRoulette();
+    }
+    playerEl.textContent = `Spieler ${currentPlayer}`;
+  };
+  
+  document.getElementById('alphabet-restart-btn').onclick = () => {
+    startAlphabet();
+  };
+  
+  updateTimerUI();
+  playerEl.textContent = `Spieler 1`;
+  spinRoulette();
 }

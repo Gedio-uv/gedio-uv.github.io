@@ -238,9 +238,13 @@ function buildWordPrompt(word, nativeLangName, userLevel) {
   const tensesAdvanced = '"praesens", "perfekt", "praeteritum", "plusquamperfekt", "futur1", "futur2", "konjunktiv1", "konjunktiv2", "imperativ"';
   const requestedTenses = userLevel === 'advanced' ? tensesAdvanced : tensesBeginner;
 
-  return `You are a German dictionary assistant. Analyze the word or phrase: "${word}"
+  return `You are a bilingual German dictionary assistant. The user input is: "${word}"
 
-Determine its base form and translate it to ${nativeLangName}. Return ONLY a valid JSON object. Do not include markdown or explanations.
+1. If the input is NOT German, identify the primary German translation for it.
+2. Perform a detailed dictionary analysis on the GERMAN word.
+3. Provide translations and explanations in ${nativeLangName}.
+
+Return ONLY a valid JSON object based on the GERMAN word. Do not include markdown or explanations.
 
 {
   "word": "German word (base form)",

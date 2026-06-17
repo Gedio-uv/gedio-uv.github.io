@@ -1,0 +1,10 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are a German dictionary assistant. Analyze the word or phrase: \"Haus\"\n\nDetermine if it is German or Simplified Chinese. Return ONLY a valid JSON object (no markdown, no explanation):\n\n{\n  \"word\": \"<German word (base form)>\",\n  \"article\": \"<der/die/das for nouns, - for others>\",\n  \"plural\": \"<plural form for nouns, - for others>\",\n  \"ipa\": \"</IPA transcription/>\",\n  \"partOfSpeech\": \"<noun/verb/adjective/adverb/preposition/conjunction>\",\n  \"nativeTranslation\": \"<WRITE TRANSLATION IN CHINESE CHARACTERS (中文) HERE>\",\n  \"synonyms\": [\"<German synonym 1>\", \"<German synonym 2>\", \"<German synonym 3>\"],\n  \"examples\": [\n    { \"german\": \"<Natural German sentence>\", \"native\": \"<WRITE TRANSLATION IN CHINESE CHARACTERS (中文) HERE>\" }\n  ],\n  \"grammarNotes\": \"<Brief grammar note in Chinese characters>\",\n  \"imageQuery\": \"house\"\n}\n\nRules:\n- If input is Simplified Chinese, translate to German first.\n- If input is German, keep as-is.\n- You MUST output the actual Chinese characters (e.g., 房子) for the translation fields. Do not leave them empty!\n- Return ONLY the JSON object, absolutely no markdown or prose."
+    }
+  ],
+  "response_format": {"type": "json_object"}
+}

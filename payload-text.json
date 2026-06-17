@@ -1,0 +1,9 @@
+{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Translate the German word 'Haus' to Simplified Chinese."
+    }
+  ]
+}
