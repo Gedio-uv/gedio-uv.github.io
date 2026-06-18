@@ -359,6 +359,7 @@ body.nav-open .nav-mobile-toggle span:nth-child(2) { transform: translateY(-3.5p
 
 .cs-img-full {
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 12px;
   margin: 32px 0;
@@ -366,6 +367,13 @@ body.nav-open .nav-mobile-toggle span:nth-child(2) { transform: translateY(-3.5p
 }
 
 .cs-img-full:hover { transform: scale(1.008); }
+
+/* Phone screenshots used as full-width images — cap at readable size */
+.cs-img-full.img-phone-full {
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .cs-img-dark {
   width: 100%;
@@ -619,11 +627,33 @@ footer {
    CASE STUDY — SHARED PAGE STRUCTURE
    ============================================ */
 
+/* Default hero image — full-width, auto height (landscape images like incode ic1, ytem y1) */
 .cs-hero-img {
   width: 100%;
   display: block;
   height: auto;
 }
+
+/* Speaker hero (sp1.png) — two phones side by side, needs contained width + centered */
+.cs-hero-img.hero-contained {
+  max-width: 860px;
+  margin: 48px auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Other work project images — phone screenshots, cap height so they don't tower over text */
+.project-img-phone {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  margin: 0 auto;
+  transition: transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.project-img-phone:hover { transform: scale(1.02); }
 
 .cs-content {
   max-width: 1100px;
@@ -730,11 +760,21 @@ footer {
   margin-bottom: 16px;
 }
 
-.decision-img,
-.img-phone {
+/* Landscape/wide images — full column width */
+.decision-img {
   width: 100%;
   display: block;
   border-radius: 12px;
+}
+
+/* Tall phone screenshots — cap height, center in column */
+.img-phone {
+  max-height: 560px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  border-radius: 12px;
+  margin: 0 auto;
 }
 
 /* ============================================
@@ -746,12 +786,14 @@ footer {
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   margin-top: 32px;
+  align-items: start;
 }
 
 .flow-images img {
   width: 100%;
   display: block;
   border-radius: 8px;
+  height: auto;
 }
 
 /* ============================================
@@ -763,12 +805,14 @@ footer {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-top: 24px;
+  align-items: start;
 }
 
 .img-grid-3 img {
   width: 100%;
   display: block;
   border-radius: 8px;
+  height: auto;
 }
 
 /* ============================================
@@ -839,9 +883,10 @@ footer {
 .motion-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  padding: 2px;
-  background: var(--light-gray);
+  gap: 3px;
+  background: #1a1a1a;
+  padding: 3px;
+  margin-top: 0;
 }
 
 .video-card {
