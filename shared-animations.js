@@ -95,16 +95,24 @@
   const counterObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('[data-target]').forEach(el => {
-        const target = parseInt(el.dataset.target, 10);
-        const suffix = el.dataset.suffix || '';
-        const duration = 1300;
+      entry.target.querySelectorAll('.animate-number').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals) || 0;
+        const duration = 1500; // 1.5s
         const startTime = performance.now();
+        
         function update(now) {
           const progress = Math.min((now - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const val = Math.round(eased * target);
-          el.innerHTML = val + (suffix ? '<span>' + suffix + '</span>' : '');
+          const eased = 1 - Math.pow(1 - progress, 3); // cubic ease out
+          const val = eased * target;
+          
+          if (decimals > 0) {
+            el.textContent = val.toFixed(decimals);
+          } else {
+            // Add commas for large numbers like 770,452
+            el.textContent = Math.round(val).toLocaleString('en-US');
+          }
+          
           if (progress < 1) requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
@@ -113,6 +121,6 @@
     });
   }, { threshold: 0.3 });
 
-  document.querySelectorAll('.stats, .stats-grid, #stats').forEach(el => counterObserver.observe(el));
+  document.querySelectorAll('.stats, .stats-grid, #stats, .impact-dashboard').forEach(el => counterObserver.observe(el));
 
 })();
