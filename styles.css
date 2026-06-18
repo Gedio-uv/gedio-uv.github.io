@@ -627,11 +627,16 @@ footer {
    CASE STUDY — SHARED PAGE STRUCTURE
    ============================================ */
 
-/* Default hero image — full-width, auto height (landscape images like incode ic1, ytem y1) */
+/* Default hero image — capped width so it stays proportional and sharp */
 .cs-hero-img {
-  width: 100%;
   display: block;
+  width: 100%;
+  max-width: 1100px;
   height: auto;
+  margin: 40px auto 0;
+  border-radius: 12px;
+  padding: 0 48px;
+  box-sizing: border-box;
 }
 
 /* Speaker hero (sp1.png) — two phones side by side, needs contained width + centered */
