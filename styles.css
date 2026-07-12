@@ -1948,11 +1948,11 @@ body.dark-theme .btn-pill:hover {
 
 .glass-title {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(5rem, 20vw, 33vh);
   font-weight: 600;
   letter-spacing: -0.04em;
-  line-height: 1.03;
-  color: #050505; /* Changed to dark for contrast */
+  line-height: 0.9;
+  color: #ffffff;
   margin-bottom: 24px;
 }
 
