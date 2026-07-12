@@ -647,7 +647,97 @@
       nav { padding: 16px 20px; }
       nav.scrolled { padding: 14px 20px; }
     }
-  </style>
+  .waves-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #020202;
+  overflow: hidden;
+  z-index: 0;
+  /* Blur the blobs heavily to make them blend into light shapes */
+  filter: blur(40px) saturate(130%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  animation: blobFloat 20s infinite linear;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+/* Irregular shapes and continuous movement */
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  33%  { transform: translate(25vw, -15vh) scale(1.3) rotate(120deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+  66%  { transform: translate(-15vw, 15vh) scale(0.8) rotate(240deg); border-radius: 30% 70% 50% 50% / 60% 40% 70% 30%; }
+  100% { transform: translate(0, 0) scale(1) rotate(360deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+}
+
+.blob-1 {
+  top: 10%;
+  left: 10%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, #0077ff, #00ffff);
+  animation-duration: 24s;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  top: 30%;
+  right: -5%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, #ffcc00, #ff4400);
+  animation-duration: 29s;
+  animation-delay: -5s;
+  animation-direction: reverse;
+}
+
+.blob-3 {
+  bottom: -15%;
+  left: 20%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, #0033ff, #00aaff);
+  animation-duration: 21s;
+  animation-delay: -10s;
+}
+
+.blob-4 {
+  top: -10%;
+  right: 20%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, #ffaa00, #00ffaa);
+  animation-duration: 26s;
+  animation-delay: -15s;
+  animation-direction: reverse;
+}
+
+/* Glass effect layer */
+.glass-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Stronger 3D fluted glass shading */
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.95) 0px,
+    rgba(0, 0, 0, 0.2) 6px,
+    rgba(0, 0, 0, 0) 12px,
+    rgba(0, 0, 0, 0.2) 18px,
+    rgba(0, 0, 0, 0.95) 24px
+  );
+  backdrop-filter: blur(8px) contrast(1.5) brightness(1.2);
+  -webkit-backdrop-filter: blur(8px) contrast(1.5) brightness(1.2);
+
+</style>
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
@@ -821,11 +911,11 @@
           <div class="blob blob-3"></div>
           <div class="blob blob-4"></div>
         </div>
-        <div class="glass-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(120px); -webkit-backdrop-filter: blur(120px);"></div>
+        <div class="glass-overlay"></div>
         
         <!-- Text Content -->
         <div style="position: relative; z-index: 2; width: 100%; text-align: center;">
-          <h2 style="font-family: 'Inter', sans-serif; font-size: clamp(4rem, 15vw, 25vh); font-weight: 600; letter-spacing: -0.04em; line-height: 0.9; color: #ffffff; margin: 0;">Motion</h2>
+          <h2 style="font-family: 'Inter', sans-serif; font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 600; letter-spacing: -0.04em; line-height: 0.9; color: #ffffff; margin: 0;">Motion</h2>
         </div>
 
       </a>
