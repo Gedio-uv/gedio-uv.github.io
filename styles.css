@@ -1954,6 +1954,7 @@ body.dark-theme .btn-pill:hover {
   line-height: 0.9;
   color: #ffffff;
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .glass-desc {
