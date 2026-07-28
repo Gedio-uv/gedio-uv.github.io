@@ -8,7 +8,7 @@ import { saveProgress } from '../../../lib/supabaseClient';
 
 export default function ListeningModule() {
   const router = useRouter();
-  const { mode, globalExamData, setGlobalExamData } = useExam();
+  const { mode, examData: globalExamData, setExamData: setGlobalExamData } = useExam();
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -235,14 +235,14 @@ export default function GrammarModule() {
                           const isCorrect = isSubmitted && mode === 'practice' && blank.correctOptionIndex === oIdx;
                           const isWrongSelection = isSubmitted && mode === 'practice' && isSelected && answers[blank.id] !== blank.correctOptionIndex;
                           
-                          let btnStyle = {
-                            padding: '10px 16px',
+                          const btnStyle: React.CSSProperties = {
+                            padding: '12px 16px',
                             borderRadius: '6px',
                             border: '1px solid var(--border-color)',
                             background: isSelected ? 'var(--text-primary)' : 'transparent',
                             color: isSelected ? 'var(--bg-primary)' : 'var(--text-primary)',
                             cursor: isSubmitted ? 'default' : 'pointer',
-                            textAlign: 'left' as const,
+                            textAlign: 'left',
                             transition: 'all 0.2s ease',
                             display: 'flex',
                             gap: '12px',

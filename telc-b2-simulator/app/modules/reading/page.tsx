@@ -205,7 +205,7 @@ export default function ReadingModule() {
                               const isCorrect = isSubmitted && mode === 'practice' && text.correctHeadlineIndex === hIdx;
                               const isWrongSelection = isSubmitted && mode === 'practice' && isSelected && answers[idx] !== text.correctHeadlineIndex;
                               
-                              let btnStyle = {
+                              const btnStyle: React.CSSProperties = {
                                 padding: '8px 16px',
                                 borderRadius: '6px',
                                 border: '1px solid var(--border-color)',
