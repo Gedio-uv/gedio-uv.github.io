@@ -30,13 +30,27 @@ export default function Home() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const handleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
+  const [email, setEmail] = useState('');
+  const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [loginError, setLoginError] = useState('');
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+    if (!email) return;
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
       options: {
-        redirectTo: window.location.origin
+        emailRedirectTo: window.location.origin
       }
     });
+
+    if (error) {
+      setLoginError(error.message);
+    } else {
+      setMagicLinkSent(true);
+    }
   };
 
   const handleLogout = async () => {
@@ -79,9 +93,26 @@ export default function Home() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
             Melden Sie sich an, um Ihren Fortschritt zu speichern.
           </p>
-          <button onClick={handleLogin} className="primary-button" style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}>
-            Mit Google anmelden
-          </button>
+          {magicLinkSent ? (
+            <div style={{ background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgb(34, 197, 94)', color: 'rgb(34, 197, 94)', padding: '16px', borderRadius: '8px' }}>
+              Wir haben Ihnen einen Anmeldelink per E-Mail gesendet. Bitte überprüfen Sie Ihren Posteingang.
+            </div>
+          ) : (
+            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <input 
+                type="email" 
+                placeholder="Ihre E-Mail-Adresse" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                style={{ padding: '16px', fontSize: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)', width: '100%', boxSizing: 'border-box' }}
+              />
+              {loginError && <p style={{ color: 'rgb(239, 68, 68)', fontSize: '0.9rem', textAlign: 'left' }}>{loginError}</p>}
+              <button type="submit" className="primary-button" style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}>
+                Mit E-Mail anmelden
+              </button>
+            </form>
+          )}
         </div>
       </div>
     );
