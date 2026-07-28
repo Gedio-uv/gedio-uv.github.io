@@ -1,0 +1,74 @@
+.moduleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+  transition: color var(--transition-fast);
+}
+
+.backBtn:hover {
+  color: var(--text-primary);
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  font-family: var(--font-main);
+  font-size: 14px;
+}
+
+.timer span {
+  color: var(--text-secondary);
+}
+
+.timer strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.moduleContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.instructions {
+  padding: 24px;
+}
+
+.instructions h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.instructions p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.mt4 {
+  margin-top: 24px;
+}
+
+.emptyState {
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}

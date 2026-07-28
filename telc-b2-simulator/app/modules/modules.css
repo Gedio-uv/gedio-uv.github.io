@@ -1,0 +1,67 @@
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.back-btn:hover {
+  color: var(--text-primary);
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+.timer span {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.timer strong {
+  color: var(--warning);
+}
+
+.module-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.instructions {
+  padding: 2rem;
+}
+
+.instructions p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.empty-state {
+  border: 1px dashed var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 4rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.2);
+}
