@@ -31,25 +31,35 @@ export default function Home() {
   }, []);
 
   const [email, setEmail] = useState('');
-  const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
-    if (!email) return;
+    if (!email || !password) return;
 
-    const { error } = await supabase.auth.signInWithOtp({
+    // Try to login
+    let { error } = await supabase.auth.signInWithPassword({
       email,
-      options: {
-        emailRedirectTo: window.location.origin
-      }
+      password,
     });
+
+    // If login fails because user doesn't exist, try signing them up
+    if (error && error.message.includes('Invalid login credentials')) {
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      
+      if (signUpError) {
+        setLoginError(signUpError.message);
+      }
+      return;
+    }
 
     if (error) {
       setLoginError(error.message);
-    } else {
-      setMagicLinkSent(true);
     }
   };
 
@@ -93,26 +103,29 @@ export default function Home() {
           <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
             Melden Sie sich an, um Ihren Fortschritt zu speichern.
           </p>
-          {magicLinkSent ? (
-            <div style={{ background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgb(34, 197, 94)', color: 'rgb(34, 197, 94)', padding: '16px', borderRadius: '8px' }}>
-              Wir haben Ihnen einen Anmeldelink per E-Mail gesendet. Bitte überprüfen Sie Ihren Posteingang.
-            </div>
-          ) : (
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <input 
-                type="email" 
-                placeholder="Ihre E-Mail-Adresse" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{ padding: '16px', fontSize: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)', width: '100%', boxSizing: 'border-box' }}
-              />
-              {loginError && <p style={{ color: 'rgb(239, 68, 68)', fontSize: '0.9rem', textAlign: 'left' }}>{loginError}</p>}
-              <button type="submit" className="primary-button" style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}>
-                Mit E-Mail anmelden
-              </button>
-            </form>
-          )}
+          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <input 
+              type="email" 
+              placeholder="Ihre E-Mail-Adresse" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={{ padding: '16px', fontSize: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)', width: '100%', boxSizing: 'border-box' }}
+            />
+            <input 
+              type="password" 
+              placeholder="Passwort" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
+              style={{ padding: '16px', fontSize: '1rem', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)', width: '100%', boxSizing: 'border-box' }}
+            />
+            {loginError && <p style={{ color: 'rgb(239, 68, 68)', fontSize: '0.9rem', textAlign: 'left' }}>{loginError}</p>}
+            <button type="submit" className="primary-button" style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}>
+              Anmelden / Registrieren
+            </button>
+          </form>
         </div>
       </div>
     );
