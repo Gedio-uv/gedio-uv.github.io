@@ -25,10 +25,8 @@
     <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="incode.html" class="active">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="other.html">Other work</a></li>
-      <li><a href="motion.html">Motion</a></li>
+            <li><a href="ytem.html">Ytem</a></li>
+            <li><a href="motion.html">Motion</a></li>
       <li><a href="ai-projects.html">AI Projects</a></li>
       <li class="nav-divider"></li>
       <li><a href="about.html">Approach</a></li>
@@ -59,10 +57,19 @@
         <div class="cs-meta-value">PM Poojit Sharma</div>
       </div>
     </div>
+<!-- TABS UI -->
+  <div class="tabs-container" style="display: flex; gap: 16px; margin: 32px 0 64px 0; width: 100%; justify-content: flex-start;">
+    <button class="tab-btn active" onclick="switchTab('tab-case-study', this)" style="background: #111; color: #fff; border: 1px solid #111; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: all 0.2s ease;">Case Study</button>
+    <button class="tab-btn" onclick="switchTab('tab-design-process', this)" style="background: transparent; color: #666; border: 1px solid transparent; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: all 0.2s ease;">Design Process</button>
+  </div>
   </header>
 
   <!-- HERO IMAGE -->
-  <img src="images/ic1.png" alt="Incode Fan ID — identity verification flow" class="cs-hero-img">
+  
+  
+  
+  <div id="tab-case-study" class="tab-content" style="display: block;">
+<img src="images/ic1.png" alt="Incode Fan ID — identity verification flow" class="cs-hero-img">
 
   <!-- CONTENT -->
   <div class="cs-content">
@@ -277,11 +284,94 @@
 
   </div>
 
-  <!-- CTA -->
+  
+  </div>
+  
+  <div id="tab-design-process" class="tab-content" style="display: none;">
+
+  <!-- TAB 2: DESIGN PROCESS -->
+  <div class="cs-content">
+    
+    <!-- TIMELINE DIAGRAM & TEXT BLOCKS -->
+    <section class="cs-section reveal">
+      <img src="images/incode_design_process_timeline.svg" alt="Design process timeline" class="diagram-img" style="margin-bottom: 48px; width: 100%;">
+      <h3>The brief</h3>
+      <p>The request came in on a single afternoon, triggered by a security incident at a Liga MX match. It went to Poojit Sharma first, and the brief was blunt: 'We need a system where the fan can verify their identity, and FMF can confirm they are who they say they are.' No spec, no wireframe reference — just the problem, stated in one sentence, with two weeks to build it.</p>
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>First attempt, first mistake</h3>
+      <p>My first instinct was to collect as much user data as possible during onboarding — the more we knew, the safer the system, or so I assumed. It was wrong. Beyond adding real time and stress to the user's onboarding, most of what we collected was never used and got discarded later. This became the first real lesson of the project: more data is not more security.</p>
+      
+      <img src="images/early over-collection concept.png" alt="Hand-drawn draft — early over-collection concept" style="margin: 48px 0 16px 0; width: 100%; border-radius: 12px;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>The constraint</h3>
+      <p>Two weeks meant external identity verification was severely limited — there wasn't time to integrate deep third-party checks. Poojit's direct line to FMF (Mexico's Football Federation) became the project's lifeline: he fed ideation and information in real time as I designed against a moving brief.</p>
+      
+      <div style="margin: 48px 0 16px 0; display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div style="display: flex; gap: 16px; width: 100%; justify-content: space-between;">
+          <img src="images/ic3a.png" alt="Take a selfie" style="width: 32%; object-fit: contain;">
+          <img src="images/ic3c.png" alt="Scan your ID" style="width: 32%; object-fit: contain;">
+          <img src="images/ic3f.png" alt="Successfully processed" style="width: 32%; object-fit: contain;">
+        </div>
+        <p style="margin-top: 16px; font-size: 0.85rem; color: #666; text-align: center;">The onboarding flow that shipped.</p>
+      </div>
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>Field research, after beta</h3>
+      <p>Once the beta was live, research shifted from assumption to evidence: on-the-ground observation of user behavior, friction points, onboarding time, and drop-off — all pulled from the operator dashboard backend and heatmap data. This is where the real signal started.</p>
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>Stripping down</h3>
+      <p>The research showed onboarding took too long because of that extra data collection — friction and motivation loss, later confirmed against marketing's engagement metrics. But fixing it wasn't linear. It was like building a tower out of Legos: technically the structure held with just the basics, but without enough body, it broke for edge cases. One version removed all tutorials entirely, betting users would find the flow intuitively — the curse of knowledge: because I understood it, I assumed everyone would. That version failed. There were several other variants tested along the way that didn't survive.</p>
+      
+      <img src="images/incode_onboarding_flow_final.svg" alt="Final onboarding flow structure" class="diagram-img" style="margin: 48px 0 16px 0; width: 100%;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>Simplifying the dashboard</h3>
+      <p>The dashboard I inherited surfaced every signal from every onboarding report at once. More information didn't mean more clarity — for live verification decisions, it meant the opposite. Working with Poojit, I restructured it around a single principle: for real-time verification, less is more.</p>
+      
+      <img src="images/incode_dashboard_before_after.svg" alt="Operator dashboard before and after simplification" class="diagram-img" style="margin: 48px 0 16px 0; width: 100%;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>The rhythm with Poojit</h3>
+      <p>Iteration was constant — Poojit was my calibration point throughout. We'd revisit the onboarding flow, test different ways to make it more direct, and rarely disagreed hard enough to need resolving; we worked in enough sync that we consistently landed on the same conclusions.</p>
+      <p style="margin-top: 16px;">I also built Incode's functional motion practice from scratch during this period — see the <a href="motion.html" style="color: var(--white); text-decoration: underline;">motion work</a>.</p>
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>Getting the brand right</h3>
+      <p>FMF didn't have a clear point of view on branding. Early color choices clashed with existing football club identities; when FMF proposed their own, the palettes lacked coherence. After roughly three rounds of revision, we landed on Incode's own brand colors from that period — the pragmatic choice that actually worked.</p>
+      
+      <img src="images/brand color iterations.png" alt="Brand color iterations" style="margin: 32px 0 32px 0; width: 100%; border-radius: 12px;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>Field execution</h3>
+      <p>Two problems surfaced only once we were live, neither of them a design problem. The first was bandwidth: stadium entry points couldn't handle verification traffic, resolved by IT running dedicated internet lines directly to the entrances to speed up assisted, on-site registration. The second was onboarding completion: we split registration into two parts — the essential minimum required to verify identity, and a second, non-critical layer of information. Marketing built an incentive program around completing the second part, which worked, but only temporarily, and mainly with the 16–40 age group, per marketing's data.</p>
+      
+      <img src="images/on-site assisted verification process.png" alt="Hand-drawn draft — on-site assisted verification process" style="margin: 48px 0 16px 0; width: 100%; border-radius: 12px;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>What I actually owned</h3>
+      <p>To be specific about scope: I directly designed the fan-facing web app, the onboarding flow, and the FanID wallet — including its extra layer for face-based payments inside stadiums and linked services. The operator dashboard was Incode's existing product; my contribution there was collaborating with Poojit to simplify it for live event use, not designing it from the ground up.</p>
+    </section>
+
+  </div>
+
+  </div>
+<!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
       <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
-      <p>I'm currently open to Senior Product Designer opportunities in fintech, B2B SaaS, and digital identity.</p>
+      <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
@@ -295,5 +385,28 @@
 
   <script src="shared-animations.js?v=3"></script>
 
+
+<script>
+  function switchTab(tabId, btnElement) {
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    document.getElementById(tabId).style.display = 'block';
+    
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.style.background = 'transparent';
+      btn.style.color = '#666';
+      btn.style.border = '1px solid transparent';
+      btn.classList.remove('active');
+    });
+    
+    btnElement.style.background = '#111';
+    btnElement.style.color = '#fff';
+    btnElement.style.border = '1px solid #111';
+    btnElement.classList.add('active');
+    
+    // Re-trigger scroll reveal if needed
+    window.dispatchEvent(new Event('scroll'));
+  }
+</script>
 </body>
+
 </html>
