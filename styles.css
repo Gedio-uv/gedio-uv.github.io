@@ -2118,7 +2118,7 @@ body.dark-theme .btn-pill:hover {
   align-items: center;
 }
 .grid-70 {
-  max-width: 70%;
+  max-width: 840px;
   margin: 0 auto;
 }
 
