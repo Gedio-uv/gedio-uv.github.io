@@ -61,7 +61,10 @@
   </header>
 
   <!-- HERO IMAGE -->
-  <img src="images/sp1.png" alt="Speaker — community connection platform" class="cs-hero-img hero-contained">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; margin: 0 auto 64px auto;">
+    <img src="images/sp4c.png" alt="Speaker UI" style="width: 100%; border-radius: 16px;">
+    <img src="images/sp5.png" alt="Speaker UI Navigation" style="width: 100%; border-radius: 16px;">
+  </div>
 
   <!-- CONTENT -->
   <div class="cs-content">
@@ -153,10 +156,10 @@
       <span class="decision-number">Design Decision 02</span>
       <h3>Space as a navigation model.</h3>
       <p>The floor plan visualization on the main screen gave residents immediate spatial orientation within their building — something no competing product was doing at the time. Navigation organized by floor and interest group made the community feel tangible, not abstract.</p>
-      <div class="img-grid-3 reveal-stagger" style="margin-bottom: 8px;">
-        <img src="images/SP-Floor_Overview.png" alt="Floor Overview">
-        <img src="images/SP-Parking_Map.png" alt="Parking Map">
-        <img src="images/SP-Parking_Map__iPad_.png" alt="Parking Map iPad">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: 1fr 1fr 1.8fr; gap: 24px; margin-bottom: 8px; align-items: start;">
+        <img src="images/SP-Floor_Overview.png" alt="Floor Overview" style="width: 100%; border-radius: 12px;">
+        <img src="images/SP-Parking_Map.png" alt="Parking Map" style="width: 100%; border-radius: 12px;">
+        <img src="images/SP-Parking_Map__iPad_.png" alt="Parking Map iPad" style="width: 100%; border-radius: 12px;">
       </div>
       <div class="cs-caption">Navigation by floor and by physical space — parking included.</div>
     </div>
@@ -164,21 +167,25 @@
     <div class="decision reveal">
       <h3>Booking, without friction</h3>
       <p>Booking a shared space — a padel court, an amenity, a guest parking spot — had to feel as fast on a resident's phone as on the building's iPad kiosk. I designed both surfaces from the same system.</p>
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px;">
-        <img src="images/SP-Book_Padel_Court.png" alt="Book Padel Court" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Book_Padel_Court__iPad_.png" alt="Book Padel Court iPad" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Booking_Confirmation.png" alt="Booking Confirmation" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Select_Amenity.png" alt="Select Amenity" style="width: 100%; border-radius: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 24px;">
+        <div style="display: grid; grid-template-columns: 1fr 1.8fr; gap: 24px; align-items: start;">
+          <img src="images/SP-Book_Padel_Court.png" alt="Book Padel Court" style="width: 100%; border-radius: 12px;">
+          <img src="images/SP-Book_Padel_Court__iPad_.png" alt="Book Padel Court iPad" style="width: 100%; border-radius: 12px;">
+        </div>
+        <div style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 24px; align-items: start;">
+          <img src="images/SP-Booking_Confirmation.png" alt="Booking Confirmation" style="width: 100%; border-radius: 12px;">
+          <img src="images/SP-Select_Amenity.png" alt="Select Amenity" style="width: 100%; border-radius: 12px;">
+        </div>
       </div>
     </div>
 
     <div class="decision reveal">
       <h3>Guest access, handled</h3>
       <p>Guests needed a way in that didn't compromise resident privacy — reserved spots, scannable codes, and clear time windows, without exposing personal contact information.</p>
-      <div class="img-grid-3 reveal-stagger">
-        <img src="images/SP-Reserve_Parking.png" alt="Reserve Parking">
-        <img src="images/SP-Parking_Confirmation.png" alt="Parking Confirmation">
-        <img src="images/SP-Parking_Confirmation__iPad_.png" alt="Parking Confirmation iPad">
+      <div class="reveal-stagger" style="display: grid; grid-template-columns: 1fr 1fr 1.8fr; gap: 24px; align-items: start;">
+        <img src="images/SP-Reserve_Parking.png" alt="Reserve Parking" style="width: 100%; border-radius: 12px;">
+        <img src="images/SP-Parking_Confirmation.png" alt="Parking Confirmation" style="width: 100%; border-radius: 12px;">
+        <img src="images/SP-Parking_Confirmation__iPad_.png" alt="Parking Confirmation iPad" style="width: 100%; border-radius: 12px;">
       </div>
     </div>
 
