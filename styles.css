@@ -2090,3 +2090,44 @@ body.dark-theme .btn-pill:hover {
     padding: 140px 24px 80px;
   }
 }
+
+/* Custom speaker layouts */
+.grid-phone-ipad {
+  display: grid;
+  grid-template-columns: 1fr 2.89fr;
+  gap: 24px;
+  align-items: center;
+}
+.grid-ipad-phone {
+  display: grid;
+  grid-template-columns: 2.89fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.grid-2-phones-centered {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 51.4%;
+  margin: 0 auto;
+}
+.grid-2-phones-ipad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2.89fr;
+  gap: 24px;
+  align-items: center;
+}
+.grid-70 {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .grid-phone-ipad, .grid-ipad-phone, .grid-2-phones-centered, .grid-2-phones-ipad {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .grid-70 {
+    max-width: 100%;
+  }
+}
