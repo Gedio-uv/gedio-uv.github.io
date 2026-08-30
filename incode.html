@@ -270,6 +270,10 @@
       <h3>Status-first hierarchy for operators.</h3>
       <p>The operator dashboard had to support fast decision-making under real event-day pressure. I structured information in a status-first hierarchy — critical verification states immediately visible, evidence organized to support review without hesitation. Exception handling was designed to resolve edge cases without disrupting access control flow.</p>
 
+      <h4>The three-tier verification system</h4>
+      <p>Each score range mapped directly to a different operational protocol. Green (85–100%) meant immediate entry — minor capture issues with no security implications. Orange (70–84%) triggered an automatic kiosk redirect to complete the capture before entry. Red (69% and below) activated a security protocol — and critically, the score was never visible to the fan. A user with falsified documents saw only a generic message directing them to staff. The design had to protect the system's integrity without revealing the reason for rejection.</p>
+      <img src="images/Verification_decision_system.svg" alt="Three-tier verification decision system" style="width:100%; display:block; margin:32px 0; border-radius:8px;">
+
       <img src="images/ic4.png" alt="Operator dashboard — status-first hierarchy" class="cs-img-full">
     </div>
 
@@ -327,6 +331,11 @@
     </section>
 
     <section class="cs-section reveal">
+      <h3>Validation in the field</h3>
+      <p>During the first betas I participated directly as an on-site onboarding assistant — helping fans complete registration at the stadiums and observing their behavior with the app in real time. This gave me signal that no heatmap could: I saw exactly where people hesitated, where they abandoned, and why. Combined with drop-off reports coming from FMF through Poojit, this led to the most impactful design change of the project — reducing the onboarding data collection to the essential minimum. The extra fields weren't adding security. They were adding friction and killing completion rates.</p>
+    </section>
+
+    <section class="cs-section reveal">
       <h3>Stripping down</h3>
       <p>The research showed onboarding took too long because of that extra data collection — friction and motivation loss, later confirmed against marketing's engagement metrics. But fixing it wasn't linear. It was like building a tower out of Legos: technically the structure held with just the basics, but without enough body, it broke for edge cases. One version removed all tutorials entirely, betting users would find the flow intuitively — the curse of knowledge: because I understood it, I assumed everyone would. That version failed. There were several other variants tested along the way that didn't survive.</p>
       
@@ -338,6 +347,12 @@
       <p>The dashboard I inherited surfaced every signal from every onboarding report at once. More information didn't mean more clarity — for live verification decisions, it meant the opposite. Working with Poojit, I restructured it around a single principle: for real-time verification, less is more.</p>
       
       <img src="images/incode_dashboard_before_after.svg" alt="Operator dashboard before and after simplification" class="diagram-img" style="margin: 48px 0 16px 0; width: 100%;">
+    </section>
+
+    <section class="cs-section reveal">
+      <h3>The verification system</h3>
+      <p>The operator dashboard showed every fan verification in real time across all active gates simultaneously — identity check, score, and outcome. The three-tier color system was the core decision layer: green for direct entry, orange for assisted kiosk redirect, red for security protocol. When face match failed, it was treated as a spoofing attempt and routed directly to red — the same protocol as falsified documents or flagged users. The fan never saw their score or the reason for any redirect. This was a deliberate security decision: revealing the rejection reason would allow bad actors to argue or manipulate the situation at the gate.</p>
+      <img src="images/Operator.svg" alt="Operator decision flow — gate verification process" style="width:100%; display:block; margin:32px 0; border-radius:8px;">
     </section>
 
     <section class="cs-section reveal">
