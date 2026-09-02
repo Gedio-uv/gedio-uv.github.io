@@ -1,29 +1,5 @@
 <svg width="680" height="254" viewBox="0 0 680 254" fill="none" xmlns="http://www.w3.org/2000/svg">
-<style>
-  /* Connectors (paths with stroke and no fill) */
-  path[stroke]:not([fill]), path[stroke][fill="none"], line, polyline {
-    stroke-dasharray: 2500;
-    stroke-dashoffset: 2500;
-    animation: drawLine 2s ease-out forwards;
-  }
-  
-  /* Elements that fade in */
-  rect, circle, image, text, path[fill]:not([fill="none"]) {
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 1.2s;
-  }
-  
-  /* Ensure parent containers don't hide everything by default if we target them by accident */
-  g { opacity: 1; }
 
-  @keyframes drawLine {
-    to { stroke-dashoffset: 0; }
-  }
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-</style>
 <path d="M154 82H169" stroke="#C5C5C5" stroke-width="1.5"/>
 <path d="M265 82H280" stroke="#C5C5C5" stroke-width="1.5"/>
 <path d="M384 82H399" stroke="#C5C5C5" stroke-width="1.5"/>
