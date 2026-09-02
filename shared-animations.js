@@ -123,4 +123,24 @@
 
   document.querySelectorAll('.stats, .stats-grid, #stats, .impact-dashboard').forEach(el => counterObserver.observe(el));
 
+
+  // ── SVG LAZY LOAD & ANIMATE ──
+  const svgObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.getAttribute('data-animated-svg');
+        if (src) {
+          // Add a small delay for smooth scrolling before triggering the heavy SVG load
+          setTimeout(() => {
+            img.setAttribute('src', src + '?v=' + Date.now()); // Date.now forces animation restart
+          }, 150);
+          svgObserver.unobserve(img);
+        }
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('img[data-animated-svg]').forEach(el => svgObserver.observe(el));
+
 })();
