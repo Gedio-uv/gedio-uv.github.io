@@ -5,46 +5,55 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ytem — Guido Usnayo Vidaurre</title>
+  <meta name="description" content="Case study: Ytem, an inventory management app for retail store operators, connected to a handheld RFID scanner and designed for the shop floor.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
 
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html" class="active">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html" class="active" aria-current="page">Ytem</a></li>
+        <li><a href="ai-projects.html">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
 
   <!-- HEADER -->
-  <header class="cs-header">
+  <div class="cs-header">
     <span class="cs-label">Case Study 03</span>
     <h1 class="cs-title">Ytem</h1>
     <p class="cs-subtitle">Inventory management system for retail store operators — designed for the shop floor, not the office.</p>
     <div class="cs-meta">
       <div>
         <div class="cs-meta-label">Role</div>
-        <div class="cs-meta-value">UX & UI Designer</div>
+        <div class="cs-meta-value">UX &amp; UI Designer</div>
       </div>
+      <!-- TODO(Guido): add the year(s) for Ytem — no date appears anywhere on the site. -->
       <div>
         <div class="cs-meta-label">Type</div>
         <div class="cs-meta-value">Client project</div>
@@ -58,11 +67,11 @@
         <div class="cs-meta-value">Mobile + RFID</div>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- HERO — dark -->
   <div class="hero-dark">
-    <img src="images/y1.png" alt="Ytem — inventory management app screens">
+    <picture><source type="image/webp" srcset="images/y1.webp"><img src="images/y1.png" width="904" height="586" fetchpriority="high" decoding="async" alt="Three Ytem screens: a receiving list with found and expected counts, a shipment lookup, and a scan progress gauge."></picture>
   </div>
 
   <!-- CONTEXT -->
@@ -71,20 +80,6 @@
     <h2>Inventory management sounds like a back-office problem.</h2>
     <p>In practice, it's a real-time operational challenge — non-technical staff, variable lighting, physical tasks, and time pressure. The design had to work in that environment, not around it.</p>
     <p>A retail technology client needed a faster, smarter way for store owners to manage inventory. Ytem was designed to solve this — a mobile app connected to a handheld RFID scanning device that automated inventory counting and fed that data directly into supply chain decisions.</p>
-    <div class="context-meta">
-      <div class="context-tag">
-        <span class="context-tag-label">Client project</span>
-        <span class="context-tag-value">Project type</span>
-      </div>
-      <div class="context-tag">
-        <span class="context-tag-label">UX & UI Designer</span>
-        <span class="context-tag-value">Role</span>
-      </div>
-      <div class="context-tag">
-        <span class="context-tag-label">Deployed</span>
-        <span class="context-tag-value">Status</span>
-      </div>
-    </div>
   </section>
 
   <!-- THE PROBLEM -->
@@ -103,82 +98,75 @@
       <span class="section-label">System Architecture</span>
       <h2>Four layers, one connected system.</h2>
       <p>Mobile app, RFID scanners, connection gateway, and data dashboard — connected into a single operational flow from physical scan to supply chain decision.</p>
-      <img src="images/y2.png" alt="Ytem system architecture">
+      <picture><source type="image/webp" srcset="images/y2.webp"><img src="images/y2.png" width="1200" height="536" loading="lazy" decoding="async" alt="System diagram: a smartphone and RFID scanners connect through a connection gateway to remote commands and a data dashboard."></picture>
     </div>
   </div>
 
-  <!-- DESIGN DECISION 01 -->
-  <div style="border-bottom: 1px solid var(--light-gray);">
-    <div class="cs-content">
-      <div class="decision-split">
-        <div>
-          <span class="decision-number">Design Decision 01</span>
-          <h3>Dark UI for a bright shop floor.</h3>
-          <p>The most important decision was the dark UI. Working in a retail environment meant screens needed to be easy to read under variable lighting conditions — the dark theme significantly improved scan visibility and reduced eye strain during extended use.</p>
-        </div>
-        <img src="images/y3.png" alt="Ytem dark UI — shop floor readability">
+  <!-- DESIGN DECISIONS -->
+  <div class="cs-content">
+    <div class="decision-split decision-split--first reveal">
+      <div>
+        <span class="decision-number">Design Decision 01</span>
+        <h3>Dark UI for a bright shop floor.</h3>
+        <p>The most important decision was the dark UI. Working in a retail environment meant screens needed to be easy to read under variable lighting conditions — the dark theme significantly improved scan visibility and reduced eye strain during extended use.</p>
       </div>
+      <picture><source type="image/webp" srcset="images/y3.webp"><img src="images/y3.png" width="384" height="383" loading="lazy" decoding="async" alt="Two Ytem receiving screens in the dark UI: the product list and the shipment lookup."></picture>
     </div>
-  </div>
 
-  <!-- DESIGN DECISION 02 -->
-  <div style="border-bottom: 1px solid var(--light-gray);">
-    <div class="cs-content">
-      <div class="decision-split reverse">
-        <div>
-          <span class="decision-number">Design Decision 02</span>
-          <h3>Three taps. Scan. Done.</h3>
-          <p>The app was structured around the core scanning workflow — receive, scan, sync. Every screen was optimized to minimize taps and keep the user focused on the physical task at hand. Progress indicators, found/expected counters, and location labels gave operators constant awareness without overwhelming them.</p>
-        </div>
-        <img src="images/y4.png" alt="Ytem scanning workflow" class="img-phone">
+    <div class="decision-split reverse reveal">
+      <div>
+        <span class="decision-number">Design Decision 02</span>
+        <h3>Three taps. Scan. Done.</h3>
+        <p>The app was structured around the core scanning workflow — receive, scan, sync. Every screen was optimized to minimize taps and keep the user focused on the physical task at hand. Progress indicators, found/expected counters, and location labels gave operators constant awareness without overwhelming them.</p>
       </div>
+      <picture><source type="image/webp" srcset="images/y4.webp"><img src="images/y4.png" width="178" height="382" loading="lazy" decoding="async" alt="Scan progress screen: 10 items scanned, 7 remaining, 3 missing." class="img-phone"></picture>
     </div>
   </div>
 
   <!-- BRAND SYSTEM — dark band -->
-  <div class="dark-band">
+  <div class="dark-band reveal">
     <div class="dark-band-inner">
       <span class="section-label">Brand System</span>
       <h2>A visual identity built for dark environments.</h2>
       <p>Dark background, red accent for critical actions, clean typography optimized for small screens under variable light.</p>
-      <div class="brand-grid">
-        <img src="images/y5a.png" alt="Ytem typography">
-        <img src="images/y5b.png" alt="Ytem colors">
-        <img src="images/y5c.png" alt="Ytem logo">
+      <div class="brand-grid brand-grid--row">
+        <picture><source type="image/webp" srcset="images/y5a.webp"><img src="images/y5a.png" width="233" height="185" loading="lazy" decoding="async" alt="Typography: U8 Font in weights from Thin to Black."></picture>
+        <picture><source type="image/webp" srcset="images/y5b.webp"><img src="images/y5b.png" width="230" height="185" loading="lazy" decoding="async" alt="Colour palette: red #FC0D30 and gray #1A242E, each with tints."></picture>
+        <picture><source type="image/webp" srcset="images/y5c.webp"><img src="images/y5c.png" width="698" height="185" loading="lazy" decoding="async" alt="Ytem logo drawn on a construction grid."></picture>
       </div>
     </div>
   </div>
 
-  <!-- DESIGN PRINCIPLES — split layout, light background -->
-  <section style="padding: 80px 40px; border-bottom: 1px solid var(--light-gray);">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1100px; margin: 0 auto;">
+  <!-- DESIGN PRINCIPLES -->
+  <section class="principles reveal">
+    <div class="principles-inner">
       <div>
         <span class="section-label">Design Principles</span>
-        <h2 style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 24px; line-height: 1.15;">Three principles guided every screen.</h2>
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-            <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 8px;">01</span>
-            <div style="font-size: 0.875rem; font-weight: 600; color: var(--black); margin-bottom: 4px;">Glanceable over readable</div>
-            <div style="font-size: 0.8rem; color: var(--gray); line-height: 1.5;">Operators process status at a distance — not sitting at a desk reading sentences.</div>
+        <h2>Three principles guided every screen.</h2>
+        <div class="principle-list">
+          <div class="problem-card">
+            <span class="problem-number">01</span>
+            <h3 class="problem-title">Glanceable over readable</h3>
+            <p class="problem-desc">Operators process status at a distance — not sitting at a desk reading sentences.</p>
           </div>
-          <div style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-            <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 8px;">02</span>
-            <div style="font-size: 0.875rem; font-weight: 600; color: var(--black); margin-bottom: 4px;">Physical context first</div>
-            <div style="font-size: 0.8rem; color: var(--gray); line-height: 1.5;">One hand is always on the scanner. Every tap was designed around that constraint.</div>
+          <div class="problem-card">
+            <span class="problem-number">02</span>
+            <h3 class="problem-title">Physical context first</h3>
+            <p class="problem-desc">One hand is always on the scanner. Every tap was designed around that constraint.</p>
           </div>
-          <div style="padding: 20px; background: #f5f5f5; border-radius: 8px;">
-            <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; color: var(--accent); display: block; margin-bottom: 8px;">03</span>
-            <div style="font-size: 0.875rem; font-weight: 600; color: var(--black); margin-bottom: 4px;">Zero training required</div>
-            <div style="font-size: 0.8rem; color: var(--gray); line-height: 1.5;">The flow had to be self-evident on day one, to someone who had never seen the app before.</div>
+          <div class="problem-card">
+            <span class="problem-number">03</span>
+            <h3 class="problem-title">Zero training required</h3>
+            <p class="problem-desc">The flow had to be self-evident on day one, to someone who had never seen the app before.</p>
           </div>
         </div>
       </div>
-      <img src="images/y6.png" alt="Ytem design principles applied" style="width: 100%; display: block; border-radius: 8px;">
+      <picture><source type="image/webp" srcset="images/y6.webp"><img src="images/y6.png" width="694" height="646" loading="lazy" decoding="async" alt="Annotated Ytem count screen showing where each of the three principles applies."></picture>
     </div>
   </section>
 
   <!-- IMPACT -->
-  <section class="impact-section">
+  <section class="impact-section reveal">
     <div class="impact-section-inner">
       <span class="section-label">Impact</span>
       <h2>Deployed to real retail environments.</h2>
@@ -195,11 +183,13 @@
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -208,7 +198,7 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
+  <script src="shared-animations.js?v=4"></script>
 
 </body>
 </html>

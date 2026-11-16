@@ -154,6 +154,27 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
   white-space: nowrap;
 }
 
+/* Dark scope: re-declares the colour tokens, so anything inside follows.
+   Used by the Motion page, the Motion band on the home page, and the
+   Ytem bands (its screens are a dark UI and need a dark ground). */
+body.dark-theme,
+.card--plain,
+.dark-band,
+.hero-dark {
+  --color-bg: #0d0f13;
+  --color-surface: #0d0f13;
+  --color-surface-raised: #1b1f27;
+  --color-border: #2a2f39;
+  --color-border-strong: #5a6376;
+  --color-text: #f3f4f6;
+  --color-text-muted: #a6adba;
+  --color-text-subtle: #8b93a1;
+  --color-accent: #9db0ff;
+  --color-on-light: #0d0f13;
+  color: var(--color-text);
+}
+body.dark-theme { --color-surface: #14171d; }
+
 /* ============================================
    3. NAVIGATION
    ============================================ */
@@ -604,16 +625,7 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 
 /* Card without media (Motion): a dark band that closes the page.
    Re-scopes the colour tokens, so everything inside follows. */
-.card--plain {
-  --color-surface: #0d0f13;
-  --color-border: #2a2f39;
-  --color-border-strong: #5a6376;
-  --color-text: #f3f4f6;
-  --color-text-muted: #a6adba;
-  --color-text-subtle: #8b93a1;
-  --color-accent: #9db0ff;
-  color: var(--color-text);
-}
+.card--plain { color: var(--color-text); }
 .card--plain .card-body {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -842,7 +854,7 @@ picture { display: block; }
 }
 .decision-split.reverse { direction: rtl; }
 .decision-split.reverse > * { direction: ltr; }
-.decision-split img { width: 100%; display: block; border-radius: var(--radius-md); }
+.decision-split img { width: 100%; height: auto; display: block; border-radius: var(--radius-md); }
 
 .decision-img { width: 100%; display: block; border-radius: var(--radius-md); }
 
@@ -949,7 +961,7 @@ picture { display: block; }
 .dark-band { background: var(--color-surface); padding: var(--space-8) var(--gutter); }
 .dark-band-inner { max-width: var(--page-max); margin: 0 auto; }
 .dark-band p { max-width: 35rem; margin-bottom: var(--space-6); }
-.dark-band img { width: 100%; display: block; border-radius: var(--radius-md); }
+.dark-band img { width: 100%; height: auto; display: block; border-radius: var(--radius-md); }
 
 /* ============================================
    11. CTA + FOOTER
@@ -1096,6 +1108,7 @@ footer {
 
 .hero-dark { background: var(--color-surface); padding: var(--gutter); }
 .hero-dark img {
+  height: auto;
   width: 100%;
   max-width: 56rem;
   margin: 0 auto;
@@ -1122,12 +1135,32 @@ footer {
 .context-tag-value { font-size: var(--text-xs); color: var(--color-text-subtle); }
 
 .problem-section {
-  background: var(--color-surface);
+  background: var(--color-surface-raised);
   padding: var(--space-8) 0;
   border-bottom: 1px solid var(--color-border);
 }
 
-.impact-section { padding: var(--space-8) 0; border-top: 1px solid var(--color-border); }
+.principles { padding: var(--space-8) 0; border-bottom: 1px solid var(--color-border); }
+.principles-inner {
+  max-width: calc(var(--page-max) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+.principles h2 { font-size: var(--text-xl); line-height: 1.15; margin-bottom: var(--space-5); }
+.principles img { width: 100%; height: auto; display: block; border-radius: var(--radius-md); }
+.principle-list { display: grid; gap: var(--space-3); }
+.decision-split--first { border-top: none; }
+/* Ytem brand tiles share one height, so widths follow their aspect ratios */
+@media (min-width: 861px) { .brand-grid--row { grid-template-columns: 233fr 230fr 698fr; } }
+@media (max-width: 860px) {
+  .principles-inner { grid-template-columns: 1fr; gap: var(--space-6); }
+}
+
+.impact-section { padding: var(--space-8) 0; }
 
 .problem-section-inner,
 .impact-section-inner {
@@ -1388,21 +1421,8 @@ footer {
    18. MOTION — video grid + lightbox
    ============================================ */
 
-/* The Motion page stays dark: re-scope the colour tokens for the whole page */
-body.dark-theme {
-  --color-bg: #0d0f13;
-  --color-surface: #14171d;
-  --color-surface-raised: #1b1f27;
-  --color-border: #272c36;
-  --color-border-strong: #5a6376;
-  --color-text: #f3f4f6;
-  --color-text-muted: #a6adba;
-  --color-text-subtle: #8b93a1;
-  --color-accent: #9db0ff;
-  --color-on-light: #0d0f13;
-  background: var(--color-bg);
-  color: var(--color-text);
-}
+/* The Motion page stays dark (tokens come from the dark scope in section 2) */
+body.dark-theme { background: var(--color-bg); color: var(--color-text); }
 
 .motion-grid.editorial {
   display: grid;
