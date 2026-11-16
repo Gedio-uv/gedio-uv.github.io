@@ -5,307 +5,288 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motion — Guido Usnayo Vidaurre</title>
+  <meta name="description" content="Motion work: films showing Incode FanID verification in real-world use, and full product-interface animation at CreatixBox.">
+  <meta name="theme-color" content="#0d0f13">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body class="dark-theme">
 
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html" class="active">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
-
-  <!-- GLASS WAVES HEADER -->
-  <header class="glass-waves-header">
-    <div class="waves-bg">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-      <div class="blob blob-4"></div>
-    </div>
-    <div class="glass-overlay"></div>
-    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
-    <div class="glass-content">
-      <h1 class="glass-title">Motion</h1>
-      <p style="margin-top: 24px; font-size: 1.1rem; line-height: 1.6; color: var(--color-text-muted); max-width: 680px; margin-left: auto; margin-right: auto; padding: 0 20px;">Motion work across two contexts: directing and producing audiovisual material at Incode to show FanID's verification experience in real-world use — not just the interface, but the moment itself — and, earlier at CreatixBox, animating full product interfaces from the ground up in After Effects.</p>
-    </div>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html">AI Projects</a></li>
+        <li><a href="motion.html" class="active" aria-current="page">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
   </header>
 
-  <div style="max-width: 1440px; margin: 0 auto; padding: 64px 20px 32px 20px;">
-    <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Incode — directing real-world verification</h2>
-    <p style="color: var(--color-text-muted); max-width: 680px; line-height: 1.6; margin-bottom: 0;">I directed, animated, and post-produced commercial and client-facing material showing FanID's onboarding and verification flow embedded directly into phone screens — while a production director worked alongside me to guide the actors, consulting me on how the onboarding actually worked. These pieces showed identity verification across different real-life contexts: onboarding into a stadium match, verifying identity in a rideshare, checking into a hotel room. Used both for client meetings — to show simplified onboarding and UX to prospects — and for commercial material at industry conventions in Las Vegas and New York. I also built a modular video design system so this content could be adapted per client without rebuilding each piece from scratch.</p>
+  <main id="main">
+
+  <div class="cs-header">
+    <span class="cs-label">Product films · UI animation</span>
+    <h1 class="cs-title">Motion</h1>
+    <p class="cs-subtitle">Motion work across two contexts: directing and producing audiovisual material at Incode to show FanID's verification experience in real-world use — not just the interface, but the moment itself — and, earlier at CreatixBox, animating full product interfaces from the ground up in After Effects.</p>
+    <div class="cs-meta">
+      <div>
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">Direction, animation, post-production</div>
+      </div>
+      <!-- TODO(Guido): add the year(s) for the motion work — no date appears anywhere on the site. -->
+      <div>
+        <div class="cs-meta-label">Tools</div>
+        <div class="cs-meta-value">After Effects · Principle (prototyping)</div>
+      </div>
+    </div>
   </div>
-  <!-- VIDEO GRID -->
-  <section class="motion-grid editorial" id="motionGrid">
 
-    <!-- VIMEO -->
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.36s;" data-type="vimeo" data-id="1145366421">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">01</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/1145366421.jpg" alt="Motion piece">
-      </div>
+  <section class="motion-section" aria-labelledby="motion-incode">
+    <div class="motion-intro reveal">
+      <h2 id="motion-incode">Incode — directing real-world verification</h2>
+      <p>I directed, animated, and post-produced commercial and client-facing material showing FanID's onboarding and verification flow embedded directly into phone screens — while a production director worked alongside me to guide the actors, consulting me on how the onboarding actually worked. These pieces showed identity verification across different real-life contexts: onboarding into a stadium match, verifying identity in a rideshare, checking into a hotel room. Used both for client meetings — to show simplified onboarding and UX to prospects — and for commercial material at industry conventions in Las Vegas and New York. I also built a modular video design system so this content could be adapted per client without rebuilding each piece from scratch.</p>
     </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.39s;" data-type="vimeo" data-id="1029800637">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">02</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/1029800637.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.34s;" data-type="vimeo" data-id="870443762">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">03</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/870443762.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.10s;" data-type="vimeo" data-id="848826173">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">04</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/848826173.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.00s;" data-type="vimeo" data-id="830710395">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">05</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/830710395.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.33s;" data-type="vimeo" data-id="818816558">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">06</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/818816558.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.37s;" data-type="vimeo" data-id="802350822">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">07</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/802350822.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.36s;" data-type="vimeo" data-id="795730294">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">08</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/795730294.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.22s;" data-type="vimeo" data-id="795726483">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">09</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/795726483.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.03s;" data-type="vimeo" data-id="792766271">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">10</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/792766271.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.36s;" data-type="vimeo" data-id="788048163">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">11</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/788048163.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.27s;" data-type="vimeo" data-id="783805204">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">12</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/783805204.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.25s;" data-type="vimeo" data-id="783990170">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">13</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">VIMEO</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://vumbnail.com/783990170.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <!-- YOUTUBE -->
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.24s;" data-type="youtube" data-id="JBlYOSPxNCw">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">14</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/JBlYOSPxNCw/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-
-
-        <div class="video-card editorial-card reveal" style="transition-delay: 0.35s;" data-type="youtube" data-id="m8Ms1PiEL18">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">19</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/m8Ms1PiEL18/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-
-
-
+    <ul class="motion-grid">
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/1145366421" data-type="vimeo" data-id="1145366421">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">01</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/1145366421.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/1029800637" data-type="vimeo" data-id="1029800637">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">02</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/1029800637.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/870443762" data-type="vimeo" data-id="870443762">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">03</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/870443762.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/848826173" data-type="vimeo" data-id="848826173">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">04</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/848826173.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/830710395" data-type="vimeo" data-id="830710395">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">05</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/830710395.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/818816558" data-type="vimeo" data-id="818816558">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">06</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/818816558.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/802350822" data-type="vimeo" data-id="802350822">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">07</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/802350822.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/795730294" data-type="vimeo" data-id="795730294">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">08</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/795730294.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/795726483" data-type="vimeo" data-id="795726483">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">09</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/795726483.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/792766271" data-type="vimeo" data-id="792766271">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">10</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/792766271.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/788048163" data-type="vimeo" data-id="788048163">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">11</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/788048163.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/783805204" data-type="vimeo" data-id="783805204">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">12</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/783805204.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://player.vimeo.com/video/783990170" data-type="vimeo" data-id="783990170">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">13</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">Vimeo</span>
+          </span>
+          <span class="video-thumb"><img src="https://vumbnail.com/783990170.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=JBlYOSPxNCw" data-type="youtube" data-id="JBlYOSPxNCw">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">14</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/JBlYOSPxNCw/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=m8Ms1PiEL18" data-type="youtube" data-id="m8Ms1PiEL18">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">15</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/m8Ms1PiEL18/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+    </ul>
   </section>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
+  <section class="motion-section" aria-labelledby="motion-creatix">
+    <div class="motion-intro reveal">
+      <h2 id="motion-creatix">CreatixBox — full UI animation</h2>
+      <p>Motion pieces built entirely in After Effects, animating complete product interfaces to promote software and educational courses on building software. I owned animation and direction end-to-end; copy came from the CEO.</p>
+    </div>
+    <ul class="motion-grid">
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=8pZTBvgBhn8" data-type="youtube" data-id="8pZTBvgBhn8">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">16</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/8pZTBvgBhn8/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=8v5nUAunt2Y" data-type="youtube" data-id="8v5nUAunt2Y">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">17</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/8v5nUAunt2Y/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=xYQ-HdVfBSA" data-type="youtube" data-id="xYQ-HdVfBSA">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">18</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/xYQ-HdVfBSA/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=sTnTV8Ui3Ok" data-type="youtube" data-id="sTnTV8Ui3Ok">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">19</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/sTnTV8Ui3Ok/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=-Hjq2XS3U-8" data-type="youtube" data-id="-Hjq2XS3U-8">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">20</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/-Hjq2XS3U-8/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+      <li class="reveal">
+        <a class="video-card" href="https://www.youtube.com/watch?v=6imG95z8Bpk" data-type="youtube" data-id="6imG95z8Bpk">
+          <span class="ed-meta-top">
+            <span><span class="visually-hidden">Play </span><span class="ed-number">21</span><span class="ed-title">Interface motion</span></span>
+            <span class="ed-details">YouTube</span>
+          </span>
+          <span class="video-thumb"><img src="https://img.youtube.com/vi/6imG95z8Bpk/mqdefault.jpg" width="640" height="360" loading="lazy" decoding="async" alt=""></span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- LIGHTBOX (opened by shared-animations.js; without JS the cards are plain links) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Video player" hidden>
     <div class="lightbox-inner">
-      <button class="lightbox-close" id="lightboxClose">✕</button>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close video">✕</button>
       <div class="lightbox-video">
-        <iframe id="lightboxFrame" src="" allowfullscreen allow="autoplay"></iframe>
+        <iframe id="lightboxFrame" title="Video" allowfullscreen allow="autoplay; fullscreen"></iframe>
       </div>
     </div>
-  </div>
-
-  <div style="max-width: 1440px; margin: 0 auto; padding: 64px 20px 32px 20px;">
-    <h2 style="font-size: 1.5rem; margin-bottom: 16px;">CreatixBox — full UI animation</h2>
-    <p style="color: var(--color-text-muted); max-width: 680px; line-height: 1.6; margin-bottom: 32px;">Motion pieces built entirely in After Effects, animating complete product interfaces to promote software and educational courses on building software. I owned animation and direction end-to-end; copy came from the CEO.</p>
-  </div>
-
-  <section class="motion-grid editorial" style="margin-bottom: 64px;">
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.23s;" data-type="youtube" data-id="8pZTBvgBhn8">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">15</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/8pZTBvgBhn8/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.24s;" data-type="youtube" data-id="8v5nUAunt2Y">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">16</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/8v5nUAunt2Y/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.34s;" data-type="youtube" data-id="xYQ-HdVfBSA">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">17</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/xYQ-HdVfBSA/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.35s;" data-type="youtube" data-id="sTnTV8Ui3Ok">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">18</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/sTnTV8Ui3Ok/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.10s;" data-type="youtube" data-id="-Hjq2XS3U-8">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">20</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/-Hjq2XS3U-8/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-
-    <div class="video-card editorial-card reveal" style="transition-delay: 0.17s;" data-type="youtube" data-id="6imG95z8Bpk">
-      <div class="ed-meta-top">
-        <div><span class="ed-number">21</span><span class="ed-title">INTERFACE MOTION</span></div>
-        <div class="ed-details">YOUTUBE</div>
-      </div>
-      <div class="video-thumb">
-        <img src="https://img.youtube.com/vi/6imG95z8Bpk/mqdefault.jpg" alt="Motion piece">
-      </div>
-    </div>
-  </section>
-
-  <div style="text-align: center; color: rgba(255,255,255,0.5); font-size: 0.9rem; padding-bottom: 64px;">
-    Primary tool: After Effects. Prototyping: Principle.
   </div>
 
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -314,39 +295,6 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
-  <script>
-    // Lightbox
-    const lightbox = document.getElementById('lightbox');
-    const lightboxFrame = document.getElementById('lightboxFrame');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    document.querySelectorAll('.video-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const type = card.dataset.type;
-        const id = card.dataset.id;
-        let src = '';
-        if (type === 'vimeo') {
-          src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`;
-        } else if (type === 'youtube') {
-          src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-        }
-        lightboxFrame.src = src;
-        lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      lightboxFrame.src = '';
-      document.body.style.overflow = '';
-    }
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-  </script>
-
+  <script src="shared-animations.js?v=4"></script>
 </body>
 </html>

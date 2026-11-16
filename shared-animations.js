@@ -95,6 +95,57 @@
     selectTab(fromHash || tabs[0], false);
   }
 
+  // ── VIDEO LIGHTBOX (Motion) ──
+  // Cards are ordinary links to the video. This plays them in place instead.
+  var lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    var frame = document.getElementById('lightboxFrame');
+    var closeBtn = document.getElementById('lightboxClose');
+    var opener = null;
+    // Everything outside the dialog is made inert while it is open
+    var setInert = function (on) {
+      var el = lightbox;
+      while (el && el !== document.body) {
+        Array.prototype.forEach.call(el.parentElement.children, function (sib) {
+          if (sib !== el && sib.tagName !== 'SCRIPT') sib.inert = on;
+        });
+        el = el.parentElement;
+      }
+    };
+    var closeLightbox = function () {
+      if (lightbox.hidden) return;
+      lightbox.classList.remove('open');
+      lightbox.hidden = true;
+      frame.removeAttribute('src');
+      setInert(false);
+      document.body.style.overflow = '';
+      if (opener) opener.focus();
+    };
+    document.querySelectorAll('.video-card').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let new-tab clicks through
+        e.preventDefault();
+        var id = card.dataset.id;
+        frame.src = card.dataset.type === 'vimeo'
+          ? 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0'
+          : 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+        opener = card;
+        lightbox.hidden = false;
+        setInert(true);
+        // next frame, so the opacity transition runs
+        requestAnimationFrame(function () { lightbox.classList.add('open'); });
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      });
+    });
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
   // ── READ PROGRESS BAR (scroll-linked, transform only) ──
   var progressBar = document.querySelector('.read-progress');
   if (progressBar) {

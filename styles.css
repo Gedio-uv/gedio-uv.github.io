@@ -1060,7 +1060,8 @@ footer {
    ============================================ */
 
 .page-header {
-  padding: calc(var(--nav-height) + var(--space-8)) var(--gutter) var(--space-7);
+  --cs-inset: max(var(--gutter), calc((100% - var(--page-max)) / 2));
+  padding: calc(var(--nav-height) + var(--space-8)) var(--cs-inset) var(--space-7);
 }
 
 .page-title { font-size: var(--text-3xl); letter-spacing: -0.035em; line-height: 1.02; margin-bottom: var(--space-4); }
@@ -1267,6 +1268,8 @@ footer {
 .about-section { margin-bottom: var(--space-7); }
 .about-section p { margin-bottom: var(--space-4); }
 .about-section p:last-child { margin-bottom: 0; }
+.about-section--ruled { border-top: 1px solid var(--color-border); padding-top: var(--space-8); }
+.tool-icon img { width: 100%; height: 100%; border-radius: var(--radius-sm); object-fit: cover; display: block; }
 
 .tools-section {
   max-width: calc(var(--page-max) + var(--gutter) * 2);
@@ -1469,17 +1472,20 @@ footer {
 /* The Motion page stays dark (tokens come from the dark scope in section 2) */
 body.dark-theme { background: var(--color-bg); color: var(--color-text); }
 
-.motion-grid.editorial {
+.motion-section { max-width: calc(var(--page-max) + var(--gutter) * 2); margin: 0 auto; padding: var(--space-8) var(--gutter) 0; }
+.motion-section:last-of-type { padding-bottom: var(--space-9); }
+.motion-intro { margin-bottom: var(--space-6); }
+.motion-intro h2 { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+.motion-intro p { max-width: var(--measure); color: var(--color-text-muted); }
+
+.motion-grid {
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5) var(--space-4);
-  padding: 0 var(--gutter) var(--space-9);
-  max-width: 100rem;
-  margin: 0 auto;
+  gap: var(--space-6) var(--space-4);
 }
 
-.video-card { cursor: pointer; }
-.video-card.editorial-card { display: flex; flex-direction: column; }
+.video-card { display: flex; flex-direction: column; color: inherit; text-decoration: none; border-radius: var(--radius-md); }
 
 .ed-meta-top {
   display: flex;
@@ -1494,9 +1500,9 @@ body.dark-theme { background: var(--color-bg); color: var(--color-text); }
 }
 .ed-number, .ed-title { color: var(--color-text); font-weight: var(--weight-medium); }
 .ed-title { margin-left: var(--space-2); }
-.ed-details { text-align: right; max-width: 60%; }
 
 .video-thumb {
+  display: block;
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -1532,6 +1538,7 @@ body.dark-theme { background: var(--color-bg); color: var(--color-text); }
 
 .lightbox-inner { width: 90vw; max-width: var(--page-max); position: relative; }
 
+.lightbox[hidden] { display: none; }
 .lightbox-close {
   position: absolute;
   top: -3rem; right: 0;
@@ -1552,84 +1559,5 @@ body.dark-theme { background: var(--color-bg); color: var(--color-text); }
   border-radius: var(--radius-sm);
 }
 
-@media (max-width: 1024px) { .motion-grid.editorial { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .motion-grid.editorial { grid-template-columns: 1fr; gap: var(--space-6); } }
-
-/* ============================================
-   19. LEGACY — Motion page header.
-   Animated blobs + glass layer. Conflicts with the motion rules;
-   scheduled for removal when motion.html is refreshed.
-   ============================================ */
-
-.glass-waves-header {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  padding: 120px var(--gutter);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: #030303;
-}
-
-.waves-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: #020202;
-  overflow: hidden;
-  z-index: 0;
-  filter: blur(40px) saturate(130%);
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  animation: blobFloat 20s infinite linear;
-  opacity: 0.9;
-  mix-blend-mode: screen;
-}
-
-@keyframes blobFloat {
-  0%   { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-  33%  { transform: translate(25vw, -15vh) scale(1.3) rotate(120deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-  66%  { transform: translate(-15vw, 15vh) scale(0.8) rotate(240deg); border-radius: 30% 70% 50% 50% / 60% 40% 70% 30%; }
-  100% { transform: translate(0, 0) scale(1) rotate(360deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-}
-
-.blob-1 { top: 10%; left: 10%; width: 55vw; height: 55vw; background: radial-gradient(circle, #0077ff, #00ffff); animation-duration: 24s; }
-.blob-2 { top: 30%; right: -5%; width: 45vw; height: 45vw; background: radial-gradient(circle, #ffcc00, #ff4400); animation-duration: 29s; animation-delay: -5s; animation-direction: reverse; }
-.blob-3 { bottom: -15%; left: 20%; width: 60vw; height: 60vw; background: radial-gradient(circle, #0033ff, #00aaff); animation-duration: 21s; animation-delay: -10s; }
-.blob-4 { top: -10%; right: 20%; width: 40vw; height: 40vw; background: radial-gradient(circle, #ffaa00, #00ffaa); animation-duration: 26s; animation-delay: -15s; animation-direction: reverse; }
-
-.glass-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.95) 0px,
-    rgba(0, 0, 0, 0.2) 6px,
-    rgba(0, 0, 0, 0) 12px,
-    rgba(0, 0, 0, 0.2) 18px,
-    rgba(0, 0, 0, 0.95) 24px
-  );
-  backdrop-filter: blur(8px) contrast(1.5) brightness(1.2);
-  -webkit-backdrop-filter: blur(8px) contrast(1.5) brightness(1.2);
-  z-index: 1;
-}
-
-.glass-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
-
-.glass-title {
-  font-size: clamp(5rem, 20vw, 33vh);
-  font-weight: var(--weight-bold);
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  color: #ffffff;
-  margin-bottom: var(--space-5);
-  text-align: center;
-}
+@media (max-width: 1024px) { .motion-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .motion-grid { grid-template-columns: 1fr; gap: var(--space-6); } }
