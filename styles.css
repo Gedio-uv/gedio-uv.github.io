@@ -67,15 +67,6 @@
   --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --rise: 12px;
-
-  /* Legacy aliases — used by inline styles on pages not yet migrated */
-  --black: var(--color-text);
-  --white: var(--color-bg);
-  --dark: var(--color-surface);
-  --gray: var(--color-text-muted);
-  --gray-light: var(--color-text-subtle);
-  --light-gray: var(--color-border);
-  --accent: var(--color-accent);
 }
 
 /* ============================================
