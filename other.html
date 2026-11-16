@@ -5,49 +5,57 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Other Work — Guido Usnayo Vidaurre</title>
+  <meta name="description" content="Additional work across branding, product design, and UX: Senden, Torakka, and Timelense.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
 
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
 
   <!-- HEADER -->
-  <header class="page-header">
+  <div class="page-header">
     <span class="page-label">Other Work</span>
     <h1 class="page-title">More projects.</h1>
     <p class="page-desc">A selection of additional work across branding, product design, and UX — spanning mobile, IoT, and AR experiences.</p>
-  </header>
+  </div>
 
   <!-- PROJECTS -->
   <section class="projects">
 
     <!-- SENDEN -->
     <div class="project-item reveal">
-      <img src="images/m1.png" alt="Senden — parcel delivery branding and product design" class="project-img-phone">
+      <picture><source type="image/webp" srcset="images/m1.webp"><img src="images/m1.png" width="220" height="442" loading="lazy" decoding="async" alt="Senden parcel tracking app screen." class="project-img-phone"></picture>
       <div class="project-info">
         <span class="project-number">Project 01</span>
         <h2 class="project-title">Senden</h2>
@@ -62,8 +70,8 @@
     </div>
 
     <!-- TORAKKA -->
-    <div class="project-item reverse">
-      <img src="images/m2.png" alt="Torakka — Bluetooth bike tracking app" class="project-img-phone">
+    <div class="project-item reverse reveal">
+      <picture><source type="image/webp" srcset="images/m2.webp"><img src="images/m2.png" width="219" height="442" loading="lazy" decoding="async" alt="Torakka bike tracking app screen." class="project-img-phone"></picture>
       <div class="project-info">
         <span class="project-number">Project 02</span>
         <h2 class="project-title">Torakka</h2>
@@ -78,8 +86,8 @@
     </div>
 
     <!-- TIMELENSE -->
-    <div class="project-item">
-      <img src="images/m3.png" alt="Timelense — AR postcard app" class="project-img-phone">
+    <div class="project-item reveal">
+      <picture><source type="image/webp" srcset="images/m3.webp"><img src="images/m3.png" width="220" height="442" loading="lazy" decoding="async" alt="Timelense AR postcard app screen." class="project-img-phone"></picture>
       <div class="project-info">
         <span class="project-number">Project 03</span>
         <h2 class="project-title">Timelense</h2>
@@ -99,12 +107,12 @@
   <section class="skills-section reveal">
     <div class="skills-inner">
       <div>
-        <span class="skills-label">Core Skills</span>
+        <h2 class="skills-label">Core Skills</h2>
         <div class="skills-list">
-          <span class="skill-item">Identity & Verification Systems</span>
+          <span class="skill-item">Identity &amp; Verification Systems</span>
           <span class="skill-item">Product Architecture</span>
-          <span class="skill-item">B2B Dashboard & Operational UX</span>
-          <span class="skill-item">Motion Design & Prototyping</span>
+          <span class="skill-item">B2B Dashboard &amp; Operational UX</span>
+          <span class="skill-item">Motion Design &amp; Prototyping</span>
           <span class="skill-item">Cross-functional Collaboration</span>
           <span class="skill-item">Brand Identity</span>
           <span class="skill-item">Design Systems</span>
@@ -112,7 +120,7 @@
         </div>
       </div>
       <div>
-        <span class="skills-label">Tools</span>
+        <h2 class="skills-label">Tools</h2>
         <div class="skills-list">
           <span class="skill-item">Figma</span>
           <span class="skill-item">After Effects</span>
@@ -131,11 +139,13 @@
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -144,7 +154,7 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
+  <script src="shared-animations.js?v=4"></script>
 
 </body>
 </html>
