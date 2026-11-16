@@ -1409,6 +1409,19 @@ footer {
 .grid-2-phones-centered { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); max-width: 51.4%; margin: 0 auto; }
 .grid-2-phones-ipad { display: grid; grid-template-columns: 1fr 1fr 2.89fr; gap: var(--space-5); align-items: center; }
 .grid-70 { max-width: 52.5rem; margin: 0 auto; padding: 0 var(--gutter); }
+.cs-hero-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);
+  max-width: 46rem; margin: var(--space-7) auto var(--space-6); padding: 0 var(--gutter);
+}
+.img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); max-width: 35rem; margin: 0 auto; }
+.cs-figure { margin-top: var(--space-6); }
+.cs-figure + .cs-figure { margin-top: var(--space-8); }
+.cs-figure > * + *:not(figcaption) { margin-top: var(--space-5); }
+.cs-figure .cs-img-full { margin: 0; }
+.cs-hero-pair img, .img-pair img,
+.grid-phone-ipad img, .grid-ipad-phone img, .grid-2-phones-centered img, .grid-2-phones-ipad img {
+  width: 100%; height: auto; display: block; border-radius: var(--radius-md);
+}
 
 @media (max-width: 768px) {
   .grid-phone-ipad, .grid-ipad-phone, .grid-2-phones-centered, .grid-2-phones-ipad {

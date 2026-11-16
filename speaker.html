@@ -5,38 +5,46 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Speaker — Guido Usnayo Vidaurre</title>
+  <meta name="description" content="Case study: Speaker, a privacy-first community platform for residents of the same building, designed solo across mobile, iPad, and web.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <div class="read-progress" id="readProgress"></div>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html" class="active">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
+
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html" class="active" aria-current="page">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
 
   <!-- HEADER -->
-  <header class="cs-header">
+  <div class="cs-header">
     <span class="cs-label">Case Study 02</span>
     <h1 class="cs-title">Speaker</h1>
     <p class="cs-subtitle">Community connection platform for urban residents — privacy-first architecture for shared residential spaces.</p>
@@ -45,6 +53,7 @@
         <div class="cs-meta-label">Role</div>
         <div class="cs-meta-value">Solo Designer</div>
       </div>
+      <!-- TODO(Guido): add the year(s) for Speaker — no date appears anywhere on the site. -->
       <div>
         <div class="cs-meta-label">Type</div>
         <div class="cs-meta-value">Freelance</div>
@@ -58,14 +67,12 @@
         <div class="cs-meta-value">Mobile · iPad · Web</div>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- HERO IMAGE -->
-  <div class="grid-70" style="margin-bottom: 64px;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-      <img src="images/sp4c.png" alt="Speaker UI" style="width: 100%; border-radius: 16px;">
-      <img src="images/sp5.png" alt="Speaker UI Navigation" style="width: 100%; border-radius: 16px;">
-    </div>
+  <div class="cs-hero-pair">
+    <picture><source type="image/webp" srcset="images/sp4c.webp"><img src="images/sp4c.png" width="470" height="924" fetchpriority="high" decoding="async" alt="Speaker home screen: a floor plan of the 1st floor with the residents who live on it."></picture>
+    <picture><source type="image/webp" srcset="images/sp5.webp"><img src="images/sp5.png" width="470" height="923" fetchpriority="high" decoding="async" alt="Speaker group chat for the 1st floor."></picture>
   </div>
 
   <!-- CONTENT -->
@@ -116,7 +123,7 @@
       <span class="decision-number">Design — Branding Process</span>
       <h3>From brief to brand identity.</h3>
       <p>Starting from the brief, I ran through four naming and brand concepts before landing on Speaker — a name combining 'speaker' with the idea of storeys and floors, visually represented by a speech bubble icon made of colorful dots arranged like a building grid.</p>
-      <img src="images/SP-early_over_collection_concept.png" alt="Speaker branding process" class="cs-img-full">
+      <picture><source type="image/webp" srcset="images/SP-early_over_collection_concept.webp"><img src="images/SP-early_over_collection_concept.png" width="1808" height="675" loading="lazy" decoding="async" alt="Hand-drawn naming and logo sketches: Talkie, Chatting, and Speak concepts." class="cs-img-full"></picture>
     </div>
 
     <!-- DESIGN PROCESS -->
@@ -125,22 +132,23 @@
       <h3>Low to high fidelity.</h3>
       <p>I tested at low, medium, and high fidelity — moving from hand-drawn sketches to mid-fi screens to final UI. User testing with real residents shaped key decisions, particularly around group organization by floor and the emergency contact feature which emerged as an unexpected priority.</p>
       
-      <div style="max-width: 560px; margin: 0 auto;">
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 8px;">
-        <img src="images/SP-Emergency_Center.png" alt="Emergency Center" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Security_Alert.png" alt="Security Alert" style="width: 100%; border-radius: 12px;">
-      </div>
-      </div>
-      <div class="cs-caption">Emergency Center — from contact to active SOS tracking.</div>
+      <figure class="cs-figure">
+        <div class="img-pair">
+          <picture><source type="image/webp" srcset="images/SP-Emergency_Center.webp"><img src="images/SP-Emergency_Center.png" width="470" height="924" loading="lazy" decoding="async" alt="Emergency Center screen."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Security_Alert.webp"><img src="images/SP-Security_Alert.png" width="470" height="924" loading="lazy" decoding="async" alt="Security Alert screen."></picture>
+        </div>
+        <figcaption class="cs-caption">Emergency Center — from contact to active SOS tracking.</figcaption>
+      </figure>
 
-      <img src="images/SP-early_parking_flow.png" alt="Early parking flow sketches" class="cs-img-full" style="margin-top: 64px;">
-      
-      <div class="img-grid-3 reveal-stagger" style="margin-top: 24px; margin-bottom: 8px;">
-        <img src="images/SP-Parking_Map.png" alt="Parking Map">
-        <img src="images/SP-Reserve_Parking.png" alt="Reserve Parking">
-        <img src="images/SP-Parking_Confirmation.png" alt="Parking Confirmation">
-      </div>
-      <div class="cs-caption">The parking booking flow, from first sketch to shipped UI.</div>
+      <figure class="cs-figure">
+        <picture><source type="image/webp" srcset="images/SP-early_parking_flow.webp"><img src="images/SP-early_parking_flow.png" width="1808" height="675" loading="lazy" decoding="async" alt="Early parking flow sketches." class="cs-img-full"></picture>
+        <div class="img-grid-3 reveal-stagger">
+          <picture><source type="image/webp" srcset="images/SP-Parking_Map.webp"><img src="images/SP-Parking_Map.png" width="470" height="924" loading="lazy" decoding="async" alt="Parking Map screen."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Reserve_Parking.webp"><img src="images/SP-Reserve_Parking.png" width="470" height="924" loading="lazy" decoding="async" alt="Reserve Parking screen."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Parking_Confirmation.webp"><img src="images/SP-Parking_Confirmation.png" width="470" height="924" loading="lazy" decoding="async" alt="Parking Confirmation screen."></picture>
+        </div>
+        <figcaption class="cs-caption">The parking booking flow, from first sketch to shipped UI.</figcaption>
+      </figure>
     </div>
 
     <!-- DESIGN DECISION 01 -->
@@ -149,9 +157,9 @@
       <h3>Warm UI for a social product.</h3>
       <p>The colorful, high-contrast chat UI was a deliberate choice to make the social layer feel warm and approachable — distinct from the cold utility of most building management tools.</p>
       <div class="img-grid-3 reveal-stagger">
-        <img src="images/sp4a.png" alt="Speaker UI — chat interface">
-        <img src="images/sp4b.png" alt="Speaker UI — floor navigation">
-        <img src="images/sp4c.png" alt="Speaker UI — community features">
+        <picture><source type="image/webp" srcset="images/sp4a.webp"><img src="images/sp4a.png" width="204" height="406" loading="lazy" decoding="async" alt="Hand-drawn sketch of a payment screen."></picture>
+        <picture><source type="image/webp" srcset="images/sp4b.webp"><img src="images/sp4b.png" width="200" height="406" loading="lazy" decoding="async" alt="Mid-fidelity wireframe of the floor screen."></picture>
+        <picture><source type="image/webp" srcset="images/sp4c.webp"><img src="images/sp4c.png" width="470" height="924" loading="lazy" decoding="async" alt="Final floor screen with the 1st floor plan."></picture>
       </div>
     </div>
 
@@ -160,32 +168,38 @@
       <span class="decision-number">Design Decision 02</span>
       <h3>Space as a navigation model.</h3>
       <p>The floor plan visualization on the main screen gave residents immediate spatial orientation within their building — something no competing product was doing at the time. Navigation organized by floor and interest group made the community feel tangible, not abstract.</p>
-      <div class="reveal-stagger grid-2-phones-ipad" style="margin-bottom: 8px;">
-        <img src="images/SP-Floor_Overview.png" alt="Floor Overview" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Parking_Map.png" alt="Parking Map" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Parking_Map__iPad_.png" alt="Parking Map iPad" style="width: 100%; border-radius: 12px;">
-      </div>
-      <div class="cs-caption">Navigation by floor and by physical space — parking included.</div>
+      <figure class="cs-figure">
+        <div class="reveal-stagger grid-2-phones-ipad">
+          <picture><source type="image/webp" srcset="images/SP-Floor_Overview.webp"><img src="images/SP-Floor_Overview.png" width="470" height="924" loading="lazy" decoding="async" alt="Floor Overview on phone."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Parking_Map.webp"><img src="images/SP-Parking_Map.png" width="470" height="924" loading="lazy" decoding="async" alt="Parking Map on phone."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Parking_Map__iPad_.webp"><img src="images/SP-Parking_Map__iPad_.png" width="1360" height="914" loading="lazy" decoding="async" alt="Parking Map on iPad."></picture>
+        </div>
+        <figcaption class="cs-caption">Navigation by floor and by physical space — parking included.</figcaption>
+      </figure>
     </div>
 
     <div class="decision reveal">
       <h3>Booking, without friction</h3>
       <p>Booking a shared space — a padel court, an amenity, a guest parking spot — had to feel as fast on a resident's phone as on the building's iPad kiosk. I designed both surfaces from the same system.</p>
-      <div class="img-grid-2 reveal-stagger" style="margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
-        <img src="images/SP-Book_Padel_Court.png" alt="Book Padel Court" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Book_Padel_Court__iPad_.png" alt="Book Padel Court iPad" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Booking_Confirmation.png" alt="Booking Confirmation" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Select_Amenity.png" alt="Select Amenity" style="width: 100%; border-radius: 12px;">
+      <div class="cs-figure">
+        <div class="reveal-stagger grid-phone-ipad">
+          <picture><source type="image/webp" srcset="images/SP-Book_Padel_Court.webp"><img src="images/SP-Book_Padel_Court.png" width="470" height="924" loading="lazy" decoding="async" alt="Book Padel Court on phone."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Book_Padel_Court__iPad_.webp"><img src="images/SP-Book_Padel_Court__iPad_.png" width="1360" height="914" loading="lazy" decoding="async" alt="Book Padel Court on iPad."></picture>
+        </div>
+        <div class="reveal-stagger img-pair">
+          <picture><source type="image/webp" srcset="images/SP-Booking_Confirmation.webp"><img src="images/SP-Booking_Confirmation.png" width="470" height="924" loading="lazy" decoding="async" alt="Booking Confirmation screen."></picture>
+          <picture><source type="image/webp" srcset="images/SP-Select_Amenity.webp"><img src="images/SP-Select_Amenity.png" width="470" height="924" loading="lazy" decoding="async" alt="Select Amenity screen."></picture>
+        </div>
       </div>
     </div>
 
     <div class="decision reveal">
       <h3>Guest access, handled</h3>
       <p>Guests needed a way in that didn't compromise resident privacy — reserved spots, scannable codes, and clear time windows, without exposing personal contact information.</p>
-      <div class="reveal-stagger grid-2-phones-ipad">
-        <img src="images/SP-Reserve_Parking.png" alt="Reserve Parking" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Parking_Confirmation.png" alt="Parking Confirmation" style="width: 100%; border-radius: 12px;">
-        <img src="images/SP-Parking_Confirmation__iPad_.png" alt="Parking Confirmation iPad" style="width: 100%; border-radius: 12px;">
+      <div class="cs-figure reveal-stagger grid-2-phones-ipad">
+        <picture><source type="image/webp" srcset="images/SP-Reserve_Parking.webp"><img src="images/SP-Reserve_Parking.png" width="470" height="924" loading="lazy" decoding="async" alt="Reserve Parking on phone."></picture>
+        <picture><source type="image/webp" srcset="images/SP-Parking_Confirmation.webp"><img src="images/SP-Parking_Confirmation.png" width="470" height="924" loading="lazy" decoding="async" alt="Parking Confirmation on phone."></picture>
+        <picture><source type="image/webp" srcset="images/SP-Parking_Confirmation__iPad_.webp"><img src="images/SP-Parking_Confirmation__iPad_.png" width="1360" height="914" loading="lazy" decoding="async" alt="Parking Confirmation on iPad."></picture>
       </div>
     </div>
 
@@ -194,8 +208,6 @@
       <span class="cs-section-label">Impact</span>
       <h2>Deployed to real residents.</h2>
       <p>The product was implemented by the client and deployed to real residents. User testing confirmed the core flows were intuitive across the target age group. The client planned to scale it across additional buildings — validating that the privacy-first approach didn't reduce adoption.</p>
-
-      <img src="images/sp4c.png" alt="Speaker — deployed product" class="img-phone">
 
       <div class="impact-tags reveal-stagger">
         <div class="impact-tag"><strong>Deployed</strong> Implemented by client</div>
@@ -210,11 +222,13 @@
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -223,7 +237,7 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
+  <script src="shared-animations.js?v=4"></script>
 
 </body>
 </html>
