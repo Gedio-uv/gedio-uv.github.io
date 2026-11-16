@@ -5,347 +5,99 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Projects — Guido Usnayo Vidaurre</title>
-  <meta name="description" content="Products I design and ship myself — concept, UX, and visual identity through AI-assisted development. Tolk and Spark.">
+  <meta name="description" content="Products I design and ship myself: concept, UX, and visual identity through AI-assisted development. Tolk and Spark.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #fafafa;
-      --white: #0a0a0a;
-      --gray: #999999;
-      --light-gray: #1f1f1f;
-      --accent: #335cff;
-      --font: 'Inter', -apple-system, sans-serif;
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-    nav.scrolled { border-bottom-color: var(--light-gray); }
-    .nav-name { font-size: 0.875rem; font-weight: 400; color: var(--black); text-decoration: none; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
-    .nav-links a {
-      font-size: 0.8rem; color: var(--gray); text-decoration: none;
-      transition: color 0.2s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 1px; background: var(--black);
-      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .nav-links a:hover { color: var(--black); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--black); font-weight: 500; }
-    .nav-links a.active::after { width: 100%; }
-    .nav-divider { width: 1px; height: 12px; background: var(--light-gray); }
-
-    /* MOBILE NAV */
-    .nav-mobile-toggle {
-      display: none; width: 24px; height: 24px;
-      background: none; border: none; cursor: pointer;
-      position: relative; z-index: 101;
-    }
-    .nav-mobile-toggle span {
-      display: block; width: 100%; height: 1.5px;
-      background: var(--black); position: absolute; left: 0;
-      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s;
-    }
-    .nav-mobile-toggle span:nth-child(1) { top: 8px; }
-    .nav-mobile-toggle span:nth-child(2) { bottom: 8px; }
-    body.nav-open .nav-mobile-toggle span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
-    body.nav-open .nav-mobile-toggle span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
-
-    @media (max-width: 860px) {
-      nav { padding: 16px 20px; }
-      .nav-mobile-toggle { display: block; }
-      body.nav-open nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-      .nav-name { position: relative; z-index: 101; }
-      .nav-links {
-        position: fixed; inset: 0;
-        background: rgba(10,10,10,0.98);
-        flex-direction: column; justify-content: center;
-        gap: 32px; font-size: 1.5rem;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-      body.nav-open .nav-links { opacity: 1; pointer-events: auto; }
-      .nav-links a { font-size: 1.25rem; }
-      .nav-divider { width: 40px; height: 1px; }
-    }
-
-    /* HEADER */
-    .cs-header {
-      padding: 120px 40px 48px;
-      border-bottom: 1px solid var(--light-gray);
-      max-width: 1000px; margin: 0 auto;
-    }
-    .cs-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
-      margin-bottom: 16px; display: block;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.1s;
-    }
-    .cs-title {
-      font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 600;
-      letter-spacing: -0.03em; line-height: 1.06;
-      color: var(--black); margin-bottom: 28px; max-width: 16ch;
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s;
-    }
-    .cs-intro {
-      opacity: 0; animation: fadeUp 0.5s ease forwards 0.35s;
-      max-width: 680px;
-    }
-    .cs-intro p { font-size: 1.05rem; line-height: 1.75; color: var(--gray); margin-bottom: 18px; }
-    .cs-intro p:last-child { margin-bottom: 0; }
-    .cs-intro strong { color: var(--black); font-weight: 500; }
-
-    /* PROJECTS */
-    .projects { max-width: 1000px; margin: 0 auto; padding: 72px 40px 96px; }
-    .projects-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--gray); margin-bottom: 28px; display: block;
-    }
-    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-    .project-card {
-      position: relative; display: block; text-decoration: none;
-      border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--light-gray); background: #0d0d0d;
-      transition: transform 0.5s var(--ease-out-expo), border-color 0.3s;
-    }
-    .project-card:hover { transform: translateY(-5px); border-color: #2e2e2e; }
-
-    .project-visual {
-      position: relative; aspect-ratio: 16/10; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .project-visual img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; transition: transform 0.7s var(--ease-out-expo);
-    }
-    .project-card:hover .project-visual img { transform: scale(1.04); }
-
-    .status-pill {
-      position: absolute; top: 16px; right: 16px; z-index: 3;
-      font-size: 0.58rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 6px 12px; border-radius: 100px;
-      background: rgba(255,255,255,0.12); color: #fff;
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .status-pill.live { background: rgba(52,211,153,0.16); border-color: rgba(52,211,153,0.3); }
-    .status-pill.live::before {
-      content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
-      background: #34d399; margin-right: 6px; vertical-align: middle;
-    }
-
-    /* Spark branded visual */
-    .spark-visual { background: radial-gradient(125% 125% at 22% 8%, #2c1670 0%, #1A1040 52%, #110a2c 100%); }
-    .spark-visual::after {
-      content: ''; position: absolute; bottom: -40px; right: -30px;
-      width: 160px; height: 160px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(236,72,153,0.45) 0%, transparent 70%);
-      filter: blur(8px);
-    }
-    .spark-wordmark {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(2.2rem, 4.5vw, 3.2rem); letter-spacing: -0.02em;
-      background: linear-gradient(92deg, #A78BFA 0%, #EC4899 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      position: relative; z-index: 2;
-    }
-
-    /* Tolk branded visual — cool indigo/cyan, distinct from Spark's warm violet/pink */
-    .tolk-visual { background: radial-gradient(125% 125% at 78% 8%, #14306b 0%, #0e1f4a 50%, #08122e 100%); }
-    .tolk-visual::after {
-      content: ''; position: absolute; bottom: -40px; left: -30px;
-      width: 160px; height: 160px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(34,211,238,0.34) 0%, transparent 70%);
-      filter: blur(8px);
-    }
-    .tolk-wordmark {
-      font-weight: 700; font-size: clamp(2.2rem, 4.5vw, 3.2rem); letter-spacing: -0.02em;
-      background: linear-gradient(92deg, #818CF8 0%, #22D3EE 100%);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      position: relative; z-index: 2;
-      display: inline-flex; align-items: center; gap: 10px;
-    }
-    .tolk-wordmark .globe { -webkit-text-fill-color: initial; font-size: 0.78em; }
-
-    .project-info { padding: 24px 26px 28px; }
-    .project-meta {
-      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 12px; display: block;
-    }
-    .project-title {
-      font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em;
-      color: var(--black); line-height: 1.3; margin-bottom: 10px;
-    }
-    .project-desc { font-size: 0.92rem; color: var(--gray); line-height: 1.6; margin-bottom: 18px; }
-    .project-cta { font-size: 0.78rem; font-weight: 500; color: var(--accent); transition: gap 0.2s; }
-    .project-card:hover .project-cta { text-decoration: underline; text-underline-offset: 3px; }
-
-    @media (max-width: 860px) {
-      .cs-header { padding: 100px 20px 40px; }
-      .projects { padding: 56px 20px 72px; }
-      .projects-grid { grid-template-columns: 1fr; gap: 16px; }
-      footer { flex-direction: column; gap: 12px; align-items: flex-start; }
-    }
-
-    /* CTA */
-    
-.cs-cta .btn-pill {
-  background: #FFFFFF !important;
-  color: #030303 !important;
-}
-.cs-cta .btn-pill:hover {
-  background: #E2E2E2 !important;
-}
-.cs-cta {
-
-      padding: 64px 40px; background: #050505;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .cta-left h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600;
-      letter-spacing: -0.03em; color: #fff; line-height: 1.1; margin-bottom: 8px;
-    }
-    .cta-left p { font-size: 0.875rem; color: rgba(255,255,255,0.45); }
-    .btn-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #fff; padding: 13px 26px; border-radius: 100px;
-      font-size: 0.8rem; font-weight: 500; text-decoration: none; white-space: nowrap;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-pill:hover { background: #1238e0; transform: translateY(-1px); }
-    @media (max-width: 860px) { .cs-cta { padding: 48px 20px; flex-direction: column; gap: 32px; text-align: center; } }
-
-    /* FOOTER */
-    footer {
-      padding: 28px 40px; border-top: 1px solid rgba(255,255,255,0.08);
-      background: #050505; display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-text { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-
-    /* REVEAL & PROGRESS */
-    .reveal {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-stagger > * {
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
-
-    .read-progress {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: var(--accent); z-index: 200; width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
 
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html" class="active">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html" class="active" aria-current="page">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <header class="cs-header">
+  <main id="main">
+
+  <div class="cs-header">
     <span class="cs-label">Self-initiated · AI-assisted · 2026</span>
-    <h1 class="cs-title">Products I design and ship myself — with AI as a build partner.</h1>
+    <h1 class="cs-title cs-title--statement">Products I design and ship myself — with AI as a build partner.</h1>
     <div class="cs-intro">
       <p>This is where I go past Figma. These are products I take from a raw idea to a live, deployed app — owning the <strong>concept, UX architecture, visual identity, and content</strong>, then building and shipping them through AI-assisted development.</p>
       <p>For me it's less about "using AI" and more about closing the loop. Designing and shipping a real product solo means I validate ideas with real users instead of mockups, make sharper product decisions, and understand exactly what I'm handing to engineering in my day-to-day work.</p>
       <p>Each project below started as a personal itch and turned into something real.</p>
     </div>
-  </header>
+  </div>
 
-  <section class="projects">
-    <span class="projects-label reveal">Projects</span>
-    <div class="projects-grid">
+  <section class="work" aria-labelledby="projects-title">
+    <div class="work-header reveal">
+      <h2 id="projects-title">Projects</h2>
+      <p class="work-count">2 projects</p>
+    </div>
+
+    <div class="work-grid work-grid--2 reveal-stagger">
 
       <!-- TOLK -->
-      <a href="tolk.html" class="project-card reveal">
-        <div class="project-visual tolk-visual">
-          <span class="status-pill live">Live</span>
-          <span class="tolk-wordmark"><span class="globe">🌍</span>Tolk</span>
+      <article class="card">
+        <div class="card-media card-media--shots">
+          <picture><source type="image/webp" srcset="images/tolk_search-600.webp"><img src="images/tolk_search.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Tolk: search result for the German word Hund."></picture>
+          <picture><source type="image/webp" srcset="images/tolk_grammar-600.webp"><img src="images/tolk_grammar.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Tolk: grammar screen."></picture>
         </div>
-        <div class="project-info">
-          <span class="project-meta">German Learning · Web App · Live</span>
-          <h3 class="project-title">Tolk — German learning, built for daily use</h3>
-          <p class="project-desc">A mobile-first German learning tool I designed and shipped because the existing apps didn't fit how I actually learn. Built with Antigravity, Groq, and the Unsplash API.</p>
-          <span class="project-cta">View project →</span>
+        <div class="card-body">
+          <p class="card-kicker">German learning · Web app</p>
+          <h3 class="card-title"><a href="tolk.html" class="card-link">Tolk — German learning, built for daily use</a></h3>
+          <p class="card-desc">A mobile-first German learning tool I designed and shipped because the existing apps didn't fit how I actually learn. Built with Antigravity, Groq, and the Unsplash API.</p>
+          <dl class="card-facts">
+            <div><dt>Role</dt><dd>Concept, UX, visual identity, content</dd></div>
+            <div><dt>Year</dt><dd>2026</dd></div>
+            <div><dt>Status</dt><dd><span class="status status--live">Live</span></dd></div>
+          </dl>
+          <p class="card-cta" aria-hidden="true">View project <span class="arrow">→</span></p>
         </div>
-      </a>
+      </article>
 
       <!-- SPARK -->
-      <a href="spark.html" class="project-card reveal">
-        <div class="project-visual spark-visual">
-          <span class="status-pill live">Live</span>
-          <span class="spark-wordmark">Spark</span>
+      <article class="card">
+        <div class="card-media card-media--shots">
+          <picture><source type="image/webp" srcset="images/spark_home-600.webp"><img src="images/spark_home.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Spark: start screen asking how you want to play."></picture>
+          <picture><source type="image/webp" srcset="images/spark_question-600.webp"><img src="images/spark_question.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Spark: a question card."></picture>
         </div>
-        <div class="project-info">
-          <span class="project-meta">Social Card Game · Language Layer · WIP</span>
-          <h3 class="project-title">Spark — A conversation card game with a language-learning layer</h3>
-          <p class="project-desc">A social card game for multilingual groups, with a progressive immersion mode for language practice. Full product ownership — concept, UX, brand, and content. Built with Cursor and Claude.</p>
-          <span class="project-cta">View project →</span>
+        <div class="card-body">
+          <p class="card-kicker">Social card game · Language layer</p>
+          <h3 class="card-title"><a href="spark.html" class="card-link">Spark — A conversation card game with a language-learning layer</a></h3>
+          <p class="card-desc">A social card game for multilingual groups, with a progressive immersion mode for language practice. Full product ownership — concept, UX, brand, and content. Built with Cursor and Claude.</p>
+          <dl class="card-facts">
+            <div><dt>Role</dt><dd>Concept, UX, brand, content</dd></div>
+            <div><dt>Year</dt><dd>2026</dd></div>
+            <div><dt>Status</dt><dd><span class="status">Beta</span></dd></div>
+          </dl>
+          <p class="card-cta" aria-hidden="true">View project <span class="arrow">→</span></p>
         </div>
-      </a>
+      </article>
 
     </div>
   </section>
@@ -353,11 +105,13 @@
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -366,63 +120,6 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
-  <script>
-    // ── AI PARTICLES BACKGROUND ──
-    (function() {
-      const canvas = document.createElement('canvas');
-      canvas.id = 'aiParticles';
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0'; canvas.style.left = '0';
-      canvas.style.width = '100vw'; canvas.style.height = '100vh';
-      canvas.style.zIndex = '-1'; canvas.style.pointerEvents = 'none';
-      document.body.prepend(canvas);
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-      window.addEventListener('resize', resize); resize();
-      const particles = [];
-      const particleCount = window.innerWidth < 800 ? 35 : 75;
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * w, y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.5,
-          vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-          hue: Math.random() * 80 + 210
-        });
-      }
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-        particles.forEach((p, i) => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-          p.hue += 0.2; if (p.hue > 290) p.hue = 210;
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p.x - p2.x, dy = p.y - p2.y;
-            const dist = dx * dx + dy * dy;
-            if (dist < 18000) {
-              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `hsla(${p.hue}, 80%, 65%, ${0.12 - (dist / 18000) * 0.12})`;
-              ctx.lineWidth = 0.6; ctx.stroke();
-            }
-          }
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${p.hue}, 90%, 75%, 0.5)`; ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // ── Reveal fallback (idempotent with shared-animations.js) ──
-    (function() {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.08 });
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => obs.observe(el));
-    })();
-  </script>
+  <script src="shared-animations.js?v=4"></script>
 </body>
 </html>

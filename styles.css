@@ -530,6 +530,12 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 }
 
 .work-more { margin-top: var(--space-9); }
+.work-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+/* Status label: text first, the dot is decoration */
+.status { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: var(--weight-medium); }
+.status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-text-subtle); }
+.status--live::before { background: #16a34a; }
 
 /* Project card — one pattern for every project */
 .card {
@@ -719,6 +725,13 @@ a:focus-visible > .arrow { transform: translateX(4px); }
   line-height: 1.02;
   margin-bottom: var(--space-4);
 }
+
+/* A sentence-length title (AI Projects) */
+.cs-title--statement { font-size: var(--text-2xl); line-height: 1.1; letter-spacing: -0.03em; max-width: 22ch; margin-bottom: var(--space-5); }
+.cs-intro { max-width: var(--measure); animation: rise var(--dur-enter) var(--ease-enter) calc(var(--stagger) * 2) both; }
+.cs-intro p { color: var(--color-text-muted); margin-bottom: var(--space-4); }
+.cs-intro p:last-child { margin-bottom: 0; }
+.cs-intro strong { color: var(--color-text); font-weight: var(--weight-medium); }
 
 .cs-subtitle {
   font-size: var(--text-md);
