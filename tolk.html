@@ -6,746 +6,52 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tolk — Guido Usnayo Vidaurre</title>
-  <meta name="description"
-    content="Tolk — restructuring a feature-first German learning app around a single core intent. Product design: IA, flows, content model, responsive system.">
+  <meta name="description" content="Case study: Tolk, a mobile-first German learning web app I designed and shipped myself, focused on the design decisions behind it.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --black: #fafafa;
-      --white: #0a0a0a;
-      --gray: #999999;
-      --light-gray: #1f1f1f;
-      --accent: #7C3AED;
-      --accent-hover: #6d28d9;
-      --font: 'Inter', -apple-system, sans-serif;
-    }
-
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-
-    nav.scrolled {
-      border-bottom-color: var(--light-gray);
-    }
-
-    .nav-name {
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: var(--black);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--black);
-      transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .nav-links a:hover {
-      color: var(--black);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-links a.active {
-      color: var(--black);
-      font-weight: 500;
-    }
-
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-divider {
-      width: 1px;
-      height: 12px;
-      background: var(--light-gray);
-    }
-
-    .nav-mobile-toggle {
-      display: none;
-      width: 24px;
-      height: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      z-index: 101;
-    }
-
-    .nav-mobile-toggle span {
-      display: block;
-      width: 100%;
-      height: 1.5px;
-      background: var(--black);
-      position: absolute;
-      left: 0;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
-    }
-
-    .nav-mobile-toggle span:nth-child(1) {
-      top: 8px;
-    }
-
-    .nav-mobile-toggle span:nth-child(2) {
-      bottom: 8px;
-    }
-
-    body.nav-open .nav-mobile-toggle span:nth-child(1) {
-      transform: translateY(3.5px) rotate(45deg);
-    }
-
-    body.nav-open .nav-mobile-toggle span:nth-child(2) {
-      transform: translateY(-3.5px) rotate(-45deg);
-    }
-
-    @media (max-width: 860px) {
-      nav {
-        padding: 16px 20px;
-      }
-
-      .nav-mobile-toggle {
-        display: block;
-      }
-
-      body.nav-open nav {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-      }
-
-      .nav-name {
-        position: relative;
-        z-index: 101;
-      }
-
-      .nav-links {
-        position: fixed;
-        inset: 0;
-        background: rgba(10, 10, 10, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        gap: 32px;
-        font-size: 1.5rem;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-
-      body.nav-open .nav-links {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .nav-links a {
-        font-size: 1.25rem;
-      }
-
-      .nav-divider {
-        width: 40px;
-        height: 1px;
-      }
-    }
-
-    /* HEADER */
-    .cs-header {
-      padding: 120px 40px 48px;
-      border-bottom: 1px solid var(--light-gray);
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .cs-back {
-      font-size: 0.75rem;
-      color: var(--gray);
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 18px;
-      transition: color 0.2s;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.05s;
-    }
-
-    .cs-back:hover {
-      color: var(--black);
-    }
-
-    .cs-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-      display: block;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.1s;
-    }
-
-    .cs-title {
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.07;
-      color: var(--black);
-      margin-bottom: 16px;
-      max-width: 18ch;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.2s;
-    }
-
-    .cs-note {
-      font-size: 0.95rem;
-      font-style: italic;
-      color: var(--gray);
-      line-height: 1.6;
-      max-width: 640px;
-      margin-top: 8px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.3s;
-    }
-
-    .cs-meta {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.4s;
-    }
-
-    .cs-meta-label {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 4px;
-    }
-
-    .cs-meta-value {
-      font-size: 0.85rem;
-      color: var(--black);
-      line-height: 1.4;
-    }
-
-    .cs-actions {
-      margin-top: 32px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.5s;
-    }
-
-    .cs-live-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--accent);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .cs-live-btn:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
-
-    .cs-live-btn .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #fff;
-      animation: livePulse 2s infinite;
-    }
-
-    @keyframes livePulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55);
-      }
-
-      70% {
-        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-      }
-    }
-
-    /* HERO IMAGE (phone) */
-    .cs-hero-img {
-      display: block;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 320px;
-      border-radius: 32px;
-      border: 6px solid #222;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-      box-sizing: border-box;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .cs-hero-img:hover {
-      transform: scale(1.01);
-    }
-
-    /* CONTENT */
-    .cs-content {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 80px 40px 0;
-    }
-
-    .cs-content.tight {
-      padding-top: 56px;
-    }
-
-    .cs-section {
-      margin-bottom: 72px;
-    }
-
-    .cs-section h2 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      margin-bottom: 24px;
-      line-height: 1.2;
-    }
-
-    .cs-section p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--gray);
-      margin-bottom: 20px;
-    }
-
-    .cs-section p:last-child {
-      margin-bottom: 0;
-    }
-
-    .cs-section strong {
-      color: var(--black);
-      font-weight: 500;
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-top: 28px;
-    }
-
-    .feature-list li {
-      margin-bottom: 22px;
-    }
-
-    .feature-list h4 {
-      font-size: 1.02rem;
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 6px;
-    }
-
-    .feature-list p {
-      margin-bottom: 0;
-      font-size: 1rem;
-    }
-
-    /* DECISION — split (phone) */
-    .wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    .decision-split {
-      border-top: 1px solid var(--light-gray);
-      padding-top: 64px;
-      margin-bottom: 64px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .decision-number {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .decision-split h3,
-    .decision-block h3 {
-      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      margin-bottom: 16px;
-      line-height: 1.15;
-    }
-
-    .decision-split p,
-    .decision-block p {
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--gray);
-    }
-
-    .decision-split strong,
-    .decision-block strong {
-      color: var(--black);
-      font-weight: 500;
-    }
-
-    .decision-split .decision-img {
-      width: 100%;
-      max-width: 280px;
-      display: block;
-      margin: 0 auto;
-      border-radius: 28px;
-      border: 6px solid #222;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    /* DECISION — full-width (diagrams / desktop) */
-    .decision-block {
-      border-top: 1px solid var(--light-gray);
-      padding-top: 64px;
-      margin-bottom: 64px;
-    }
-
-    .decision-block .d-text {
-      max-width: 720px;
-    }
-
-    .decision-block .d-figure {
-      margin-top: 40px;
-    }
-
-    .d-shows {
-      font-size: 0.82rem;
-      font-style: italic;
-      color: #6f6f6f;
-      margin-top: 18px;
-    }
-
-    .diagram-img {
-      width: 100%;
-      display: block;
-      border-radius: 14px;
-      border: 1px solid var(--light-gray);
-      background: #000;
-    }
-
-    .diagram-img.portrait {
-      max-width: 540px;
-      margin: 0 auto;
-    }
-
-    .shot-img {
-      width: 100%;
-      display: block;
-      border-radius: 12px;
-      border: 1px solid var(--light-gray);
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
-    }
-
-    .fig-caption {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--gray);
-      margin-top: 16px;
-    }
-
-    .img-2up {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      max-width: 640px;
-      margin: 0 auto 64px;
-      padding: 0 40px;
-    }
-
-    .img-2up img {
-      width: 100%;
-      max-width: 260px;
-      display: block;
-      margin: 0 auto;
-      border-radius: 26px;
-      border: 6px solid #222;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    @media (max-width: 860px) {
-      .decision-split {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .img-2up {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .cs-header {
-        padding: 100px 20px 40px;
-      }
-
-      .cs-content {
-        padding: 56px 20px 0;
-      }
-
-      .wrap {
-        padding: 0 20px;
-      }
-
-      .cs-meta {
-        gap: 24px;
-        flex-direction: column;
-      }
-
-      
-.cs-cta .btn-pill {
-  background: #FFFFFF !important;
-  color: #030303 !important;
-}
-.cs-cta .btn-pill:hover {
-  background: #E2E2E2 !important;
-}
-.cs-cta {
-
-        padding: 48px 20px;
-        flex-direction: column;
-        gap: 32px;
-        text-align: center;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 16px;
-        align-items: flex-start;
-      }
-    }
-
-    /* CTA */
-    .cs-cta {
-      padding: 64px 40px;
-      background: #050505;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 24px;
-    }
-
-    .cta-left h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-
-    .cta-left p {
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.45);
-    }
-
-    .btn-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #fff;
-      padding: 13px 26px;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-pill:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 28px 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: #050505;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-text {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* REVEAL & PROGRESS */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-stagger>* {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal-stagger.visible>*:nth-child(1) {
-      opacity: 1;
-      transform: none;
-      transition-delay: 0s;
-    }
-
-    .reveal-stagger.visible>*:nth-child(2) {
-      opacity: 1;
-      transform: none;
-      transition-delay: 0.1s;
-    }
-
-    .reveal-stagger.visible>*:nth-child(3) {
-      opacity: 1;
-      transform: none;
-      transition-delay: 0.2s;
-    }
-
-    .read-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      background: var(--accent);
-      z-index: 200;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>
 
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html" class="active" aria-current="page">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <header class="cs-header">
+  <main id="main">
+
+  <div class="cs-header">
     <a href="ai-projects.html" class="cs-back">← AI Projects</a>
     <span class="cs-label">Self-initiated · Product design · 2026</span>
-    <h1 class="cs-title">Tolk — a German learning tool I built because the existing apps didn't fit how I actually
+    <h1 class="cs-title cs-title--statement cs-title--long">Tolk — a German learning tool I built because the existing apps didn't fit how I actually
       learn.</h1>
-    <p class="cs-note">An early-stage, in-progress product. This case study focuses on the design decisions and the
+    <p class="cs-subtitle">An early-stage, in-progress product. This case study focuses on the design decisions and the
       reasoning behind them — which is where most of the work lived.</p>
 
     <div class="cs-meta">
@@ -768,14 +74,13 @@
     </div>
 
     <div class="cs-actions">
-      <a href="https://gedio-uv.github.io/deutsch-lernen/" target="_blank" rel="noopener" class="cs-live-btn"><span
-          class="dot"></span>Open Tolk live ↗</a>
+      <a href="https://gedio-uv.github.io/deutsch-lernen/" target="_blank" rel="noopener" class="btn-primary">Open Tolk live ↗<span class="visually-hidden"> (opens in a new tab)</span></a>
     </div>
-  </header>
+  </div>
 
-  <img src="images/tolk_search.png" alt="Tolk — word search result for Hund" class="cs-hero-img">
+  <div class="cs-hero-phone"><picture><source type="image/webp" srcset="images/tolk_search.webp"><img src="images/tolk_search.png" width="1290" height="2390" fetchpriority="high" decoding="async" alt="Tolk search result for the German word Hund, with a photo, the article “der”, and a pronunciation button."></picture></div>
 
-  <main class="cs-content">
+  <div class="cs-content">
     <section class="cs-section reveal">
       <h2>The starting point</h2>
       <p>Most language apps are built around streaks, points, and daily goals. They assume you have 20 minutes, a quiet
@@ -795,34 +100,35 @@
         I focused entirely on UX. Antigravity handled the UI execution. The goal was to get from zero to something I'd
         use daily in one session — and to validate the concept with real use before investing more time.</p>
     </section>
-  </main>
+  </div>
 
   <!-- DECISION 1 -->
-  <section class="decision-block wrap reveal">
-    <div class="d-text">
+  <div class="cs-content">
+    <div class="decision reveal">
       <span class="decision-number">Decision 01 · Information architecture</span>
       <h3>Navigation by intent: five tabs down to four</h3>
       <p>The old bottom bar mixed unrelated mental modes — a lookup tool, passive learning, active practice, reference,
         and configuration — competing for the same scarce space. I regrouped navigation around <strong>user
           intent</strong> and cut it to four: Search, Games, Grammar, Profile. Settings, low-frequency, moved into
         Profile; an underdeveloped Music mode was deferred rather than shipped half-built.</p>
-      <p class="d-shows">Shows: information architecture, mental models, editing down.</p>
+      <p class="decision-shows">Shows: information architecture, mental models, editing down.</p>
+      <figure class="cs-figure">
+      <div class="diagram-panel"><picture><source type="image/webp" srcset="images/tolk_sitemap.webp"><img src="images/tolk_sitemap.png" width="3720" height="2632" loading="lazy" decoding="async" alt="Tolk sitemap: Home branches into Search, Games, Grammar, and Profile, each with its sub-pages."></picture></div>
+      <figcaption class="cs-caption">Sitemap — the restructured four-tab architecture, organized by intent.</figcaption>
+      </figure>
     </div>
-    <div class="d-figure">
-      <img src="images/tolk_sitemap.png" alt="Tolk sitemap — Home branching into Search, Games, Grammar, Profile"
-        class="diagram-img">
-      <p class="fig-caption">Sitemap — the restructured four-tab architecture, organized by intent.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- 2-UP: GAMES + GRAMMAR -->
-  <div class="img-2up reveal">
-    <img src="images/tolk_games.png" alt="Tolk Games — Was ist das quiz">
-    <img src="images/tolk_grammar.png" alt="Tolk Grammar — declension tables">
+  <div class="cs-content">
+    <div class="img-pair img-pair--spaced reveal">
+      <picture><source type="image/webp" srcset="images/tolk_games.webp"><img src="images/tolk_games.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Tolk Games: the “Was ist das?” picture quiz."></picture>
+      <picture><source type="image/webp" srcset="images/tolk_grammar.webp"><img src="images/tolk_grammar.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Tolk Grammar: article declension tables."></picture>
+    </div>
   </div>
 
   <!-- DECISION 2 -->
-  <div class="wrap">
+  <div class="cs-content">
     <div class="decision-split reveal">
       <div class="decision-text">
         <span class="decision-number">Decision 02 · Prioritization</span>
@@ -833,16 +139,16 @@
           those stats into Profile rather than letting them gate the main task. I documented a lighter option — a thin
           progress strip above Search — as a future move if retention becomes the priority.
         </p>
-        <p class="d-shows">Shows: separating activation from retention, resisting vanity surfaces, sequencing by what's
+        <p class="decision-shows">Shows: separating activation from retention, resisting vanity surfaces, sequencing by what's
           validated.</p>
       </div>
-      <img src="images/tolk_profile.png" alt="Tolk Profile — progress, difficulty, pronunciation" class="decision-img">
+      <picture><source type="image/webp" srcset="images/tolk_profile.webp"><img src="images/tolk_profile.png" width="1290" height="2390" loading="lazy" decoding="async" alt="Tolk Profile: progress stats, difficulty level, and pronunciation speed." class="img-phone"></picture>
     </div>
   </div>
 
   <!-- DECISION 3 -->
-  <section class="decision-block wrap reveal">
-    <div class="d-text">
+  <div class="cs-content">
+    <div class="decision reveal">
       <span class="decision-number">Decision 03 · Flow rigor</span>
       <h3>Resolving the onboarding flow</h3>
       <p>Onboarding branched on the user's level — beginner, advanced, or "not sure" — but the original flow never
@@ -850,36 +156,33 @@
         explicit choices, and each path sets both the interface language and the level (beginner → native-language UI;
         advanced → German UI). I also removed the account-creation step, because it contradicted a later decision about
         authentication.</p>
-      <p class="d-shows">Shows: flow rigor, handling the branch everyone forgets, internal consistency.</p>
+      <p class="decision-shows">Shows: flow rigor, handling the branch everyone forgets, internal consistency.</p>
+      <figure class="cs-figure">
+      <div class="diagram-panel diagram-panel--portrait"><picture><source type="image/webp" srcset="images/tolk_flow.webp"><img src="images/tolk_flow.png" width="3432" height="4424" loading="lazy" decoding="async" alt="Onboarding flow: intro, optional registration, choose level; beginner, advanced, and “I’m not sure” (placement test) all resolve to a level and interface language before Home."></picture></div>
+      <figcaption class="cs-caption">Onboarding flow — the "not sure" path resolves into the same two outcomes.</figcaption>
+      </figure>
     </div>
-    <div class="d-figure">
-      <img src="images/tolk_flow.png"
-        alt="Tolk onboarding flow — intro, optional register, choose level, placement test resolving to level + UI, home"
-        class="diagram-img portrait">
-      <p class="fig-caption">Onboarding flow — the "not sure" path resolves into the same two outcomes.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- DECISION 4 (text only) -->
-  <main class="cs-content tight">
-    <section class="cs-section reveal"
-      style="border-top:1px solid var(--light-gray); padding-top:64px; margin-bottom:0;">
+  <div class="cs-content">
+    <div class="decision reveal">
       <span class="decision-number">Decision 04 · Scope discipline</span>
-      <h2 style="margin-top:12px;">Deferring accounts: local-first persistence</h2>
+      <h3>Deferring accounts: local-first persistence</h3>
       <p>"Save my progress" reads as "build login," but they're not the same thing. I separated them: progress persists
         locally on the device first, with no account required. This keeps the product feeling like it remembers the user
         while a lightweight email-capture test measures whether people actually want to register — <em>before</em>
         committing to building authentication. I structured the saved data as a single versioned store, so that once
         registration intent is validated, migrating local progress into real accounts is a clean one-step job rather
         than a rewrite.</p>
-      <p class="d-shows">Shows: scope discipline, validation-driven design, designing for a future state without
+      <p class="decision-shows">Shows: scope discipline, validation-driven design, designing for a future state without
         over-building the present.</p>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <!-- DECISION 5 -->
-  <section class="decision-block wrap reveal">
-    <div class="d-text">
+  <div class="cs-content">
+    <div class="decision reveal">
       <span class="decision-number">Decision 05 · Progressive disclosure</span>
       <h3>Level-adaptive conjugation, on a real content model</h3>
       <p>German verbs carry a lot of conjugation. Showing all nine tenses to a beginner is noise; hiding them from an
@@ -887,19 +190,17 @@
         the full set for advanced — and designed the display to adapt per device. Underneath sits a structured content
         model: every word entry resolves to an image, gender, meaning, a sample sentence, and a grammatical type that
         branches into verb, noun, adjective, or connector — each carrying only the depth that type needs.</p>
-      <p class="d-shows">Shows: progressive disclosure, content-dense UX, a real linguistic data model.</p>
+      <p class="decision-shows">Shows: progressive disclosure, content-dense UX, a real linguistic data model.</p>
+      <figure class="cs-figure">
+      <div class="diagram-panel"><picture><source type="image/webp" srcset="images/tolk_content.webp"><img src="images/tolk_content.png" width="3740" height="2520" loading="lazy" decoding="async" alt="Content model: a word entry resolves to a related image, word and gender, meaning, sentence sample, and a grammatical type that branches into verb, noun, adjective, or connector."></picture></div>
+      <figcaption class="cs-caption">Content model — one entry, typed by part of speech, with depth scaled to type.</figcaption>
+      </figure>
     </div>
-    <div class="d-figure">
-      <img src="images/tolk_content.png"
-        alt="Tolk content model — word entry resolving to image, word+gender, meaning, sentence, grammatical type"
-        class="diagram-img">
-      <p class="fig-caption">Content model — one entry, typed by part of speech, with depth scaled to type.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- DECISION 6 -->
-  <section class="decision-block wrap reveal">
-    <div class="d-text">
+  <div class="cs-content">
+    <div class="decision reveal">
       <span class="decision-number">Decision 06 · Responsive system</span>
       <h3>One consistent pattern across devices</h3>
       <p>I extended the mobile-first app to iPad and laptop with a hybrid model — most views stay a centered, readable
@@ -907,105 +208,49 @@
         across devices so users never relearn the layout. Along the way I corrected a stats block that had shipped
         unstyled, rebuilding it so the number is the visual hero and the label recedes, making progress legible at a
         glance.</p>
-      <p class="d-shows">Shows: responsive / cross-device design, design-system consistency, visual hierarchy.</p>
+      <p class="decision-shows">Shows: responsive / cross-device design, design-system consistency, visual hierarchy.</p>
+      <figure class="cs-figure">
+      <picture><source type="image/webp" srcset="images/tolk_desktop.webp"><img src="images/tolk_desktop.png" width="2000" height="1084" loading="lazy" decoding="async" alt="Tolk on desktop: a two-column word entry with the conjugation grid." class="cs-img-full"></picture>
+      <figcaption class="cs-caption">Desktop — the word entry opens into a two-column layout, with the conjugation grid showing multiple tenses at once.</figcaption>
+      </figure>
     </div>
-    <div class="d-figure">
-      <img src="images/tolk_desktop.png" alt="Tolk on desktop — two-column word entry with conjugation grid"
-        class="shot-img">
-      <p class="fig-caption">Desktop — the word entry opens into a two-column layout, with the conjugation grid showing
-        multiple tenses at once.</p>
-    </div>
-  </section>
+  </div>
 
   <!-- CLOSE -->
-  <main class="cs-content">
+  <div class="cs-content">
     <section class="cs-section reveal">
       <h2>What this project shows</h2>
-      <ul class="feature-list reveal-stagger">
-        <li>
-          <p>That I can go from problem to live product in a single session. That I use the same tools and thinking on
+      <p>That I can go from problem to live product in a single session. That I use the same tools and thinking on
             personal projects as I do on client work. And that the best way to understand a user's problem is sometimes
             to be that user.</p>
-        </li>
-      </ul>
     </section>
 
-    <section class="cs-section reveal" style="margin-bottom:0;">
+    <section class="cs-section reveal">
       <h2>Status &amp; next steps</h2>
-      <p>Live at gedio-uv.github.io/tolk — currently sharing with German classmates for feedback. Next iteration will be
+      <p>Live at <a href="https://gedio-uv.github.io/tolk">gedio-uv.github.io/tolk</a> — currently sharing with German classmates for feedback. Next iteration will be
         shaped by real input from people actively learning the language at B1–B2 level.</p>
     </section>
-  </main>
+  </div>
 
   <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     <span class="footer-text">© 2026 Guido Usnayo Vidaurre</span>
     <span class="footer-text">Leipzig · Available across Germany and Europe</span>
-    <span class="footer-text">guido.usnayo@icloud.com</span>
+    <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=2"></script>
-  <script>
-    // ── AI PARTICLES BACKGROUND ──
-    (function () {
-      const canvas = document.createElement('canvas');
-      canvas.id = 'aiParticles';
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0'; canvas.style.left = '0';
-      canvas.style.width = '100vw'; canvas.style.height = '100vh';
-      canvas.style.zIndex = '-1'; canvas.style.pointerEvents = 'none';
-      document.body.prepend(canvas);
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-      window.addEventListener('resize', resize); resize();
-      const particles = [];
-      const particleCount = window.innerWidth < 800 ? 35 : 75;
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.5 + 0.5, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, hue: Math.random() * 60 + 250 });
-      }
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-        particles.forEach((p, i) => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-          p.hue += 0.2; if (p.hue > 310) p.hue = 250;
-          for (let j = i + 1; j < particles.length; j++) {
-            const p2 = particles[j];
-            const dx = p.x - p2.x, dy = p.y - p2.y;
-            const dist = dx * dx + dy * dy;
-            if (dist < 18000) {
-              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `hsla(${p.hue}, 80%, 70%, ${0.12 - (dist / 18000) * 0.12})`;
-              ctx.lineWidth = 0.6; ctx.stroke();
-            }
-          }
-          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${p.hue}, 90%, 78%, 0.5)`; ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // ── Reveal fallback (idempotent with shared-animations.js) ──
-    (function () {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.08 });
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => obs.observe(el));
-    })();
-  </script>
+  <script src="shared-animations.js?v=4"></script>
 </body>
 
 </html>

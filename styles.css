@@ -159,6 +159,7 @@ a { color: var(--color-accent); text-underline-offset: 3px; }
    Ytem bands (its screens are a dark UI and need a dark ground). */
 body.dark-theme,
 .card--plain,
+.diagram-panel,
 .dark-band,
 .hero-dark {
   --color-bg: #0d0f13;
@@ -726,7 +727,12 @@ a:focus-visible > .arrow { transform: translateX(4px); }
   margin-bottom: var(--space-4);
 }
 
-/* A sentence-length title (AI Projects) */
+.cs-back { display: inline-block; margin-bottom: var(--space-5); font-size: var(--text-sm); color: var(--color-text-muted); text-decoration: none; animation: rise var(--dur-enter) var(--ease-enter) both; }
+.cs-back:hover { color: var(--color-text); }
+.cs-actions { margin-top: var(--space-6); animation: rise var(--dur-enter) var(--ease-enter) calc(var(--stagger) * 4) both; }
+.cs-title--long { max-width: 28ch; }
+
+/* A sentence-length title (AI Projects, Tolk, Spark) */
 .cs-title--statement { font-size: var(--text-2xl); line-height: 1.1; letter-spacing: -0.03em; max-width: 22ch; margin-bottom: var(--space-5); }
 .cs-intro { max-width: var(--measure); animation: rise var(--dur-enter) var(--ease-enter) calc(var(--stagger) * 2) both; }
 .cs-intro p { color: var(--color-text-muted); margin-bottom: var(--space-4); }
@@ -821,6 +827,19 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 .cs-section > picture:last-child .cs-img-full { margin-bottom: 0; }
 
 picture { display: block; }
+
+/* Single phone screenshot as a page hero */
+.cs-hero-phone { max-width: 20rem; margin: var(--space-7) auto 0; padding: 0 var(--gutter); }
+.cs-hero-phone img { width: 100%; height: auto; display: block; border-radius: var(--radius-md); }
+
+/* Diagrams drawn for a dark ground sit on a dark panel */
+.diagram-panel { background: var(--color-surface); border-radius: var(--radius-md); padding: var(--space-6); }
+.diagram-panel img { width: 100%; height: auto; display: block; }
+.diagram-panel--portrait img { max-width: 34rem; margin: 0 auto; }
+.decision-shows { font-size: var(--text-sm); color: var(--color-text-subtle); }
+.img-pair.img-pair--spaced { margin-top: var(--space-6); margin-bottom: var(--space-8); }
+@media (min-width: 861px) { .constraints-grid.constraints-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+.cs-section h3.problem-title { font-size: var(--text-base); line-height: var(--leading-snug); margin-bottom: var(--space-1); }
 .img-grid-3--narrow { max-width: 36rem; margin-left: auto; margin-right: auto; }
 .cta-left em { font-style: italic; font-weight: var(--weight-regular); }
 
