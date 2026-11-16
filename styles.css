@@ -9,16 +9,16 @@
 
 :root {
   /* Colour */
-  --color-bg: #0d0f13;
-  --color-surface: #14171d;
-  --color-surface-raised: #1b1f27;
-  --color-border: #272c36;
-  --color-border-strong: #5a6376;
-  --color-text: #f3f4f6;
-  --color-text-muted: #a6adba;
-  --color-text-subtle: #8b93a1;
-  --color-accent: #7d95ff;
-  --color-on-light: #0d0f13;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f1f2f4;
+  --color-border: #e3e5e8;
+  --color-border-strong: #8a8f98;
+  --color-text: #0a0a0a;
+  --color-text-muted: #555b63;
+  --color-text-subtle: #666b73;
+  --color-accent: #1a46ff;
+  --color-on-light: #fafafa; /* text on a --color-text background */
 
   /* Type */
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -602,16 +602,30 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 .card--featured .card-facts { padding-top: 0; border-top: none; font-size: var(--text-base); gap: var(--space-3); }
 .card--featured .card-cta { font-size: var(--text-base); padding-top: var(--space-3); }
 
-/* Card without media (Motion) */
+/* Card without media (Motion): a dark band that closes the page.
+   Re-scopes the colour tokens, so everything inside follows. */
+.card--plain {
+  --color-surface: #0d0f13;
+  --color-border: #2a2f39;
+  --color-border-strong: #5a6376;
+  --color-text: #f3f4f6;
+  --color-text-muted: #a6adba;
+  --color-text-subtle: #8b93a1;
+  --color-accent: #9db0ff;
+  color: var(--color-text);
+}
 .card--plain .card-body {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: var(--space-5) var(--space-8);
-  padding: var(--space-6);
-  align-items: start;
+  padding: var(--space-8) var(--space-7);
+  align-items: end;
 }
 .card--plain .card-main { display: flex; flex-direction: column; gap: var(--space-4); }
-.card--plain .card-facts { padding-top: 0; border-top: none; }
+.card--plain .card-title { font-size: var(--text-3xl); line-height: 1; letter-spacing: -0.04em; }
+.card--plain .card-desc { font-size: var(--text-base); max-width: 32rem; }
+.card--plain .card-facts { padding-top: 0; border-top: none; font-size: var(--text-base); gap: var(--space-3); }
+.card--plain .card-cta { font-size: var(--text-base); padding-top: var(--space-3); }
 
 @media (max-width: 960px) {
   .work-grid { grid-template-columns: 1fr; }
@@ -628,6 +642,7 @@ a:focus-visible > .arrow { transform: translateX(4px); }
   .card--plain .card-body { grid-template-columns: 1fr; padding: var(--space-5); }
   .card--featured .card-facts,
   .card--plain .card-facts { padding-top: var(--space-4); border-top: 1px solid var(--color-border); font-size: var(--text-sm); }
+  .card--plain .card-body { padding: var(--space-7) var(--space-5); align-items: start; }
   .work-more { margin-top: var(--space-8); }
 }
 
