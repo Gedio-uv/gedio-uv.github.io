@@ -62,10 +62,11 @@
   --dur-fast: 150ms;
   --dur-base: 220ms;
   --dur-slow: 300ms;
-  --dur-enter: 450ms;
+  --dur-enter: 500ms;
+  --stagger: 80ms;
   --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
-  --rise: 10px;
+  --rise: 12px;
 
   /* Legacy aliases — used by inline styles on pages not yet migrated */
   --black: var(--color-text);
@@ -344,16 +345,46 @@ a:focus-visible > .arrow { transform: translateX(4px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Page-load reveal of the page header (CSS only, runs once) */
+/* Page intro (CSS only, runs once on load).
+   1. The message arrives first: label, then headline.
+   2. Support follows in reading order, one stagger step apart.
+   3. A hairline draws left to right, closing the intro.
+   Base states are the final states, so with animation off
+   (reduced motion, old browsers) everything is simply there. */
+@keyframes draw {
+  from { transform: scaleX(0); }
+}
+
 .enter,
 .cs-label, .cs-title, .cs-subtitle, .cs-meta,
 .page-label, .page-title, .page-desc, .page-meta,
 .about-label, .about-headline, .about-tagline, .about-quick-meta, .about-photo {
   animation: rise var(--dur-enter) var(--ease-enter) both;
 }
-.enter-2, .cs-title, .page-title, .about-headline { animation-delay: 60ms; }
-.enter-3, .cs-subtitle, .page-desc, .about-tagline, .about-photo { animation-delay: 120ms; }
-.enter-4, .cs-meta, .page-meta, .about-quick-meta { animation-delay: 180ms; }
+.enter-2, .cs-title, .page-title, .about-headline { animation-delay: calc(var(--stagger) * 1); }
+.enter-3, .cs-subtitle, .page-desc, .about-tagline, .about-photo { animation-delay: calc(var(--stagger) * 2); }
+.enter-4, .cs-meta, .page-meta, .about-quick-meta { animation-delay: calc(var(--stagger) * 3); }
+.enter-5 { animation-delay: calc(var(--stagger) * 4); }
+.enter-6 { animation-delay: calc(var(--stagger) * 5); }
+
+.intro-rule,
+.cs-header,
+.page-header { position: relative; }
+
+.intro-rule::before,
+.cs-header::after,
+.page-header::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--color-border);
+  transform-origin: left;
+  animation: draw var(--dur-enter) var(--ease-enter) calc(var(--stagger) * 3) both;
+}
+.intro-rule::before { top: 0; }
+.cs-header::after,
+.page-header::after { bottom: 0; }
 
 /* Scroll reveal (once, via IntersectionObserver) */
 .js .reveal,
@@ -417,7 +448,6 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 .hero-status {
   margin-top: var(--space-8);
   padding-top: var(--space-5);
-  border-top: 1px solid var(--color-border);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   gap: var(--space-6) var(--space-7);
@@ -653,7 +683,6 @@ a:focus-visible > .arrow { transform: translateX(4px); }
 
 .cs-header {
   padding: calc(var(--nav-height) + var(--space-8)) var(--gutter) var(--space-7);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .cs-title {
@@ -940,7 +969,6 @@ footer {
 
 .page-header {
   padding: calc(var(--nav-height) + var(--space-8)) var(--gutter) var(--space-7);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .page-title { font-size: var(--text-3xl); letter-spacing: -0.035em; line-height: 1.02; margin-bottom: var(--space-4); }
