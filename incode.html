@@ -5,41 +5,48 @@
     if (window.location.hostname === 'gedio-uv.github.io') {
       window.location.href = 'https://guido-usnayo.vercel.app' + window.location.pathname + window.location.search;
     }
+    document.documentElement.classList.add('js');
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Incode Fan ID — Guido Usnayo Vidaurre</title>
+  <meta name="description" content="Case study: designing biometric identity verification at national scale. 770,000+ fans verified across 17 stadiums with one consistent flow.">
+  <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <div class="read-progress" id="readProgress"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
-    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span></button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="incode.html" class="active">Incode</a></li>
-      <li><a href="speaker.html">Speaker</a></li>
-      <li><a href="ytem.html">Ytem</a></li>
-      <li><a href="ai-projects.html">AI Projects</a></li>
-      <li><a href="motion.html">Motion</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="about.html">Approach</a></li>
-      <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank">LinkedIn ↗</a></li>
-    </ul>
-  </nav>
+  <header>
+    <nav id="nav" aria-label="Primary">
+      <a href="index.html" class="nav-name">Guido Usnayo Vidaurre</a>
+      <button class="nav-mobile-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="incode.html" class="active" aria-current="page">Incode</a></li>
+        <li><a href="speaker.html">Speaker</a></li>
+        <li><a href="ytem.html">Ytem</a></li>
+        <li><a href="ai-projects.html">AI Projects</a></li>
+        <li><a href="motion.html">Motion</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a href="about.html">Approach</a></li>
+        <li><a href="https://www.linkedin.com/in/guido-usnayovidaurre/" target="_blank" rel="noopener">LinkedIn ↗<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
 
   <!-- HEADER -->
-  <header class="cs-header">
+  <div class="cs-header">
     <span class="cs-label">Case Study 01</span>
     <h1 class="cs-title">Incode Fan ID</h1>
-    <p class="cs-subtitle">Designing identity verification at national scale — 770,000 fans, 17 stadiums, one consistent flow.</p>
+    <p class="cs-subtitle">Designing identity verification at national scale — 770,000+ fans, 17 stadiums, one consistent flow.</p>
     <div class="cs-meta">
       <div class="cs-meta-item">
         <div class="cs-meta-label">Role</div>
@@ -58,19 +65,15 @@
         <div class="cs-meta-value">PM Poojit Sharma</div>
       </div>
     </div>
-<!-- TABS UI -->
-  <div class="tabs-container" style="display: flex; gap: 16px; margin: 32px 0 64px 0; width: 100%; justify-content: flex-start;">
-    <button class="tab-btn active" onclick="switchTab('tab-case-study', this)" style="background: #111; color: #fff; border: 1px solid #111; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: all 0.2s ease;">Case Study</button>
-    <button class="tab-btn" onclick="switchTab('tab-design-process', this)" style="background: transparent; color: #666; border: 1px solid transparent; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: all 0.2s ease;">Design Process</button>
+    <!-- Tabs: only shown when JS runs. Without JS both parts appear one after the other. -->
+    <div class="tabs" data-tabs aria-label="Case study sections">
+      <button type="button" class="tab-btn" data-panel="case-study">Case study</button>
+      <button type="button" class="tab-btn" data-panel="design-process">Design process</button>
+    </div>
   </div>
-  </header>
 
-  <!-- HERO IMAGE -->
-  
-  
-  
-  <div id="tab-case-study" class="tab-content" style="display: block;">
-<img src="images/ic1.png" alt="Incode Fan ID — identity verification flow" class="cs-hero-img">
+  <div id="case-study" class="tab-panel">
+<picture><source type="image/webp" srcset="images/ic1.webp"><img src="images/ic1.png" width="918" height="599" fetchpriority="high" decoding="async" alt="Incode Fan ID: data read from an ID document is prefilled into a “Review your information” screen." class="cs-hero-img"></picture>
 
   <!-- CONTENT -->
   <div class="cs-content">
@@ -82,27 +85,31 @@
       <p>In March 2022, a violent incident at a Liga MX match between Atlas and Querétaro exposed a systemic failure: stadiums had no reliable way of knowing who was entering. Sports authorities responded by mandating identity verification across all national stadiums. Incode was selected to build the solution. I led product design working directly with PM Poojit Sharma.</p>
     </section>
 
+    <!-- SCOPE -->
+    <section class="cs-section reveal">
+      <span class="cs-section-label">Scope</span>
+      <h2>What I actually owned</h2>
+      <p>To be specific about scope: I directly designed the fan-facing web app, the onboarding flow, and the FanID wallet — including its extra layer for face-based payments inside stadiums and linked services. The operator dashboard was Incode's existing product; my contribution there was collaborating with Poojit to simplify it for live event use, not designing it from the ground up.</p>
+    </section>
+
     <!-- IMPACT -->
     <section class="cs-section reveal">
       <span class="cs-section-label">Impact · Verified at scale</span>
-      <h2>770,000 fans. One consistent flow.</h2>
-      <p>These results came from a single consistent onboarding flow, designed to work for 770,000 people across different ages, devices, and digital literacy levels — from tech-savvy users to first-time smartphone users.</p>
-      <div class="impact-dashboard reveal">
+      <h2>770,000+ fans. One consistent flow.</h2>
+      <p>These results came from a single consistent onboarding flow, designed to work for 770,000+ people across different ages, devices, and digital literacy levels — from tech-savvy users to first-time smartphone users.</p>
+      <div class="impact-dashboard">
         <div class="id-header">
           <div class="id-header-left">
             <span class="id-badge-blue">IMPACT</span>
             <span class="id-title">FanID · Liga MX · Season 2022-23</span>
           </div>
-          <div class="id-header-right">
-            <div class="id-status-badge"><span class="id-dot-green"></span> Live</div>
-            <div class="id-select">Last 24 months ▾</div>
-            <div class="id-select">All stadiums ▾</div>
-          </div>
         </div>
 
         <div class="id-main">
           <h3 class="id-main-title">Verified at scale.</h3>
-          <p class="id-main-desc">These results came from a single consistent onboarding flow, designed to work for 770,000 people across different ages, devices, and digital literacy levels.</p>
+          <!-- TODO(Guido): confirm the dashboard figures that appear nowhere else on the site:
+               the trend chips (+12.4%, −84%, +16%, +8 pp) and what period each compares against,
+               "45 countries", "survey n=2,400", and "Updated: Apr 2023". -->
 
           <div class="id-grid">
             <!-- Card 1 -->
@@ -111,9 +118,9 @@
                 <span class="id-card-label">FANS REGISTERED</span>
                 <span class="id-card-trend pos">▲ +12.4%</span>
               </div>
-              <div class="id-card-value"><span class="animate-number" data-target="770452">0</span></div>
+              <div class="id-card-value"><span class="animate-number" data-target="770452">770,452</span></div>
               <div class="id-card-sub">across 45 countries</div>
-              <div class="id-chart id-chart-line1">
+              <div aria-hidden="true" class="id-chart id-chart-line1">
                  <svg viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,25 Q40,25 70,15 T100,5" fill="none" stroke="#1a46ff" stroke-width="2"/><path d="M0,25 Q40,25 70,15 T100,5 L100,30 L0,30 Z" fill="rgba(26,70,255,0.08)" stroke="none"/><circle cx="100" cy="5" r="2.5" fill="#1a46ff"/></svg>
               </div>
             </div>
@@ -122,11 +129,11 @@
             <div class="id-card">
               <div class="id-card-header">
                 <span class="id-card-label">AUTH TIME · MEDIAN</span>
-                <span class="id-card-trend pos">▲ -84%</span>
+                <span class="id-card-trend pos">▼ −84%</span>
               </div>
-              <div class="id-card-value"><span class="animate-number" data-target="4.2" data-decimals="1">0</span><span class="id-unit">s</span></div>
+              <div class="id-card-value"><span class="animate-number" data-target="4.2" data-decimals="1">4.2</span><span class="id-unit">s</span></div>
               <div class="id-card-sub">target &lt;5s · down from 30-45s manual</div>
-              <div class="id-chart id-chart-line2">
+              <div aria-hidden="true" class="id-chart id-chart-line2">
                 <svg viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,5 Q20,5 40,15 T100,25" fill="none" stroke="#1a46ff" stroke-width="2"/><path d="M0,5 Q20,5 40,15 T100,25 L100,30 L0,30 Z" fill="rgba(26,70,255,0.08)" stroke="none"/><circle cx="100" cy="25" r="2.5" fill="#1a46ff"/></svg>
               </div>
             </div>
@@ -137,9 +144,9 @@
                 <span class="id-card-label">STADIUM ATTENDANCE</span>
                 <span class="id-card-trend pos">▲ +16%</span>
               </div>
-              <div class="id-card-value">+<span class="animate-number" data-target="16">0</span><span class="id-unit">%</span></div>
+              <div class="id-card-value">+<span class="animate-number" data-target="16">16</span><span class="id-unit">%</span></div>
               <div class="id-card-sub">YoY · since launch</div>
-              <div class="id-chart id-chart-bar">
+              <div aria-hidden="true" class="id-chart id-chart-bar">
                 <div class="id-bar" style="height: 30%"></div>
                 <div class="id-bar" style="height: 35%"></div>
                 <div class="id-bar" style="height: 35%"></div>
@@ -161,9 +168,9 @@
                 <span class="id-card-label">USER SATISFACTION</span>
                 <span class="id-card-trend pos">▲ +8 pp</span>
               </div>
-              <div class="id-card-value"><span class="animate-number" data-target="66.7" data-decimals="1">0</span><span class="id-unit">%</span></div>
+              <div class="id-card-value"><span class="animate-number" data-target="66.7" data-decimals="1">66.7</span><span class="id-unit">%</span></div>
               <div class="id-card-sub">found registration straightforward</div>
-              <div class="id-chart id-chart-progress">
+              <div aria-hidden="true" class="id-chart id-chart-progress">
                 <div class="id-progress-track">
                   <div class="id-progress-fill" style="width: 66.7%"></div>
                 </div>
@@ -180,9 +187,9 @@
               <div class="id-card-header">
                 <span class="id-card-label">STADIUMS DEPLOYED</span>
               </div>
-              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="17">0</span></span><span class="id-unit-light"> /18</span></div>
-              <div class="id-chart id-chart-dots">
-                <div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot"></div>
+              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="17">17</span></span></div>
+              <div aria-hidden="true" class="id-chart id-chart-dots">
+                <div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div><div class="id-dot id-dot-active"></div>
               </div>
             </div>
 
@@ -190,7 +197,7 @@
               <div class="id-card-header">
                 <span class="id-card-label">MATCHES COVERED</span>
               </div>
-              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="110">0</span>+</span></div>
+              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="110">110</span>+</span></div>
               <div class="id-card-sub">Apertura · Clausura · Liguilla</div>
             </div>
 
@@ -198,7 +205,7 @@
               <div class="id-card-header">
                 <span class="id-card-label">ID TYPES ACCEPTED</span>
               </div>
-              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="150">0</span>+</span></div>
+              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="150">150</span>+</span></div>
               <div class="id-card-sub">passports · INE · national IDs · licenses</div>
             </div>
 
@@ -206,7 +213,7 @@
               <div class="id-card-header">
                 <span class="id-card-label">COUNTRIES</span>
               </div>
-              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="45">0</span></span></div>
+              <div class="id-card-value"><span class="id-accent"><span class="animate-number" data-target="45">45</span></span></div>
               <div class="id-card-sub">visiting fans &amp; international ticketing</div>
             </div>
           </div>
@@ -256,11 +263,11 @@
       <p>The core principle: move verification pressure away from the entry point. By encouraging pre-event registration, gate congestion dropped significantly. For the verification flow itself, I separated ID capture and face capture into distinct guided steps — reducing cognitive load and error rates at each stage.</p>
 
       <div class="flow-images reveal-stagger">
-        <img src="images/ic3a.png" alt="Take selfie step">
-        <img src="images/ic3b.png" alt="Face recognition step">
-        <img src="images/ic3c.png" alt="Scan ID step">
-        <img src="images/ic3e.png" alt="Processing step">
-        <img src="images/ic3f.png" alt="Verified state">
+        <picture><source type="image/webp" srcset="images/ic3a.webp"><img src="images/ic3a.png" width="181" height="364" loading="lazy" decoding="async" alt="Fan ID landing page: Get into games securely with Fan ID."></picture>
+        <picture><source type="image/webp" srcset="images/ic3b.webp"><img src="images/ic3b.png" width="181" height="364" loading="lazy" decoding="async" alt="Take a selfie step, with a face outline to position yourself."></picture>
+        <picture><source type="image/webp" srcset="images/ic3c.webp"><img src="images/ic3c.png" width="181" height="364" loading="lazy" decoding="async" alt="Selfie confirmed: You look great."></picture>
+        <picture><source type="image/webp" srcset="images/ic3e.webp"><img src="images/ic3e.png" width="541" height="1090" loading="lazy" decoding="async" alt="ID front successfully processed, with a prompt to scan the back."></picture>
+        <picture><source type="image/webp" srcset="images/ic3f.webp"><img src="images/ic3f.png" width="181" height="364" loading="lazy" decoding="async" alt="Fan ID wallet with the entry QR code and linked passes."></picture>
       </div>
     </div>
 
@@ -268,13 +275,13 @@
     <div class="decision reveal">
       <span class="decision-number">Design Decision 02</span>
       <h3>Status-first hierarchy for operators.</h3>
-      <p>The operator dashboard had to support fast decision-making under real event-day pressure. I structured information in a status-first hierarchy — critical verification states immediately visible, evidence organized to support review without hesitation. Exception handling was designed to resolve edge cases without disrupting access control flow.</p>
+      <p>The operator dashboard had to support fast decision-making under real event-day pressure. Working with Poojit, I restructured information into a status-first hierarchy — critical verification states immediately visible, evidence organized to support review without hesitation. Exception handling was designed to resolve edge cases without disrupting access control flow.</p>
 
       <h4>The three-tier verification system</h4>
       <p>Each score range mapped directly to a different operational protocol. Green (85–100%) meant immediate entry — minor capture issues with no security implications. Orange (70–84%) triggered an automatic kiosk redirect to complete the capture before entry. Red (69% and below) activated a security protocol — and critically, the score was never visible to the fan. A user with falsified documents saw only a generic message directing them to staff. The design had to protect the system's integrity without revealing the reason for rejection.</p>
-      <img src="images/Verification_decision_system.svg" alt="Three-tier verification decision system" style="width:100%; display:block; margin:32px 0; border-radius:8px;">
+      <img src="images/Verification_decision_system.svg" width="680" height="394" loading="lazy" decoding="async" alt="Diagram of the three-tier verification system: green for immediate entry, orange for kiosk redirect, red for security protocol." class="diagram-img">
 
-      <img src="images/ic4.png" alt="Operator dashboard — status-first hierarchy" class="cs-img-full">
+      <picture><source type="image/webp" srcset="images/ic4.webp"><img src="images/ic4.png" width="862" height="538" loading="lazy" decoding="async" alt="Operator dashboard session view: a pass banner and total score at the top, with ID verification, face recognition, government validation, and liveness scores below." class="cs-img-full"></picture>
     </div>
 
     <!-- DESIGN DECISION 03 -->
@@ -284,7 +291,7 @@
         <h3>Turning verification into a reusable layer.</h3>
         <p>Beyond single-event access, the identity wallet extended verification into a persistent layer — linking tickets, credentials, and future access points under one verified profile. One registration, any stadium, any match.</p>
       </div>
-      <img src="images/ic5.png" alt="Identity wallet — reusable verification layer" class="img-phone">
+      <picture><source type="image/webp" srcset="images/ic5.webp"><img src="images/ic5.png" width="200" height="411" loading="lazy" decoding="async" alt="Incode ID Wallet: an entry QR code with a linked FMF Fan ID pass." class="img-phone"></picture>
     </div>
 
   </div>
@@ -292,14 +299,14 @@
   
   </div>
   
-  <div id="tab-design-process" class="tab-content" style="display: none;">
+  <div id="design-process" class="tab-panel">
 
-  <!-- TAB 2: DESIGN PROCESS -->
   <div class="cs-content">
     
     <!-- TIMELINE DIAGRAM & TEXT BLOCKS -->
     <section class="cs-section reveal">
-      <img src="images/incode_design_process_timeline.svg" alt="Design process timeline" class="diagram-img" style="margin-bottom: 48px; width: 100%;">
+      <h2 class="tab-panel-title">Design process</h2>
+      <img src="images/incode_design_process_timeline.svg" width="680" height="254" decoding="async" alt="Design process timeline" class="diagram-img">
       <h3>The brief</h3>
       <p>The request came in on a single afternoon, triggered by a security incident at a Liga MX match. It went to Poojit Sharma first, and the brief was blunt: 'We need a system where the fan can verify their identity, and FMF can confirm they are who they say they are.' No spec, no wireframe reference — just the problem, stated in one sentence, with two weeks to build it.</p>
     </section>
@@ -308,21 +315,21 @@
       <h3>First attempt, first mistake</h3>
       <p>My first instinct was to collect as much user data as possible during onboarding — the more we knew, the safer the system, or so I assumed. It was wrong. Beyond adding real time and stress to the user's onboarding, most of what we collected was never used and got discarded later. This became the first real lesson of the project: more data is not more security.</p>
       
-      <img src="images/early over-collection concept.png" alt="Hand-drawn draft — early over-collection concept" style="margin: 48px 0 16px 0; width: 100%; border-radius: 12px;">
+      <picture><source type="image/webp" srcset="images/early%20over-collection%20concept.webp"><img src="images/early over-collection concept.png" width="1808" height="675" loading="lazy" decoding="async" alt="Hand-drawn draft: early over-collection concept" class="cs-img-full"></picture>
     </section>
 
     <section class="cs-section reveal">
       <h3>The constraint</h3>
       <p>Two weeks meant external identity verification was severely limited — there wasn't time to integrate deep third-party checks. Poojit's direct line to FMF (Mexico's Football Federation) became the project's lifeline: he fed ideation and information in real time as I designed against a moving brief.</p>
       
-      <div style="margin: 48px 0 16px 0; display: flex; flex-direction: column; align-items: center; width: 100%;">
-        <div style="display: flex; gap: 16px; width: 100%; justify-content: space-between;">
-          <img src="images/ic3a.png" alt="Take a selfie" style="width: 32%; object-fit: contain;">
-          <img src="images/ic3c.png" alt="Scan your ID" style="width: 32%; object-fit: contain;">
-          <img src="images/ic3f.png" alt="Successfully processed" style="width: 32%; object-fit: contain;">
+      <figure>
+        <div class="img-grid-3 img-grid-3--narrow">
+          <picture><source type="image/webp" srcset="images/ic3a.webp"><img src="images/ic3a.png" width="181" height="364" loading="lazy" decoding="async" alt="Fan ID landing page."></picture>
+          <picture><source type="image/webp" srcset="images/ic3c.webp"><img src="images/ic3c.png" width="181" height="364" loading="lazy" decoding="async" alt="Selfie confirmed: You look great."></picture>
+          <picture><source type="image/webp" srcset="images/ic3f.webp"><img src="images/ic3f.png" width="181" height="364" loading="lazy" decoding="async" alt="Fan ID wallet with the entry QR code."></picture>
         </div>
-        <p style="margin-top: 16px; font-size: 0.85rem; color: #666; text-align: center;">The onboarding flow that shipped.</p>
-      </div>
+        <figcaption class="cs-caption">The onboarding flow that shipped.</figcaption>
+      </figure>
     </section>
 
     <section class="cs-section reveal">
@@ -339,58 +346,55 @@
       <h3>Stripping down</h3>
       <p>The research showed onboarding took too long because of that extra data collection — friction and motivation loss, later confirmed against marketing's engagement metrics. But fixing it wasn't linear. It was like building a tower out of Legos: technically the structure held with just the basics, but without enough body, it broke for edge cases. One version removed all tutorials entirely, betting users would find the flow intuitively — the curse of knowledge: because I understood it, I assumed everyone would. That version failed. There were several other variants tested along the way that didn't survive.</p>
       
-      <img src="images/incode_onboarding_flow_final.svg" alt="Final onboarding flow structure" class="diagram-img" style="margin: 48px 0 16px 0; width: 100%;">
+      <img src="images/incode_onboarding_flow_final.svg" width="796" height="320" loading="lazy" decoding="async" alt="Final onboarding flow structure" class="diagram-img">
     </section>
 
     <section class="cs-section reveal">
       <h3>Simplifying the dashboard</h3>
       <p>The dashboard I inherited surfaced every signal from every onboarding report at once. More information didn't mean more clarity — for live verification decisions, it meant the opposite. Working with Poojit, I restructured it around a single principle: for real-time verification, less is more.</p>
       
-      <img src="images/incode_dashboard_before_after.svg" alt="Operator dashboard before and after simplification" class="diagram-img" style="margin: 48px 0 16px 0; width: 100%;">
+      <img src="images/incode_dashboard_before_after.svg" width="680" height="260" loading="lazy" decoding="async" alt="Operator dashboard before and after simplification" class="diagram-img">
     </section>
 
     <section class="cs-section reveal">
       <h3>The verification system</h3>
       <p>The operator dashboard showed every fan verification in real time across all active gates simultaneously — identity check, score, and outcome. The three-tier color system was the core decision layer: green for direct entry, orange for assisted kiosk redirect, red for security protocol. When face match failed, it was treated as a spoofing attempt and routed directly to red — the same protocol as falsified documents or flagged users. The fan never saw their score or the reason for any redirect. This was a deliberate security decision: revealing the rejection reason would allow bad actors to argue or manipulate the situation at the gate.</p>
-      <img src="images/Operator.svg" alt="Operator decision flow — gate verification process" style="width:100%; display:block; margin:32px 0; border-radius:8px;">
+      <img src="images/Operator.svg" width="680" height="780" loading="lazy" decoding="async" alt="Operator decision flow: the gate verification process" class="diagram-img">
     </section>
 
     <section class="cs-section reveal">
       <h3>The rhythm with Poojit</h3>
       <p>Iteration was constant — Poojit was my calibration point throughout. We'd revisit the onboarding flow, test different ways to make it more direct, and rarely disagreed hard enough to need resolving; we worked in enough sync that we consistently landed on the same conclusions.</p>
-      <p style="margin-top: 16px;">I also built Incode's functional motion practice from scratch during this period — see the <a href="motion.html" style="color: var(--white); text-decoration: underline;">motion work</a>.</p>
+      <p>I also built Incode's functional motion practice from scratch during this period — see the <a href="motion.html">motion work</a>.</p>
     </section>
 
     <section class="cs-section reveal">
       <h3>Getting the brand right</h3>
       <p>FMF didn't have a clear point of view on branding. Early color choices clashed with existing football club identities; when FMF proposed their own, the palettes lacked coherence. After roughly three rounds of revision, we landed on Incode's own brand colors from that period — the pragmatic choice that actually worked.</p>
       
-      <img src="images/brand color iterations.png" alt="Brand color iterations" style="margin: 32px 0 32px 0; width: 100%; border-radius: 12px;">
+      <picture><source type="image/webp" srcset="images/brand%20color%20iterations.webp"><img src="images/brand color iterations.png" width="1808" height="675" loading="lazy" decoding="async" alt="Brand color iterations" class="cs-img-full"></picture>
     </section>
 
     <section class="cs-section reveal">
       <h3>Field execution</h3>
       <p>Two problems surfaced only once we were live, neither of them a design problem. The first was bandwidth: stadium entry points couldn't handle verification traffic, resolved by IT running dedicated internet lines directly to the entrances to speed up assisted, on-site registration. The second was onboarding completion: we split registration into two parts — the essential minimum required to verify identity, and a second, non-critical layer of information. Marketing built an incentive program around completing the second part, which worked, but only temporarily, and mainly with the 16–40 age group, per marketing's data.</p>
       
-      <img src="images/on-site assisted verification process.png" alt="Hand-drawn draft — on-site assisted verification process" style="margin: 48px 0 16px 0; width: 100%; border-radius: 12px;">
-    </section>
-
-    <section class="cs-section reveal">
-      <h3>What I actually owned</h3>
-      <p>To be specific about scope: I directly designed the fan-facing web app, the onboarding flow, and the FanID wallet — including its extra layer for face-based payments inside stadiums and linked services. The operator dashboard was Incode's existing product; my contribution there was collaborating with Poojit to simplify it for live event use, not designing it from the ground up.</p>
+      <picture><source type="image/webp" srcset="images/on-site%20assisted%20verification%20process.webp"><img src="images/on-site assisted verification process.png" width="1808" height="675" loading="lazy" decoding="async" alt="Hand-drawn draft: on-site assisted verification process" class="cs-img-full"></picture>
     </section>
 
   </div>
 
   </div>
-<!-- CTA -->
+  <!-- CTA -->
   <section class="cs-cta">
     <div class="cta-left">
-      <h2>Interested in<br><em style="font-weight:300; font-style:italic">working together?</em></h2>
+      <h2>Interested in<br><em>working together?</em></h2>
       <p>I'm currently open to Senior Product Designer roles across Germany and Europe.</p>
     </div>
     <a href="mailto:guido.usnayo@icloud.com" class="btn-pill">Get in touch →</a>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -399,30 +403,6 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=3"></script>
-
-
-<script>
-  function switchTab(tabId, btnElement) {
-    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-    document.getElementById(tabId).style.display = 'block';
-    
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.style.background = 'transparent';
-      btn.style.color = '#666';
-      btn.style.border = '1px solid transparent';
-      btn.classList.remove('active');
-    });
-    
-    btnElement.style.background = '#111';
-    btnElement.style.color = '#fff';
-    btnElement.style.border = '1px solid #111';
-    btnElement.classList.add('active');
-    
-    // Re-trigger scroll reveal if needed
-    window.dispatchEvent(new Event('scroll'));
-  }
-</script>
+  <script src="shared-animations.js?v=4"></script>
 </body>
-
 </html>

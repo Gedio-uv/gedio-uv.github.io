@@ -57,6 +57,44 @@
     revealEls.forEach(function (el) { revealObserver.observe(el); });
   }
 
+  // ── TABS ──
+  // Markup is two plain sections. This turns them into an ARIA tab set;
+  // #design-process in the URL opens that tab directly.
+  var tablist = document.querySelector('[data-tabs]');
+  if (tablist) {
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[data-panel]'));
+    var selectTab = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.dataset.panel).hidden = !on;
+      });
+      if (focus) tab.focus();
+    };
+    tablist.setAttribute('role', 'tablist');
+    tabs.forEach(function (tab, i) {
+      var panel = document.getElementById(tab.dataset.panel);
+      tab.id = 'tab-' + tab.dataset.panel;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panel.id);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      tab.addEventListener('click', function () {
+        selectTab(tab, false);
+        if (history.replaceState) history.replaceState(null, '', i === 0 ? location.pathname + location.search : '#' + panel.id);
+      });
+      tab.addEventListener('keydown', function (e) {
+        var next = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+        if (next === null) return;
+        e.preventDefault();
+        selectTab(tabs[(next + tabs.length) % tabs.length], true);
+      });
+    });
+    var fromHash = tabs.filter(function (t) { return '#' + t.dataset.panel === location.hash; })[0];
+    selectTab(fromHash || tabs[0], false);
+  }
+
   // ── READ PROGRESS BAR (scroll-linked, transform only) ──
   var progressBar = document.querySelector('.read-progress');
   if (progressBar) {
