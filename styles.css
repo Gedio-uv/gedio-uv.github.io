@@ -1355,7 +1355,21 @@ footer {
    18. MOTION — video grid + lightbox
    ============================================ */
 
-body.dark-theme { background: var(--color-bg); color: var(--color-text); }
+/* The Motion page stays dark: re-scope the colour tokens for the whole page */
+body.dark-theme {
+  --color-bg: #0d0f13;
+  --color-surface: #14171d;
+  --color-surface-raised: #1b1f27;
+  --color-border: #272c36;
+  --color-border-strong: #5a6376;
+  --color-text: #f3f4f6;
+  --color-text-muted: #a6adba;
+  --color-text-subtle: #8b93a1;
+  --color-accent: #9db0ff;
+  --color-on-light: #0d0f13;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
 
 .motion-grid.editorial {
   display: grid;
