@@ -1,128 +1,108 @@
-/* shared-animations.js — included in every page */
+/* shared-animations.js — included on every page.
+   Everything here is an enhancement: pages are complete without it. */
 
 (function () {
   'use strict';
 
-  // ── NAV SCROLL & MOBILE TOGGLE ──
-  const nav = document.getElementById('nav');
+  var root = document.documentElement;
+  root.classList.add('js');
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── NAV: scroll state ──
+  var nav = document.getElementById('nav');
   if (nav) {
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
+  // ── NAV: mobile menu ──
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      document.body.classList.toggle('nav-open');
+    var setOpen = function (open) {
+      document.body.classList.toggle('nav-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+    };
+    navToggle.setAttribute('aria-controls', 'navLinks');
+    setOpen(false);
+
+    navToggle.addEventListener('click', function () {
+      setOpen(!document.body.classList.contains('nav-open'));
     });
-    // Close on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('nav-open');
-      });
+    navLinks.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
     });
-  }
-
-  // ── PAGE TRANSITION (fade in/out) ──
-  document.body.style.opacity = '0';
-  window.addEventListener('load', () => {
-    document.body.style.transition = 'opacity 0.28s ease';
-    document.body.style.opacity = '1';
-  });
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('#') && !href.startsWith('//')) {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        
-        // SPECIAL TRANSITION FOR AI PROJECTS (DARK MODE)
-        if (href.includes('deutschlernen.html') && !window.location.href.includes('deutschlernen.html')) {
-          const darkOverlay = document.createElement('div');
-          darkOverlay.style.position = 'fixed';
-          darkOverlay.style.top = '0';
-          darkOverlay.style.left = '0';
-          darkOverlay.style.width = '100vw';
-          darkOverlay.style.height = '100vh';
-          darkOverlay.style.backgroundColor = '#0a0a0a';
-          darkOverlay.style.zIndex = '9999';
-          darkOverlay.style.opacity = '0';
-          darkOverlay.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-          document.body.appendChild(darkOverlay);
-          
-          // Force reflow
-          void darkOverlay.offsetWidth;
-          
-          darkOverlay.style.opacity = '1';
-          
-          setTimeout(() => { window.location.href = href; }, 500);
-        } else {
-          // NORMAL TRANSITION
-          document.body.style.transition = 'opacity 0.2s ease';
-          document.body.style.opacity = '0';
-          setTimeout(() => { window.location.href = href; }, 200);
-        }
-      });
-    }
-  });
-
-  // ── SCROLL REVEAL (IntersectionObserver) ──
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+        setOpen(false);
+        navToggle.focus();
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => revealObserver.observe(el));
-
-  // ── READ PROGRESS BAR ──
-  const progressBar = document.querySelector('.read-progress');
-  if (progressBar) {
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = pct + '%';
-    }, { passive: true });
   }
 
-  // ── COUNTER ANIMATION ──
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('.animate-number').forEach(el => {
-        const target = parseFloat(el.dataset.target);
-        const decimals = parseInt(el.dataset.decimals) || 0;
-        const duration = 1500; // 1.5s
-        const startTime = performance.now();
-        
-        function update(now) {
-          const progress = Math.min((now - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3); // cubic ease out
-          const val = eased * target;
-          
-          if (decimals > 0) {
-            el.textContent = val.toFixed(decimals);
-          } else {
-            // Add commas for large numbers like 770,452
-            el.textContent = Math.round(val).toLocaleString('en-US');
-          }
-          
-          if (progress < 1) requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
+  // ── SCROLL REVEAL: once per element ──
+  var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       });
-      counterObserver.unobserve(entry.target);
-    });
-  }, { threshold: 0.3 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
 
-  document.querySelectorAll('.stats, .stats-grid, #stats, .impact-dashboard').forEach(el => counterObserver.observe(el));
+  // ── READ PROGRESS BAR (scroll-linked, transform only) ──
+  var progressBar = document.querySelector('.read-progress');
+  if (progressBar) {
+    var onProgress = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      progressBar.style.transform = 'scaleX(' + pct + ')';
+    };
+    window.addEventListener('scroll', onProgress, { passive: true });
+    onProgress();
+  }
 
+  // ── NUMBER COUNT-UP ──
+  // The final value lives in the HTML. This only plays a short count-up
+  // to that value the first time the number scrolls into view.
+  var numberEls = document.querySelectorAll('.animate-number');
+  var format = function (value, decimals) {
+    return decimals > 0 ? value.toFixed(decimals) : Math.round(value).toLocaleString('en-US');
+  };
+  numberEls.forEach(function (el) {
+    var target = parseFloat(el.dataset.target);
+    if (isNaN(target)) return;
+    var decimals = parseInt(el.dataset.decimals, 10) || 0;
+    el.dataset.final = format(target, decimals);
+    el.textContent = el.dataset.final;
+  });
 
-  
+  if (!reduceMotion && 'IntersectionObserver' in window && numberEls.length) {
+    var DURATION = 500;
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        countObserver.unobserve(el);
+        var target = parseFloat(el.dataset.target);
+        var decimals = parseInt(el.dataset.decimals, 10) || 0;
+        var start = performance.now();
+        var tick = function (now) {
+          var t = Math.min((now - start) / DURATION, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = t < 1 ? format(target * eased, decimals) : el.dataset.final;
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    numberEls.forEach(function (el) { countObserver.observe(el); });
+  }
 })();
