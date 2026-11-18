@@ -133,9 +133,11 @@
         lightbox.hidden = false;
         setInert(true);
         // next frame, so the opacity transition runs
-        requestAnimationFrame(function () { lightbox.classList.add('open'); });
+        requestAnimationFrame(function () {
+          lightbox.classList.add('open');
+          closeBtn.focus(); // only focusable once the dialog is visible
+        });
         document.body.style.overflow = 'hidden';
-        closeBtn.focus();
       });
     });
     closeBtn.addEventListener('click', closeLightbox);

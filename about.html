@@ -16,7 +16,8 @@
   <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css?v=5">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
@@ -144,7 +145,7 @@
         </div>
 
         <div class="tool-card">
-          <div class="tool-icon"><img src="images/icon-spline.png" width="40" height="40" loading="lazy" decoding="async" alt=""></div>
+          <div class="tool-icon"><picture><source type="image/webp" srcset="images/icon-spline-80.webp"><img src="images/icon-spline.png" width="40" height="40" loading="lazy" decoding="async" alt=""></picture></div>
           <div class="tool-info">
             <div class="tool-name">Spline</div>
             <div class="tool-desc">3D elements and interactive scenes for product UI and visual storytelling.</div>
@@ -218,7 +219,7 @@
         </div>
 
         <div class="tool-card ai">
-          <div class="tool-icon"><img src="images/icon-cursor.png" width="40" height="40" loading="lazy" decoding="async" alt=""></div>
+          <div class="tool-icon"><picture><source type="image/webp" srcset="images/icon-cursor-80.webp"><img src="images/icon-cursor.png" width="40" height="40" loading="lazy" decoding="async" alt=""></picture></div>
           <div class="tool-info">
             <div class="tool-name">Cursor</div>
             <div class="tool-desc">AI-assisted code iteration — front-end development and rapid prototyping with code.
@@ -285,7 +286,7 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=5"></script>
+  <script src="shared-animations.js?v=5" defer></script>
 
 </body>
 

@@ -16,8 +16,8 @@
   <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css?v=5">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <div class="cs-hero-phone"><picture><source type="image/webp" srcset="images/tolk_search.webp"><img src="images/tolk_search.png" width="1290" height="2390" fetchpriority="high" decoding="async" alt="Tolk search result for the German word Hund, with a photo, the article “der”, and a pronunciation button."></picture></div>
+  <div class="cs-hero-phone"><picture><source type="image/webp" srcset="images/tolk_search-600.webp 600w, images/tolk_search.webp 900w" sizes="20rem"><img src="images/tolk_search.png" width="1290" height="2390" fetchpriority="high" decoding="async" alt="Tolk search result for the German word Hund, with a photo, the article “der”, and a pronunciation button."></picture></div>
 
   <div class="cs-content">
     <section class="cs-section reveal">
@@ -250,7 +250,7 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=5"></script>
+  <script src="shared-animations.js?v=5" defer></script>
 </body>
 
 </html>

@@ -15,7 +15,8 @@
   <meta name="theme-color" content="#fafafa">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css?v=5">
   <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
@@ -73,7 +74,7 @@
   </div>
 
   <div id="case-study" class="tab-panel">
-<picture><source type="image/webp" srcset="images/ic1.webp"><img src="images/ic1.png" width="2011" height="1896" fetchpriority="high" decoding="async" alt="Incode Fan ID: data read from an ID document is prefilled into a “Review your information” screen." class="cs-hero-img cs-hero-img--narrow"></picture>
+<picture><source type="image/webp" srcset="images/ic1-800.webp 800w, images/ic1.webp 1600w" sizes="(max-width: 860px) 100vw, 48rem"><img src="images/ic1.png" width="2011" height="1896" fetchpriority="high" decoding="async" alt="Incode Fan ID: data read from an ID document is prefilled into a “Review your information” screen." class="cs-hero-img cs-hero-img--narrow"></picture>
 
   <!-- CONTENT -->
   <div class="cs-content">
@@ -319,6 +320,6 @@
     <a href="mailto:guido.usnayo@icloud.com" class="footer-link">guido.usnayo@icloud.com</a>
   </footer>
 
-  <script src="shared-animations.js?v=5"></script>
+  <script src="shared-animations.js?v=5" defer></script>
 </body>
 </html>
