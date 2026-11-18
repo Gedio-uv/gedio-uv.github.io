@@ -764,6 +764,7 @@ a:focus-visible > .arrow { transform: translateX(4px); }
   border-radius: var(--radius-md);
 }
 
+.cs-hero-img--narrow { max-width: calc(48rem + var(--gutter) * 2); }
 .cs-hero-img.hero-contained { max-width: 54rem; margin: var(--space-7) auto; }
 
 .cs-content {
@@ -1374,7 +1375,7 @@ footer {
 }
 
 .id-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); margin-bottom: var(--space-3); }
-.id-card-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-text-subtle); letter-spacing: 0.05em; text-transform: uppercase; }
+.id-card-label { font-size: var(--text-xs); font-weight: var(--weight-bold); color: var(--color-text-subtle); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: var(--space-3); }
 
 .id-card-trend { font-size: var(--text-xs); font-weight: var(--weight-bold); padding: 2px 6px; border-radius: var(--radius-sm); white-space: nowrap; }
 .id-card-trend.pos { color: var(--color-text); background: var(--color-border); }
