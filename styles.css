@@ -1478,19 +1478,21 @@ body.dark-theme { background: var(--color-bg); color: var(--color-text); }
 
 .video-card { display: flex; flex-direction: column; color: inherit; text-decoration: none; border-radius: var(--radius-md); }
 
+/* Video card caption sits under the thumbnail: number + title, host on the right */
+.video-card { gap: var(--space-3); }
 .ed-meta-top {
+  order: 1;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: var(--space-2);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  align-items: baseline;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
   color: var(--color-text-subtle);
-  line-height: 1.2;
+  line-height: var(--leading-snug);
 }
-.ed-number, .ed-title { color: var(--color-text); font-weight: var(--weight-medium); }
-.ed-title { margin-left: var(--space-2); }
+.ed-number { font-variant-numeric: tabular-nums; margin-right: var(--space-2); }
+.ed-title { color: var(--color-text); font-weight: var(--weight-medium); }
+.ed-details { flex-shrink: 0; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; }
 
 .video-thumb {
   display: block;
